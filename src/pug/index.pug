@@ -8,8 +8,8 @@ prepend ConfigBlock
 //- append JavascriptBlock
 
 block ContentBlock
-
-  - const encode_description = encodeURIComponent(sns_description);
+  - const encode_description = encodeURIComponent(description);
+  - const encode_twitter_description = encodeURIComponent(twitter_description);
   - const encode_hashtag = encodeURIComponent(hashtag);
   - const encode_url = encodeURIComponent(url);
 
