@@ -1,0 +1,51 @@
+extends /layout/_DefaultLayout
+
+prepend ConfigBlock
+  - page_name = ''
+
+//- append StylesheetBlock
+
+//- append JavascriptBlock
+
+block ContentBlock
+
+  - const encode_description = encodeURIComponent(sns_description);
+  - const encode_hashtag = encodeURIComponent(hashtag);
+  - const encode_url = encodeURIComponent(url);
+
+  .page-root(data-page='top')
+    .wrapper
+
+      include ./partial/_header
+      include ./partial/_gnav
+
+      #top.section-block
+        .content-block
+          #box
+          #box.sp-none
+
+      #about.section-block
+        .content-block
+          #box
+          #box.sp-none
+
+      include ./partial/_footer
+      include ./partial/_socialButton
+      include ./partial/_socialScript
+
+      include ./partial/_youtubeModal
+      include ./partial/_soundCheckModal
+      include ./partial/_initialVisitModal
+
+      .youtube__box01
+        #ytplayer1
+        .youtubeStartButton.js-youtubeStartButton01
+      .youtube__box02
+        #ytplayer2
+        .youtubeStartButton.js-youtubeStartButton02
+
+      button.js-gototopButton GO TO TOP
+
+      .js-facebookButton
+
+  #loading

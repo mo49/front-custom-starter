@@ -1,0 +1,109 @@
+.is-gnav-open {
+  position: absolute;
+  top: 0; left: 0;
+  overflow-y: scroll;
+}
+
+#gnav{
+  width: 100%;
+  // セクションにはスタイルをあてない
+
+  // content
+  .gnav__folding{
+    z-index: index($z, gnav);
+    overflow-y: scroll;
+
+    @include mq(sp) {
+      $top: 50px;
+      display: none;
+      width: 100%;
+      position: absolute;
+      text-align: center;
+      padding-top: $top;
+    }
+  }
+  .gnav__links{
+    font-size: 24px;
+    line-height: 88px;
+  }
+  .gnav__linksItem{
+    display: inline-block;
+    @include mq(sp) {
+      display: block;
+    }
+    a{
+      color: #000;
+      @include mq(sp) {
+        color: $font-color;
+      }
+      &:hover{
+        color: $main-color;
+      }
+    }
+  }
+
+  // overlay
+  .gnav__overlay{
+    display: none;
+    background-color: rgba(0,0,0,.9);
+    position: fixed;
+    top: -10%; left: 0;
+    width: 100%;
+    height: 120%;
+    z-index: index($z, gnav);
+  }
+
+  // button
+  .gnav__btn-toggle{
+    $size: 50;
+    $line-height: 2;
+    z-index: index($z, gnav);
+    position: fixed;
+    top: 15px; right: 15px;
+    width: $size + px;
+    height: $size + px;
+
+    .gnav__btn-open{
+      position: absolute;
+      top: 0; right: 0;
+      width: $size + px;
+      height: $size + px;
+      span{
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: $line-height + px;
+        background-color: #fff;
+        &:nth-of-type(1) {
+          top: 0;
+        }
+        &:nth-of-type(2) {
+          top: 15px;
+        }
+        &:nth-of-type(3) {
+          top: 30px;
+        }
+      }
+    }
+
+    .gnav__btn-close{
+      @extend .gnav__btn-open;
+      display: none;
+      margin-top: 15px;
+      span{
+        &:nth-of-type(1) {
+          top: 0;
+          transform: rotate(45deg);
+        }
+        &:nth-of-type(2) {
+          top: -$line-height + px;
+          transform: rotate(-45deg);
+        }
+      }
+    }
+
+  }
+
+
+
+}

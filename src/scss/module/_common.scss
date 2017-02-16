@@ -1,0 +1,39 @@
+/* ======================================
+ * 汎用スタイル
+ * ====================================== */
+
+.page-root{
+  width: 100%;
+  min-width: $content-block-width--pc;
+  height: auto;
+  font-size: $base-font-size--pc;
+  line-height: $base-line-light--pc;
+  font-family: $sans-serif;
+  overflow: hidden; // IEで指定しないと余白ができる
+  @include mq(sp) {
+    min-width: $content-block-width--sp;
+    font-size: $base-font-size--sp;
+    line-height: $base-line-light--sp;
+  };
+}
+.section-block{
+  width: 100%;
+}
+.content-block{
+  width: $content-block-width--pc;
+  margin: 0 auto;
+  @include mq(sp) {
+    width: $content-block-width--sp;
+  }
+}
+
+
+// test
+.section-block{
+  background-color: #ccc;
+  padding: 10px 0;
+}
+.content-block{
+  background-color: #888;
+  padding: 0 10px;
+}

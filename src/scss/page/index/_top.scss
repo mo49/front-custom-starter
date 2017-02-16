@@ -1,0 +1,32 @@
+#top{
+
+  #box{
+    width: 100%;
+    height: 500px;
+    background-color: #3ef;
+    margin: 10px auto;
+    @include mq(sp) {
+      height: 200px;
+    };
+    @include mq(tab) {
+      background-color: #f80;
+    }
+    @include mq($breakpoint) {
+      background-color: #0f5;
+    }
+    &:after{
+      content: '960px - padding';
+      display: block;
+      @include mq(sp) {
+        content: '375px - padding';
+      }
+      @include mq(tab) {
+        content: '375px - padding : pcを縮小表示';
+      }
+      @include mq($breakpoint) {
+        content: '800px : gnavだけメディアクエリで表示を切り替える';
+      }
+    }
+  }
+
+}

@@ -1,0 +1,59 @@
+#initialVisitModal{
+
+  display: none;
+  width: 100%; height: 100%;
+  position: fixed;
+  top: 0; left: 0;
+  background-color: rgba(0,0,0,0);
+  z-index: index($z, modal);
+
+  .modal__overlay{
+    $modal-height: 120;
+    width: 100%; height: $modal-height + %;
+    position: fixed;
+    top: -( $modal-height / 2 - 50 ) + %; left: 0;
+    background-color: rgba(0,0,0,.9);
+  }
+
+  .modal__content{
+    @include centering();
+
+    .modal__content_img{
+      margin: 0 auto;
+    }
+  }
+
+  // button
+  .modal__btn-close{
+    $line-height: 2;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    cursor: pointer;
+
+    &:before{
+      content: '';
+      display: block;
+      width: 50px;
+      height: $line-height + px;
+      background-color: #fff;
+      transform: rotate(45deg);
+      transform-origin: center center;
+    }
+    &:after{
+      @extend .modal__btn-close:before;
+      transform: rotate(-45deg);
+      margin-top: -$line-height + px;
+    }
+  }
+
+}
+
+
+#soundCheckModal,
+#youtubeModal{
+  @extend #initialVisitModal;
+
+}

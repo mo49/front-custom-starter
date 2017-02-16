@@ -1,0 +1,55 @@
+// youtube
+.youtube__box01{
+  $ratio: 9/16;
+  $youtube-width: 600;
+  $youtube-width-sp: 320;
+  position: relative;
+  width: $youtube-width + px;
+  height: $youtube-width * $ratio + px;
+  iframe{
+    width: $youtube-width + px;
+    height: $youtube-width * $ratio + px;
+  }
+  @include mq(sp) {
+    width: $youtube-width-sp + px;
+    height: $youtube-width-sp * $ratio + px;
+    iframe{
+      width: $youtube-width-sp + px;
+      height: $youtube-width-sp * $ratio + px;
+    }
+  };
+
+}
+
+.youtube__box02{
+  @extend .youtube__box01;
+
+}
+
+
+.youtubeStartButton{
+  @include centering();
+  $size: 70;
+  width: $size + px;
+  height: $size + px;
+  background-color: #222;
+  color: #fff;
+  border: 1px solid $main-color;
+  cursor: pointer;
+}
+.youtubeStartButton::after{
+  content: '';
+  display: block;
+  @include centering();
+  width: 0; height: 0;
+  $sizeh: 20;
+  $sizev: 30;
+  border-top: $sizeh + px solid transparent;
+  border-right: $sizev + px solid transparent;
+  border-bottom: $sizeh + px solid transparent;
+  border-left: $sizev + px solid currentColor;
+  margin-left: $sizev/2 + px;
+}
+.youtubeStartButton:hover{
+  color: $main-color;
+}

@@ -1,0 +1,7 @@
+@mixin set-img($w: 300, $h: 300, $scale: 1){
+  background-repeat: no-repeat;
+  background-position:  center center;
+  background-size: contain;
+  width: ceil($w * $scale) + px ;
+  height: ceil($h * $scale) + px ;
+}

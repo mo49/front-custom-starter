@@ -1,0 +1,67 @@
+// reset css
+@import 'node_modules/reset.css/reset.css';
+
+// config
+@import 'variable', 'function', 'mixin', 'keyframes';
+
+// modules
+@import 'module/*';
+
+// .wrapperより上の要素にページ名
+.page-root[data-page='top'] {
+  @import 'page/index';
+}
+
+
+
+
+/* ======================================
+ * 全ページ共通
+ * ====================================== */
+
+html, body{
+  width: 100%;
+  height: 100%;
+}
+
+// media query
+.pc-none {
+  @include mq-pc {
+    display: none;
+  }
+}
+.sp-none {
+  @include mq-sp {
+    display: none;
+  }
+}
+.tab-none {
+  @include mq-tab {
+    display: none;
+  }
+}
+
+
+* {
+  box-sizing: border-box; // 初期設定
+}
+
+.is-fixed{
+  position: fixed;
+  top: 0; left: 0;
+}
+.is-hidden{
+  display: none;
+}
+
+
+// sns
+.line-it-button {
+  opacity: 0;
+}
+
+// adobeタグの隙間
+.adobe{
+  font-size: 0;
+  line-height: 0;
+}

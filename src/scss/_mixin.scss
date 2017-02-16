@@ -1,0 +1,18 @@
+@import 'mixin/layout';
+@import 'mixin/media-query';
+@import 'mixin/set-img';
+@import 'mixin/flex-img';
+@import 'mixin/centering';
+@import 'mixin/clearfix';
+
+@mixin pc-layout {
+    @media (min-width: $pc_min_width) {
+        @content;
+    }
+}
+
+@mixin sp-layout {
+    @media (max-width: ($pc_min_width - 1)) {
+        @content;
+    }
+}

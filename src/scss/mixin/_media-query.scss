@@ -1,0 +1,110 @@
+// http://tech.cmd08.com/sass-mediaqueries-content
+
+@mixin mq( $val: 'all' ) {
+  @if $val == "pc" {
+    @include mq-pc {
+      @content;
+    }
+  } @elseif $val == "sp" {
+    @include mq-sp {
+      @content;
+    }
+  } @elseif $val == "tab" {
+    @include mq-tab {
+      @content;
+    }
+  } @elseif type-of($val) == number {
+    @include media($val) {
+      @content;
+    }
+  } @else {
+    @include mq-all {
+      @content;
+    }
+  }
+}
+
+@mixin mq-all {
+  html & {
+    @content;
+  }
+}
+
+@mixin mq-pc {
+  html[data-env="pc"] & {
+    @content;
+  }
+}
+
+@mixin mq-sp {
+  html[data-env="sp"] & {
+    @content;
+  }
+}
+
+@mixin mq-tab {
+  html[data-env="tablet"] & {
+    @content;
+  }
+}
+
+@mixin media($width) {
+  @media only screen and (max-width: $width + 'px') {
+    @content;
+  }
+}
+
+
+
+
+/*
+
+$breakpoint: 600;
+$tablet_min: 600;
+$tablet_max: 768;
+
+@mixin mq($env) {
+
+  @if $env == "pc" {
+    @include mq-pc {
+      @content;
+    };
+  } @elseif $env == "sp" {
+    @include mq-sp {
+      @content;
+    };
+  } @if $env == "tab" {
+    @include mq-tab {
+      @content;
+    };
+  } @else {
+    @include mq-all {
+      @content;
+    };
+  }
+
+}
+
+@mixin mq-all {
+  @content;
+};
+
+@mixin mq-pc {
+  @media only screen and (min-width: $breakpoint + 1 + 'px') {
+    @content;
+  }
+}
+
+@mixin mq-sp {
+  @media only screen and (max-width: $breakpoint + 'px') {
+    @content;
+  }
+}
+
+@mixin mq-tab {
+  @media only screen and (min-width: $tablet_min + 'px') and (max-width: $tablet_max + 'px') {
+    @content;
+  }
+}
+
+*/

@@ -1,0 +1,62 @@
+
+// ======================================
+// color
+// ======================================
+
+// main color
+$main-color: #3f51b5 !default;
+
+// accent
+$accent-color: #ea500c !default;
+// background
+$bg-color: #fff !default;
+// font
+$font-color: #fff !default;
+// sub font color
+$sub-font-color: #333 !default;
+// links
+$link-color: #09f !default;
+$link-color-hover: $link-color !default;
+$link-color-visited: #90f !default;
+$link-color-active: null !default;
+// border
+$border-color: $accent-color !default;
+
+
+// ======================================
+// z-index
+// ======================================
+
+$z:
+wrapper,
+footer,
+header,
+gnav,
+modal;
+// z-index: index($z, header);
+
+
+// ======================================
+// font
+// ======================================
+
+$sans-serif: YuGothic, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Meiryo, "メイリオ", sans-serif;
+$serif: YuMincho, "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "HG明朝E", "ＭＳ Ｐ明朝", "ＭＳ 明朝", serif;
+
+$base-font-size--pc: 18px;
+$base-font-size--sp: 12px;
+
+$base-line-light--pc: 24px;
+$base-line-light--sp: 18px;
+
+
+// ======================================
+// media query
+// ======================================
+
+// gnavみたいにpcの基準幅より小さくなっても画面内に収めておきたいもの
+$breakpoint: 800;
+
+// default
+$content-block-width--pc: 960px;
+$content-block-width--sp: 375px; // デザイナー作成サイズ

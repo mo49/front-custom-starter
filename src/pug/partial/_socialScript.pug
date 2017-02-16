@@ -1,0 +1,60 @@
+//- どちらか一方を使用
+
+//- オリジナル
+
+#fb-root
+script.
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '#{facebook_app_id}',
+      xfbml      : true,
+      version    : 'v2.8'
+    });
+  };
+  function shareFB(){
+    FB.ui(
+      {
+        method: 'share',
+        href: '#{url}',
+      }
+    );
+  }
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/ja_JP/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+
+  const btns = document.getElementsByClassName('js-facebookButton');
+  for (let i = 0; i < btns.length; i++) {
+    btns[i].addEventListener('click', () => shareFB(), false)
+  }
+
+
+
+//- デフォルト
+
+//- //- facebook
+//- #fb-root
+//- script.
+//-   (function(d, s, id) {
+//-       var js, fjs = d.getElementsByTagName(s)[0];
+//-       if (d.getElementById(id)) return;
+//-       js = d.createElement(s); js.id = id;
+//-       js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.8";
+//-       fjs.parentNode.insertBefore(js, fjs);
+//-   }(document, 'script', 'facebook-jssdk'));
+//-
+//- //- twitter
+//- script.
+//-   window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};if(d.getElementById(id))return;js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);t._e=[];t.ready=function(f){t._e.push(f);};return t;}(document,"script","twitter-wjs"));
+//-
+//- //- googlePlus
+//- script(src="https://apis.google.com/js/platform.js", async defer).
+//-   {lang: "ja"}
+//-
+//- //- hatebu
+//- script(type="text/javascript", src="https://b.st-hatena.com/js/bookmark_button.js", charset="utf-8", async="async").
+//-   {lang: "ja"}
