@@ -1,4 +1,5 @@
-@mixin set-img($w: 300, $h: 300, $scale: 1){
+@mixin image($url, $w: 300, $h: 300, $scale: 1){
+  background-image: url('../img/' + $url);
   background-repeat: no-repeat;
   background-position:  center center;
   background-size: contain;

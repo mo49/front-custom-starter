@@ -10284,7 +10284,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 var ROOT = './img/';
 
-var IMAGES_SRC = exports.IMAGES_SRC = [ROOT + 'sample1.jpg', ROOT + 'sample2.jpg', ROOT + 'sample3.jpg', ROOT + 'sample4.jpg', ROOT + 'sample5.jpg'];
+var IMAGES_SRC = exports.IMAGES_SRC = [ROOT + 'sample1.jpg', ROOT + 'sample2.png', ROOT + 'sample3.jpg', ROOT + 'sample4.png'];
 
 },{}],5:[function(require,module,exports){
 'use strict';
@@ -10812,8 +10812,8 @@ Promise.all([p_loadDOM, p_preloadImage]).then(function (val) {
 function init() {
 
   // 初回モーダル
-  if (cookie.getUserSiteVisited()) (0, _initialVisit.initialVisit)();
-  cookie.setUserSiteVisited();
+  if (!cookie.getUserSiteVisited()) (0, _initialVisit.initialVisit)();
+  cookie.setUserSiteVisited(1);
 
   // サウンドチェックモーダル
   new _Modal2.default({

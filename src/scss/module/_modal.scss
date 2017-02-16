@@ -18,7 +18,7 @@
   .modal__content{
     @include centering();
 
-    .modal__content_img{
+    .modal__content--img{
       margin: 0 auto;
     }
   }
@@ -55,5 +55,26 @@
 #soundCheckModal,
 #youtubeModal{
   @extend #initialVisitModal;
+
+}
+
+// test
+#initialVisitModal{
+.modal__content--img{
+  @include image('sample1.jpg', 3264, 2448, 0.3);
+  @include mq(sp) {
+    @include image('sample1.jpg', 3264, 2448, 0.15);
+  };
+}
+
+}
+
+#soundCheckModal{
+.modal__content--img{
+  @include image('sample2.png', 480, 400);
+  @include mq(sp) {
+    @include image('sample2.png', 480, 400, 0.5);
+  };
+}
 
 }

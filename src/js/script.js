@@ -52,8 +52,8 @@ Promise.all([p_loadDOM, p_preloadImage]).then((val) => {
 function init() {
 
 // 初回モーダル
-if ( cookie.getUserSiteVisited() ) initialVisit();
-cookie.setUserSiteVisited();
+if ( !cookie.getUserSiteVisited() ) initialVisit();
+cookie.setUserSiteVisited(1);
 
 // サウンドチェックモーダル
 new Modal({
