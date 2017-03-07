@@ -2,6 +2,28 @@
  * 汎用スタイル
  * ====================================== */
 
+html[data-env="pc"],
+html[data-env="tablet"]{
+
+
+}
+
+
+html[data-env="sp"]{
+
+  * {
+    // 文字を選択コピーしたいときは外す
+    -webkit-user-select: none;
+      -moz-user-select: none;
+       -ms-user-select: none;
+        -o-user-select: none;
+           user-select: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
+
+}
+
+
 .page-root{
   width: 100%;
   min-width: $content-block-width--pc;

@@ -101,6 +101,14 @@ $tablet_max: 768;
 /* ======================================
  * 汎用スタイル
  * ====================================== */
+html[data-env="sp"] * {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent; }
+
 .page-root {
   width: 100%;
   min-width: 960px;
@@ -419,15 +427,6 @@ $tablet_max: 768;
 
 .page-root[data-page='top'] .youtubeStartButton:hover {
   color: #3f51b5; }
-
-.page-root[data-page='top'] html[data-env="sp"] * {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  -o-user-select: none;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
-  box-sizing: border-box; }
 
 /* ======================================
  * 全ページ共通
