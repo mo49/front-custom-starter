@@ -100,10 +100,10 @@
              fjs.parentNode.insertBefore(js, fjs);
            }(document, 'script', 'facebook-jssdk'));
           
-          const btns = document.getElementsByClassName('js-facebookButton');
-          for (let i = 0; i < btns.length; i++) {
-            btns[i].addEventListener('click', () => shareFB(), false)
-          }
+           var facebookButtons = document.getElementsByClassName('js-facebookButton');
+           for (var i = 0; i < facebookButtons.length; i++) {
+             facebookButtons[i].addEventListener('click', function(){shareFB();}, false)
+           }
           
           
           
@@ -134,11 +134,13 @@
         <button class="js-initialVisitModalToggleButton js-initialVisitModalOpenButton is-hidden"></button>
         <div class="youtube__box01">
           <div id="ytplayer1"></div>
-          <div class="youtubeStartButton js-youtubeStartButton01"></div>
+          <div class="youtubeStartButton js-youtube01StartButton"></div>
+          <div class="youtubeStopButton js-youtube01StopButton"></div>
         </div>
         <div class="youtube__box02">
           <div id="ytplayer2"></div>
-          <div class="youtubeStartButton js-youtubeStartButton02"></div>
+          <div class="youtubeStartButton js-youtube02StartButton"></div>
+          <div class="youtubeStopButton js-youtube02StopButton"></div>
         </div>
         <button class="js-gototopButton">GO TO TOP</button>
         <div class="js-facebookButton"></div>
@@ -146,6 +148,6 @@
     </div>
     <div id="loading"></div>
     <!-- javascript-->
-    <script src="/js/script.js?v=2"></script>
+    <script src="/js/script.js?v=3"></script>
   </body>
 </html>

@@ -1,3 +1,4 @@
+import 'babel-polyfill';
 import $ from 'jquery';
 // import './util/GA';
 import './util/Viewport';

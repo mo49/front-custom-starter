@@ -6,14 +6,16 @@ const YOUTUBE_DATA = [
   {
     videoID: '4slt_lQ8fPc',
     ytplayer: 'ytplayer1',
-    $startButton: $('.js-youtubeStartButton01'),
+    $startButton: $('.js-youtube01StartButton'),
+    $stopButton: $('.js-youtube01StopButton'),
     isCustomizedButton: 1,
     isAutoPlay: 0
   },
   {
     videoID: '9pjtVUZNfWY',
     ytplayer: 'ytplayer2',
-    $startButton: $('.js-youtubeStartButton02'),
+    $startButton: $('.js-youtube02StartButton'),
+    $stopButton: $('.js-youtube02StopButton'),
     isCustomizedButton: 0,
     isAutoPlay: 0
   },
@@ -43,9 +45,16 @@ export default (() => {
       if (event.target.h.id === val.ytplayer) {
         val.$startButton.hide();
 
+        if (event.data == YT.PlayerState.PLAYING) {
+
+        }
+        if (event.data == YT.PlayerState.PAUSED) {
+
+        }
         if (event.data == YT.PlayerState.ENDED) {
           if (!val.isCustomizedButton) val.$startButton.show();
         }
+
       }
 
     })
@@ -87,6 +96,9 @@ export default (() => {
 
     val.$startButton.on('click', () => {
       players[index].playVideo();
+    });
+    val.$stopButton.on('click', () => {
+      players[index].stopVideo();
     });
 
   })

@@ -27,10 +27,10 @@ script.
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
 
-  const btns = document.getElementsByClassName('js-facebookButton');
-  for (let i = 0; i < btns.length; i++) {
-    btns[i].addEventListener('click', () => shareFB(), false)
-  }
+   var facebookButtons = document.getElementsByClassName('js-facebookButton');
+   for (var i = 0; i < facebookButtons.length; i++) {
+     facebookButtons[i].addEventListener('click', function(){shareFB();}, false)
+   }
 
 
 
