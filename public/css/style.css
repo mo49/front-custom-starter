@@ -282,33 +282,45 @@ $tablet_max: 768;
 
 #initialVisitModal .modal__content--img, #soundCheckModal .modal__content--img,
 #youtubeModal .modal__content--img {
+  text-indent: -9999px;
+  white-space: nowrap;
+  overflow: hidden;
   background-image: url("../img/sample1.jpg");
   background-repeat: no-repeat;
   background-position: center center;
-  background-size: contain;
+  background-size: 980px 735px;
   width: 980px;
   height: 735px; }
   html[data-env="sp"] #initialVisitModal .modal__content--img, html[data-env="sp"] #soundCheckModal .modal__content--img, html[data-env="sp"]
   #youtubeModal .modal__content--img {
+    text-indent: -9999px;
+    white-space: nowrap;
+    overflow: hidden;
     background-image: url("../img/sample1.jpg");
     background-repeat: no-repeat;
     background-position: center center;
-    background-size: contain;
+    background-size: 490px 368px;
     width: 490px;
     height: 368px; }
 
 #soundCheckModal .modal__content--img {
+  text-indent: -9999px;
+  white-space: nowrap;
+  overflow: hidden;
   background-image: url("../img/sample2.png");
   background-repeat: no-repeat;
   background-position: center center;
-  background-size: contain;
+  background-size: 480px 400px;
   width: 480px;
   height: 400px; }
   html[data-env="sp"] #soundCheckModal .modal__content--img {
+    text-indent: -9999px;
+    white-space: nowrap;
+    overflow: hidden;
     background-image: url("../img/sample2.png");
     background-repeat: no-repeat;
     background-position: center center;
-    background-size: contain;
+    background-size: 240px 200px;
     width: 240px;
     height: 200px; }
 

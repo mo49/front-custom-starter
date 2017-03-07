@@ -1,8 +1,19 @@
 @mixin image($url, $w: 300, $h: 300, $scale: 1){
+  @include hide-txt();
+  $width: ceil($w * $scale) + px;
+  $height: ceil($h * $scale) + px;
   background-image: url('../img/' + $url);
   background-repeat: no-repeat;
-  background-position:  center center;
-  background-size: contain;
-  width: ceil($w * $scale) + px ;
-  height: ceil($h * $scale) + px ;
+  background-position: center center;
+  background-size: $width $height;
+  width: $width;
+  height: $height;
+}
+
+// PCとSPで同じ画像のケース
+@mixin same-image($url, $w: 300, $h: 300, $pc-scale: 1, $sp-scale: 0.5){
+  @include image($url,$w,$h,$pc-scale);
+  @include mq(sp) {
+    @include image($url,$w,$h,$sp-scale);
+  }
 }

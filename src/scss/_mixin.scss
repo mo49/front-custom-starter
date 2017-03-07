@@ -4,6 +4,7 @@
 @import 'mixin/flex-img';
 @import 'mixin/centering';
 @import 'mixin/clearfix';
+@import 'mixin/hover';
 
 @mixin pc-layout {
     @media (min-width: $pc_min_width) {
