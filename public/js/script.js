@@ -17599,9 +17599,7 @@ exports.default = _class;
 },{"jquery":298}],305:[function(require,module,exports){
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); // https://developers.google.com/youtube/iframe_api_reference?hl=ja
 
 var _jquery = require('jquery');
 
@@ -17609,92 +17607,165 @@ var _jquery2 = _interopRequireDefault(_jquery);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var YOUTUBE_DATA = [{
-  videoID: '4slt_lQ8fPc',
-  ytplayer: 'ytplayer1',
-  $startButton: (0, _jquery2.default)('.js-youtube01StartButton'),
-  $stopButton: (0, _jquery2.default)('.js-youtube01StopButton'),
-  isCustomizedButton: 1,
-  isAutoPlay: 0
-}, {
-  videoID: '9pjtVUZNfWY',
-  ytplayer: 'ytplayer2',
-  $startButton: (0, _jquery2.default)('.js-youtube02StartButton'),
-  $stopButton: (0, _jquery2.default)('.js-youtube02StopButton'),
-  isCustomizedButton: 0,
-  isAutoPlay: 0
-}]; // https://developers.google.com/youtube/iframe_api_reference?hl=ja
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-exports.default = function () {
+var Youtube = function () {
+  function Youtube() {
+    _classCallCheck(this, Youtube);
 
-  var players = [];
-
-  // 複数個追加したくないので、これは１回
-  (0, _jquery2.default)('body').append('<script src="//www.youtube.com/iframe_api">');
-
-  function onPlayerReady(event) {
-
-    YOUTUBE_DATA.forEach(function (val, index) {
-
-      if (!val.isCustomizedButton) val.$startButton.hide();
-    });
+    this.YOUTUBE_DATA = [{
+      videoID: '4slt_lQ8fPc',
+      ytplayer: 'ytplayer1',
+      $startButton: (0, _jquery2.default)('.js-youtube01StartButton'),
+      $stopButton: (0, _jquery2.default)('.js-youtube01StopButton'),
+      isCustomizedButton: 1,
+      isAutoPlay: 0
+    }, {
+      videoID: '9pjtVUZNfWY',
+      ytplayer: 'ytplayer2',
+      $startButton: (0, _jquery2.default)('.js-youtube02StartButton'),
+      $stopButton: (0, _jquery2.default)('.js-youtube02StopButton'),
+      isCustomizedButton: 0,
+      isAutoPlay: 0
+    }];
+    this.players = [];
+    this._init();
   }
 
-  function onPlayerStateChange(event) {
+  _createClass(Youtube, [{
+    key: '_init',
+    value: function _init() {
 
-    YOUTUBE_DATA.forEach(function (val, index) {
+      var that = this;
 
-      if (event.target.h.id === val.ytplayer) {
-        val.$startButton.hide();
+      // 複数個追加したくないので、これは１回
+      (0, _jquery2.default)('body').append('<script src="//www.youtube.com/iframe_api">');
 
-        if (event.data == YT.PlayerState.PLAYING) {}
-        if (event.data == YT.PlayerState.PAUSED) {}
-        if (event.data == YT.PlayerState.ENDED) {
-          if (!val.isCustomizedButton) val.$startButton.show();
-        }
+      function onPlayerReady(event) {
+
+        that.YOUTUBE_DATA.forEach(function (val, index) {
+
+          if (!val.isCustomizedButton) val.$startButton.hide();
+        });
       }
-    });
-  }
 
-  var onYouTubeIframeAPIReady = function onYouTubeIframeAPIReady() {
+      function onPlayerStateChange(event) {
 
-    YOUTUBE_DATA.forEach(function (val, index) {
+        that.YOUTUBE_DATA.forEach(function (val, index) {
 
-      // https://developers.google.com/youtube/player_parameters?playerVersion=HTML5&hl=ja
-      var player = new YT.Player(val.ytplayer, {
-        videoId: val.videoID,
-        playerVars: {
-          'controls': 1,
-          'enablejsapi': 1,
-          'iv_load_policy': 3, // アノテーション
-          'disablekb': 1,
-          'showinfo': 1,
-          'loop': 0,
-          'autoplay': val.isAutoPlay,
-          'rel': 0, // 関連動画
-          'fs': 1 // 全画面
-        },
-        events: {
-          'onReady': onPlayerReady,
-          'onStateChange': onPlayerStateChange
-        }
+          if (event.target.h.id === val.ytplayer) {
+            val.$startButton.hide();
+
+            if (event.data == YT.PlayerState.PLAYING) {}
+            if (event.data == YT.PlayerState.PAUSED) {}
+            if (event.data == YT.PlayerState.ENDED) {
+              if (val.isCustomizedButton) val.$startButton.show();
+            }
+          }
+        });
+      }
+
+      var onYouTubeIframeAPIReady = function onYouTubeIframeAPIReady() {
+
+        that.YOUTUBE_DATA.forEach(function (val, index) {
+
+          // https://developers.google.com/youtube/player_parameters?playerVersion=HTML5&hl=ja
+          var player = new YT.Player(val.ytplayer, {
+            videoId: val.videoID,
+            playerVars: {
+              'controls': 1,
+              'enablejsapi': 1,
+              'iv_load_policy': 3, // アノテーション
+              'disablekb': 1,
+              'showinfo': 1,
+              'loop': 0,
+              'autoplay': val.isAutoPlay,
+              'rel': 0, // 関連動画
+              'fs': 1 // 全画面
+            },
+            events: {
+              'onReady': onPlayerReady,
+              'onStateChange': onPlayerStateChange
+            }
+          });
+          that.players[index] = player;
+        });
+      };
+
+      window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
+
+      that.YOUTUBE_DATA.forEach(function (val, index) {
+
+        val.$startButton.on('click', function () {
+          that.players[index].playVideo();
+        });
+        val.$stopButton.on('click', function () {
+          that.players[index].stopVideo();
+        });
       });
-      players[index] = player;
-    });
-  };
+    }
+  }, {
+    key: 'playVideo',
+    value: function playVideo() {
+      var index = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
 
-  window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
+      this.players[index].playVideo();
+    }
+  }, {
+    key: 'stopVideo',
+    value: function stopVideo() {
+      var index = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
 
-  YOUTUBE_DATA.forEach(function (val, index) {
+      this.players[index].stopVideo();
+    }
+  }, {
+    key: 'mute',
+    value: function mute() {
+      var index = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
 
-    val.$startButton.on('click', function () {
-      players[index].playVideo();
-    });
-    val.$stopButton.on('click', function () {
-      players[index].stopVideo();
-    });
-  });
+      this.players[index].mute();
+    }
+  }, {
+    key: 'unMute',
+    value: function unMute() {
+      var index = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+
+      this.players[index].unMute();
+    }
+  }, {
+    key: 'getVolume',
+    value: function getVolume() {
+      var index = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+
+      return this.players[index].getVolume();
+    }
+  }, {
+    key: 'setVolume',
+    value: function setVolume() {
+      var index = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+      var volume = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 100;
+
+      this.players[index].setVolume(volume);
+    }
+  }]);
+
+  return Youtube;
 }();
+
+(function () {
+
+  var youtube = new Youtube();
+  // test
+  (0, _jquery2.default)('.box').on('click', function () {
+    // youtube.playVideo();
+    // youtube.mute();
+    // youtube.setVolume(0,50);
+  });
+  (0, _jquery2.default)('.wrapper').on('click', function () {
+    // youtube.stopVideo(1);
+    // console.log(youtube.getVolume());
+  });
+})();
 
 },{"jquery":298}],306:[function(require,module,exports){
 'use strict';

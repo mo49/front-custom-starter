@@ -312,50 +312,50 @@ $tablet_max: 768;
     width: 240px;
     height: 200px; }
 
-.page-root[data-page='top'] #top #box {
+.page-root[data-page='top'] #top .box {
   width: 100%;
   height: 500px;
   background-color: #3ef;
   margin: 10px auto; }
-  html[data-env="sp"] .page-root[data-page='top'] #top #box {
+  html[data-env="sp"] .page-root[data-page='top'] #top .box {
     height: 200px; }
-  html[data-env="tablet"] .page-root[data-page='top'] #top #box {
+  html[data-env="tablet"] .page-root[data-page='top'] #top .box {
     background-color: #f80; }
   @media only screen and (max-width: 800px) {
-    .page-root[data-page='top'] #top #box {
+    .page-root[data-page='top'] #top .box {
       background-color: #0f5; } }
-  .page-root[data-page='top'] #top #box:after {
+  .page-root[data-page='top'] #top .box:after {
     content: '960px - padding';
     display: block; }
-    html[data-env="sp"] .page-root[data-page='top'] #top #box:after {
+    html[data-env="sp"] .page-root[data-page='top'] #top .box:after {
       content: '375px - padding'; }
-    html[data-env="tablet"] .page-root[data-page='top'] #top #box:after {
+    html[data-env="tablet"] .page-root[data-page='top'] #top .box:after {
       content: '375px - padding : pcを縮小表示'; }
     @media only screen and (max-width: 800px) {
-      .page-root[data-page='top'] #top #box:after {
+      .page-root[data-page='top'] #top .box:after {
         content: '800px : gnavだけメディアクエリで表示を切り替える'; } }
 
-.page-root[data-page='top'] #about #box {
+.page-root[data-page='top'] #about .box {
   width: 100%;
   height: 500px;
   background-color: #3ef;
   margin: 10px auto; }
-  html[data-env="sp"] .page-root[data-page='top'] #about #box {
+  html[data-env="sp"] .page-root[data-page='top'] #about .box {
     height: 200px; }
-  html[data-env="tablet"] .page-root[data-page='top'] #about #box {
+  html[data-env="tablet"] .page-root[data-page='top'] #about .box {
     background-color: #f80; }
   @media only screen and (max-width: 800px) {
-    .page-root[data-page='top'] #about #box {
+    .page-root[data-page='top'] #about .box {
       background-color: #0f5; } }
-  .page-root[data-page='top'] #about #box:after {
+  .page-root[data-page='top'] #about .box:after {
     content: '960px - padding';
     display: block; }
-    html[data-env="sp"] .page-root[data-page='top'] #about #box:after {
+    html[data-env="sp"] .page-root[data-page='top'] #about .box:after {
       content: '375px - padding'; }
-    html[data-env="tablet"] .page-root[data-page='top'] #about #box:after {
+    html[data-env="tablet"] .page-root[data-page='top'] #about .box:after {
       content: '375px - padding : pcを縮小表示'; }
     @media only screen and (max-width: 800px) {
-      .page-root[data-page='top'] #about #box:after {
+      .page-root[data-page='top'] #about .box:after {
         content: '800px : gnavだけメディアクエリで表示を切り替える'; } }
 
 .page-root[data-page='top'] .youtube__box01, .page-root[data-page='top'] .youtube__box02 {
