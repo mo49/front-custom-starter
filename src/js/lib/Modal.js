@@ -1,6 +1,7 @@
 // http://qiita.com/gonshi_com/items/5a86fc415dcccfb04e2a
 
 import $ from 'jquery';
+import { userClick } from '../util/userEvent';
 
 export default class {
 
@@ -22,7 +23,7 @@ export default class {
 
     let canClick = true;
 
-    this.$toggleButton.on('click', () => {
+    this.$toggleButton.on(userClick, () => {
 
       if ( !canClick ) return;
 

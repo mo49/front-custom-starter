@@ -17372,6 +17372,8 @@ var _UA = require('../util/UA');
 
 var _UA2 = _interopRequireDefault(_UA);
 
+var _userEvent = require('../util/userEvent');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -17410,7 +17412,7 @@ var Gnav = function () {
       var DURATION = 500;
       var canClick = true;
 
-      $elm.on('click', function (e) {
+      $elm.on(_userEvent.userClick, function (e) {
 
         if (!canClick) return;
 
@@ -17497,8 +17499,8 @@ var Gnav = function () {
   });
 })();
 
-},{"../util/UA":310,"jquery":298}],304:[function(require,module,exports){
-"use strict";
+},{"../util/UA":310,"../util/userEvent":316,"jquery":298}],304:[function(require,module,exports){
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -17506,9 +17508,11 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); // http://qiita.com/gonshi_com/items/5a86fc415dcccfb04e2a
 
-var _jquery = require("jquery");
+var _jquery = require('jquery');
 
 var _jquery2 = _interopRequireDefault(_jquery);
+
+var _userEvent = require('../util/userEvent');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -17532,13 +17536,13 @@ var _class = function () {
   }
 
   _createClass(_class, [{
-    key: "initListener",
+    key: 'initListener',
     value: function initListener() {
       var _this = this;
 
       var canClick = true;
 
-      this.$toggleButton.on('click', function () {
+      this.$toggleButton.on(_userEvent.userClick, function () {
 
         if (!canClick) return;
 
@@ -17558,19 +17562,19 @@ var _class = function () {
       }, 0);
     }
   }, {
-    key: "open",
+    key: 'open',
     value: function open() {
 
       this.lockBG();
     }
   }, {
-    key: "close",
+    key: 'close',
     value: function close() {
 
       this.unlockBG();
     }
   }, {
-    key: "lockBG",
+    key: 'lockBG',
     value: function lockBG() {
 
       var current_scrollY = (0, _jquery2.default)(window).scrollTop();
@@ -17583,7 +17587,7 @@ var _class = function () {
       });
     }
   }, {
-    key: "unlockBG",
+    key: 'unlockBG',
     value: function unlockBG() {
 
       this.$wrapper.attr({ style: '' });
@@ -17596,7 +17600,7 @@ var _class = function () {
 
 exports.default = _class;
 
-},{"jquery":298}],305:[function(require,module,exports){
+},{"../util/userEvent":316,"jquery":298}],305:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); // https://developers.google.com/youtube/iframe_api_reference?hl=ja
@@ -17604,6 +17608,8 @@ var _createClass = function () { function defineProperties(target, props) { for 
 var _jquery = require('jquery');
 
 var _jquery2 = _interopRequireDefault(_jquery);
+
+var _userEvent = require('../util/userEvent');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -17696,10 +17702,10 @@ var Youtube = function () {
 
       that.YOUTUBE_DATA.forEach(function (val, index) {
 
-        val.$startButton.on('click', function () {
+        val.$startButton.on(_userEvent.userClick, function () {
           that.players[index].playVideo();
         });
-        val.$stopButton.on('click', function () {
+        val.$stopButton.on(_userEvent.userClick, function () {
           that.players[index].stopVideo();
         });
       });
@@ -17756,18 +17762,18 @@ var Youtube = function () {
 
   var youtube = new Youtube();
   // test
-  (0, _jquery2.default)('.box').on('click', function () {
+  (0, _jquery2.default)('.box').on(_userEvent.userClick, function () {
     // youtube.playVideo();
     // youtube.mute();
     // youtube.setVolume(0,50);
   });
-  (0, _jquery2.default)('.wrapper').on('click', function () {
+  (0, _jquery2.default)('.wrapper').on(_userEvent.userClick, function () {
     // youtube.stopVideo(1);
     // console.log(youtube.getVolume());
   });
 })();
 
-},{"jquery":298}],306:[function(require,module,exports){
+},{"../util/userEvent":316,"jquery":298}],306:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -17928,6 +17934,8 @@ var _jquery = require('jquery');
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
+var _userEvent = require('./userEvent');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -17970,7 +17978,7 @@ var Gototop = function () {
     key: '_onClick',
     value: function _onClick() {
 
-      this.$btn.on('click', function () {
+      this.$btn.on(_userEvent.userClick, function () {
         (0, _jquery2.default)('html,body').animate({
           scrollTop: 0 + 'px'
         }, 1000);
@@ -17990,7 +17998,7 @@ var Gototop = function () {
   });
 })();
 
-},{"jquery":298}],309:[function(require,module,exports){
+},{"./userEvent":316,"jquery":298}],309:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -18388,4 +18396,24 @@ function checkOrientation() {
   }).trigger('orientationchange');
 } // http://qiita.com/butchi_y/items/7f0a3c8f1b9a75ecbb1a
 
-},{"jquery":298}]},{},[307]);
+},{"jquery":298}],316:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.userClick = undefined;
+
+var _UA = require('./UA');
+
+var _UA2 = _interopRequireDefault(_UA);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var isSP = new _UA2.default().get().Mobile; // -----------------------------------
+// user event 振り分け
+// -----------------------------------
+
+var userClick = exports.userClick = isSP ? 'touchstart' : 'click';
+
+},{"./UA":310}]},{},[307]);
