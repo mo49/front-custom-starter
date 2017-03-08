@@ -18214,6 +18214,8 @@ var _jquery = require('jquery');
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
+var _userEvent = require('./userEvent');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -18273,7 +18275,7 @@ var WindowScroller = function () {
       var BUFFER = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 30;
 
 
-      (0, _jquery2.default)('a[href^="#"]').on('click', function (e) {
+      (0, _jquery2.default)('a[href^="#"]').on(_userEvent.userClick, function (e) {
         var _this = this;
 
         e.preventDefault();
@@ -18305,7 +18307,7 @@ var WindowScroller = function () {
 
 exports.default = WindowScroller;
 
-},{"jquery":298}],313:[function(require,module,exports){
+},{"./userEvent":316,"jquery":298}],313:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
