@@ -17824,6 +17824,12 @@ var _WindowScroller = require('./util/WindowScroller');
 
 var _WindowScroller2 = _interopRequireDefault(_WindowScroller);
 
+var _banPinchInOut = require('./util/banPinchInOut');
+
+var _banDoubleTap = require('./util/banDoubleTap');
+
+var _checkOrientation = require('./util/checkOrientation');
+
 require('./lib/Gnav');
 
 require('./lib/Youtube');
@@ -17845,14 +17851,21 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // -------------------------------------------
 // 初期設定
 // -------------------------------------------
-var cookie = new _Cookie2.default();
-// import './util/GA';
 
+// import './util/GA';
+var cookie = new _Cookie2.default();
 var ua = new _UA2.default();
+var isSP = ua.get().Mobile;
 var windowScroller = new _WindowScroller2.default();
 
 ua.initSetting();
 windowScroller.stop();
+
+if (isSP) {
+  (0, _banPinchInOut.banPinchInOut)();
+  (0, _banDoubleTap.banDoubleTap)(document.documentElement);
+  (0, _checkOrientation.checkOrientation)();
+}
 
 // -------------------------------------------
 // Promise
@@ -17906,7 +17919,7 @@ function init() {
   });
 }
 
-},{"./data/imagesSrc":301,"./lib/Cookie":302,"./lib/Gnav":303,"./lib/Modal":304,"./lib/Youtube":305,"./lib/initialVisit":306,"./util/Gototop":308,"./util/PreloadImage":309,"./util/UA":310,"./util/Viewport":311,"./util/WindowScroller":312,"babel-polyfill":1,"jquery":298}],308:[function(require,module,exports){
+},{"./data/imagesSrc":301,"./lib/Cookie":302,"./lib/Gnav":303,"./lib/Modal":304,"./lib/Youtube":305,"./lib/initialVisit":306,"./util/Gototop":308,"./util/PreloadImage":309,"./util/UA":310,"./util/Viewport":311,"./util/WindowScroller":312,"./util/banDoubleTap":313,"./util/banPinchInOut":314,"./util/checkOrientation":315,"babel-polyfill":1,"jquery":298}],308:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -18283,5 +18296,96 @@ var WindowScroller = function () {
 }();
 
 exports.default = WindowScroller;
+
+},{"jquery":298}],313:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.banDoubleTap = banDoubleTap;
+// http://kimizuka.hatenablog.com/entry/2016/07/29/110931
+
+// ダブルタップを無効
+function banDoubleTap(dom) {
+
+  var tapFlag = false;
+  var timer = void 0;
+
+  dom.addEventListener("touchstart", function (evt) {
+    if (tapFlag) evt.preventDefault();
+  }, true);
+
+  dom.addEventListener("touchend", function (evt) {
+    tapFlag = true;
+    clearTimeout(timer);
+    timer = setTimeout(function () {
+      tapFlag = false;
+    }, 200);
+  }, true);
+}
+
+},{}],314:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.banPinchInOut = banPinchInOut;
+// http://blog.cror.net/iso10-user-scalable.html
+
+// ピンチイン・アウトを無効
+function banPinchInOut() {
+  document.documentElement.addEventListener('touchstart', function (event) {
+    if (event.touches.length > 1) {
+      event.preventDefault();
+    }
+  }, false);
+
+  var lastTouchEnd = 0;
+  document.documentElement.addEventListener('touchend', function (event) {
+    var now = new Date().getTime();
+    if (now - lastTouchEnd <= 300) {
+      event.preventDefault();
+    }
+    lastTouchEnd = now;
+  }, false);
+}
+
+},{}],315:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.checkOrientation = checkOrientation;
+
+var _jquery = require('jquery');
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// 横表示不可
+function checkOrientation() {
+
+  var HTML = document.documentElement;
+
+  (0, _jquery2.default)(window).on('orientationchange', function (evt) {
+
+    // -------------------------------------------
+    // youtubeモーダルを使う場合
+    // -------------------------------------------
+    // const isOpen = parseInt( document.getElementsByClassName('wrapper')[0].getAttribute('data-youtube-open') );
+    // if(isOpen) return;
+
+    var angle = screen && screen.orientation && screen.orientation.angle || window.orientation || 0;
+    if (angle % 180 !== 0) {
+      HTML.setAttribute('data-orientaion', 'landscape');
+    } else {
+      HTML.setAttribute('data-orientaion', 'portrait');
+    }
+  }).trigger('orientationchange');
+} // http://qiita.com/butchi_y/items/7f0a3c8f1b9a75ecbb1a
 
 },{"jquery":298}]},{},[307]);

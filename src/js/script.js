@@ -6,6 +6,9 @@ import './util/Gototop';
 import UA from './util/UA';
 import PreloadImage from './util/PreloadImage';
 import WindowScroller from './util/WindowScroller';
+import { banPinchInOut } from './util/banPinchInOut';
+import { banDoubleTap } from './util/banDoubleTap';
+import { checkOrientation } from './util/checkOrientation';
 import './lib/Gnav';
 import './lib/Youtube';
 import Cookie from './lib/Cookie';
@@ -18,10 +21,17 @@ import { IMAGES_SRC } from './data/imagesSrc';
 // -------------------------------------------
 const cookie = new Cookie();
 const ua = new UA();
+const isSP = ua.get().Mobile;
 const windowScroller = new WindowScroller();
 
 ua.initSetting();
 windowScroller.stop();
+
+if (isSP) {
+  banPinchInOut();
+  banDoubleTap(document.documentElement);
+  checkOrientation();
+}
 
 // -------------------------------------------
 // Promise
