@@ -39,6 +39,8 @@ class Gnav {
       if ( !canClick ) return;
 
       e.stopPropagation();
+      e.preventDefault();
+
       this.toggleGnav()
 
       canClick = false;

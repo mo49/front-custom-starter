@@ -17417,6 +17417,8 @@ var Gnav = function () {
         if (!canClick) return;
 
         e.stopPropagation();
+        e.preventDefault();
+
         _this.toggleGnav();
 
         canClick = false;
