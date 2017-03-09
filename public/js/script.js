@@ -18406,18 +18406,16 @@ function checkOrientation() {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.userClick = undefined;
-
-var _UA = require('./UA');
-
-var _UA2 = _interopRequireDefault(_UA);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var isSP = new _UA2.default().get().Mobile; // -----------------------------------
+// -----------------------------------
 // user event 振り分け
 // -----------------------------------
 
-var userClick = exports.userClick = isSP ? 'touchstart' : 'click';
+// import UA from './UA';
+//
+// const isSP = new UA().get().Mobile;
 
-},{"./UA":310}]},{},[307]);
+var supportTouch = 'ontouchend' in document;
+
+var userClick = exports.userClick = supportTouch ? 'touchstart' : 'click';
+
+},{}]},{},[307]);
