@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import { userClick } from './userEvent';
+import { userEvent } from './userEvent';
 
 class Gototop {
 
@@ -36,7 +36,7 @@ class Gototop {
 
   _onClick() {
 
-    this.$btn.on(userClick, () => {
+    this.$btn.on(userEvent.click, () => {
       $('html,body').animate({
         scrollTop: 0 + 'px'
       }, 1000);

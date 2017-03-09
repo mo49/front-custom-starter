@@ -17412,7 +17412,7 @@ var Gnav = function () {
       var DURATION = 500;
       var canClick = true;
 
-      $elm.on(_userEvent.userClick, function (e) {
+      $elm.on(_userEvent.userEvent.click, function (e) {
 
         if (!canClick) return;
 
@@ -17544,7 +17544,7 @@ var _class = function () {
 
       var canClick = true;
 
-      this.$toggleButton.on(_userEvent.userClick, function () {
+      this.$toggleButton.on(_userEvent.userEvent.click, function () {
 
         if (!canClick) return;
 
@@ -17704,10 +17704,10 @@ var Youtube = function () {
 
       that.YOUTUBE_DATA.forEach(function (val, index) {
 
-        val.$startButton.on(_userEvent.userClick, function () {
+        val.$startButton.on(_userEvent.userEvent.click, function () {
           that.players[index].playVideo();
         });
-        val.$stopButton.on(_userEvent.userClick, function () {
+        val.$stopButton.on(_userEvent.userEvent.click, function () {
           that.players[index].stopVideo();
         });
       });
@@ -17764,12 +17764,12 @@ var Youtube = function () {
 
   var youtube = new Youtube();
   // test
-  (0, _jquery2.default)('.box').on(_userEvent.userClick, function () {
+  (0, _jquery2.default)('.box').on(_userEvent.userEvent.click, function () {
     // youtube.playVideo();
     // youtube.mute();
     // youtube.setVolume(0,50);
   });
-  (0, _jquery2.default)('.wrapper').on(_userEvent.userClick, function () {
+  (0, _jquery2.default)('.wrapper').on(_userEvent.userEvent.click, function () {
     // youtube.stopVideo(1);
     // console.log(youtube.getVolume());
   });
@@ -17980,7 +17980,7 @@ var Gototop = function () {
     key: '_onClick',
     value: function _onClick() {
 
-      this.$btn.on(_userEvent.userClick, function () {
+      this.$btn.on(_userEvent.userEvent.click, function () {
         (0, _jquery2.default)('html,body').animate({
           scrollTop: 0 + 'px'
         }, 1000);
@@ -18277,7 +18277,7 @@ var WindowScroller = function () {
       var BUFFER = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 30;
 
 
-      (0, _jquery2.default)('a[href^="#"]').on(_userEvent.userClick, function (e) {
+      (0, _jquery2.default)('a[href^="#"]').on(_userEvent.userEvent.click, function (e) {
         var _this = this;
 
         e.preventDefault();
@@ -18406,16 +18406,25 @@ function checkOrientation() {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-// -----------------------------------
+exports.userEvent = undefined;
+
+var _UA = require('./UA');
+
+var _UA2 = _interopRequireDefault(_UA);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var isSP = new _UA2.default().get().Mobile; // -----------------------------------
 // user event 振り分け
 // -----------------------------------
 
-// import UA from './UA';
-//
-// const isSP = new UA().get().Mobile;
-
 var supportTouch = 'ontouchend' in document;
 
-var userClick = exports.userClick = supportTouch ? 'touchstart' : 'click';
+var userEvent = exports.userEvent = {
+  click: isSP && supportTouch ? 'touchstart' : 'click',
+  touchstart: supportTouch ? 'touchstart' : 'mousedown',
+  touchmove: supportTouch ? 'touchmove' : 'mousemove',
+  touchend: supportTouch ? 'touchend' : 'mouseup'
+};
 
-},{}]},{},[307]);
+},{"./UA":310}]},{},[307]);

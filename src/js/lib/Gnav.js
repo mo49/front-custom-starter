@@ -2,7 +2,7 @@
 
 import $ from 'jquery';
 import UA from '../util/UA';
-import { userClick } from '../util/userEvent';
+import { userEvent } from '../util/userEvent';
 
 class Gnav {
 
@@ -34,7 +34,7 @@ class Gnav {
     const DURATION = 500;
     let canClick = true;
 
-    $elm.on(userClick, (e) => {
+    $elm.on(userEvent.click, (e) => {
 
       if ( !canClick ) return;
 

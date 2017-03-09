@@ -1,7 +1,7 @@
 // https://developers.google.com/youtube/iframe_api_reference?hl=ja
 
 import $ from 'jquery';
-import { userClick } from '../util/userEvent';
+import { userEvent } from '../util/userEvent';
 
 class Youtube {
   constructor() {
@@ -100,10 +100,10 @@ class Youtube {
 
     that.YOUTUBE_DATA.forEach((val,index) => {
 
-      val.$startButton.on(userClick, () => {
+      val.$startButton.on(userEvent.click, () => {
         that.players[index].playVideo();
       });
-      val.$stopButton.on(userClick, () => {
+      val.$stopButton.on(userEvent.click, () => {
         that.players[index].stopVideo();
       });
 
@@ -136,12 +136,12 @@ class Youtube {
 
   const youtube = new Youtube();
   // test
-  $('.box').on(userClick, () => {
+  $('.box').on(userEvent.click, () => {
     // youtube.playVideo();
     // youtube.mute();
     // youtube.setVolume(0,50);
   })
-  $('.wrapper').on(userClick, () => {
+  $('.wrapper').on(userEvent.click, () => {
     // youtube.stopVideo(1);
     // console.log(youtube.getVolume());
   })

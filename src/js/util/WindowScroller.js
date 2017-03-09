@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import { userClick } from './userEvent';
+import { userEvent } from './userEvent';
 
 export default class WindowScroller {
 
@@ -37,7 +37,7 @@ export default class WindowScroller {
     // ページ内スムーススクロール
     onClickLink(TIME = 1000, BUFFER = 30) {
 
-      $('a[href^="#"]').on(userClick, function(e) {
+      $('a[href^="#"]').on(userEvent.click, function(e) {
 
         e.preventDefault();
 

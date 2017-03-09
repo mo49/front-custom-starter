@@ -1,15 +1,15 @@
 import $ from 'jquery';
-import { userClick } from './userEvent';
+import { userEvent } from './userEvent';
 
 export default (() => {
 
-  $('.js-facebookButton').on(userClick, () => {
+  $('.js-facebookButton').on(userEvent.click, () => {
     ga('send', 'event', 'share', 'click', 'facebook');
   });
-  $('.js-twitterButton').on(userClick, () => {
+  $('.js-twitterButton').on(userEvent.click, () => {
     ga('send', 'event', 'share', 'click', 'twitter');
   });
-  $('.js-lineButton').on(userClick, () => {
+  $('.js-lineButton').on(userEvent.click, () => {
     ga('send', 'event', 'share', 'click', 'line');
   });
 
