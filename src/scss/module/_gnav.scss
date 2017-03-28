@@ -54,7 +54,7 @@
   }
 
   // button
-  .gnav__btn-toggle{
+  .gnav__toggleButton{
     $size: 50;
     $line-height: 2;
     z-index: index($z, gnav);
@@ -63,7 +63,7 @@
     width: $size + px;
     height: $size + px;
 
-    .gnav__btn-open{
+    .gnav__openButton{
       position: absolute;
       top: 0; right: 0;
       width: $size + px;
@@ -86,8 +86,8 @@
       }
     }
 
-    .gnav__btn-close{
-      @extend .gnav__btn-open;
+    .gnav__closeButton{
+      @extend .gnav__openButton;
       display: none;
       margin-top: 15px;
       span{

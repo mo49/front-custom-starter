@@ -56,7 +56,7 @@ gulp.task('pug', () => {
     const locals = readConfig(`${CONFIG}/meta.yml`);
     locals.versions = revLogger.versions();
     locals.basePath = BASE_PATH;
-    
+
     return gulp.src(`${SRC}/pug/**/[!_]*.pug`)
         .pipe(pug({
             locals: locals,
