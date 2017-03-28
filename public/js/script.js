@@ -17387,7 +17387,9 @@ var Gnav = function () {
     this.$toggleButton = opts.$toggleButton || (0, _jquery2.default)(document.createElement("div"));
     this.$gnav = opts.$gnav || (0, _jquery2.default)(document.createElement("div"));
     this.$folding = this.$gnav.find('.gnav__folding');
-    this.$link = this.$gnav.find('.gnav__linksItem a');
+    this.$link_smoothScroll = this.$gnav.find('.gnav__linksItem a[data-link-type="smooth-scroll"]');
+    this.$link_otherPage = this.$gnav.find('.gnav__linksItem a[data-link-type="other-page"]');
+    this.$link_modalOnGnav = this.$gnav.find('.gnav__linksItem a[data-link-type="modal-on-gnav"]');
     this.isSP = opts.isSP || false;
 
     this.$wrapper = (0, _jquery2.default)('.wrapper');
@@ -17402,12 +17404,18 @@ var Gnav = function () {
       if (!this.isSP) return;
 
       this.onClick(this.$toggleButton);
-      this.onClick(this.$link);
+      this.onClick(this.$link_smoothScroll, 'smoothScroll');
+      this.onClick(this.$link_otherPage, 'otherPage', false);
+      this.onClick(this.$link_modalOnGnav, 'modalOnGnav', false);
     }
   }, {
     key: 'onClick',
     value: function onClick($elm) {
       var _this = this;
+
+      var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'default';
+      var canToggle = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+
 
       var DURATION = 500;
       var canClick = true;
@@ -17416,15 +17424,23 @@ var Gnav = function () {
 
         if (!canClick) return;
 
-        e.stopPropagation();
-        e.preventDefault();
+        switch (type) {
+          case 'otherPage':
+            e.stopPropagation();break;
+          default:
+            e.stopPropagation();
+            e.preventDefault();
+        }
 
-        _this.toggleGnav();
+        if (canToggle) {
 
-        canClick = false;
-        setTimeout(function () {
-          return canClick = true;
-        }, DURATION);
+          _this.toggleGnav();
+
+          canClick = false;
+          setTimeout(function () {
+            return canClick = true;
+          }, DURATION);
+        }
       });
     }
   }, {

@@ -11,7 +11,9 @@ class Gnav {
     this.$toggleButton = opts.$toggleButton || $(document.createElement("div"));
     this.$gnav = opts.$gnav || $(document.createElement("div"));
     this.$folding = this.$gnav.find('.gnav__folding');
-    this.$link = this.$gnav.find('.gnav__linksItem a');
+    this.$link_smoothScroll = this.$gnav.find('.gnav__linksItem a[data-link-type="smooth-scroll"]');
+    this.$link_otherPage = this.$gnav.find('.gnav__linksItem a[data-link-type="other-page"]');
+    this.$link_modalOnGnav = this.$gnav.find('.gnav__linksItem a[data-link-type="modal-on-gnav"]');
     this.isSP = opts.isSP || false;
 
     this.$wrapper = $('.wrapper');
@@ -25,11 +27,13 @@ class Gnav {
     if (!this.isSP) return;
 
     this.onClick( this.$toggleButton )
-    this.onClick( this.$link )
+    this.onClick( this.$link_smoothScroll, 'smoothScroll' )
+    this.onClick( this.$link_otherPage, 'otherPage', false )
+    this.onClick( this.$link_modalOnGnav, 'modalOnGnav', false )
 
   }
 
-  onClick($elm) {
+  onClick($elm, type='default', canToggle=true) {
 
     const DURATION = 500;
     let canClick = true;
@@ -38,13 +42,22 @@ class Gnav {
 
       if ( !canClick ) return;
 
-      e.stopPropagation();
-      e.preventDefault();
+      switch (type) {
+        case 'otherPage':
+          e.stopPropagation(); break;
+        default:
+          e.stopPropagation();
+          e.preventDefault();
+      }
 
-      this.toggleGnav()
+      if (canToggle) {
 
-      canClick = false;
-      setTimeout(() => canClick = true, DURATION )
+        this.toggleGnav()
+
+        canClick = false;
+        setTimeout(() => canClick = true, DURATION )
+
+      }
 
     })
 
