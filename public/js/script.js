@@ -17393,7 +17393,8 @@ var Gnav = function () {
     this.$link_modalOnGnav = this.$gnav.find('.gnav__linksItem a[data-link-type="modal-on-gnav"]');
     this.isSP = opts.isSP || false;
 
-    this.$wrapper = (0, _jquery2.default)('.wrapper');
+    this.wrapper = document.getElementsByClassName('wrapper')[0];
+    this.$wrapper = (0, _jquery2.default)(this.wrapper);
 
     this.initListener();
   }
@@ -17402,7 +17403,7 @@ var Gnav = function () {
     key: 'initListener',
     value: function initListener() {
 
-      if (!this.isSP) return;
+      // if (!this.isSP) return;
 
       this._onClick(this.$toggleButton);
       this._onClick(this.$link_smoothScroll, 'smoothScroll');
@@ -17464,7 +17465,7 @@ var Gnav = function () {
         } else {
           if (isOpened) {
             isOpened = false;
-            _this2.$gnav.fadeOut(0);
+            _this2.$gnav.fadeOut(300);
           }
         }
       });
@@ -17516,6 +17517,11 @@ var Gnav = function () {
     key: 'lockBG',
     value: function lockBG() {
 
+      // 0のときだけ通す
+      var currentCount = parseInt(this.wrapper.getAttribute('data-lock-bg')) || 0;
+      this.wrapper.setAttribute('data-lock-bg', currentCount + 1);
+      if (currentCount !== 0) return;
+
       var current_scrollY = (0, _jquery2.default)(window).scrollTop();
       this.original_scrollY = current_scrollY;
 
@@ -17528,6 +17534,11 @@ var Gnav = function () {
   }, {
     key: 'unlockBG',
     value: function unlockBG() {
+
+      // 1のときだけ通す
+      var currentCount = parseInt(this.wrapper.getAttribute('data-lock-bg'));
+      this.wrapper.setAttribute('data-lock-bg', currentCount - 1);
+      if (currentCount !== 1) return;
 
       this.$wrapper.attr({ style: '' });
       (0, _jquery2.default)('html, body').prop({ scrollTop: this.original_scrollY });
@@ -17581,8 +17592,10 @@ var _class = function () {
     this.$openButton = opts.$openButton || (0, _jquery2.default)(document.createElement("div"));
     this.isAutoOpen = opts.isAutoOpen || false;
     this.fadeDuration = isNaN(opts.fadeDuration) ? 500 : opts.fadeDuration;
+    // this.canLock = opts.canLock || false;
 
-    this.$wrapper = (0, _jquery2.default)('.wrapper');
+    this.wrapper = document.getElementsByClassName('wrapper')[0];
+    this.$wrapper = (0, _jquery2.default)(this.wrapper);
 
     this.initListener();
   }
@@ -17629,6 +17642,12 @@ var _class = function () {
     key: 'lockBG',
     value: function lockBG() {
 
+      // modal on modal の対策
+      // 0のときだけ通す
+      var currentCount = parseInt(this.wrapper.getAttribute('data-lock-bg')) || 0;
+      this.wrapper.setAttribute('data-lock-bg', currentCount + 1);
+      if (currentCount !== 0) return;
+
       var current_scrollY = (0, _jquery2.default)(window).scrollTop();
       this.original_scrollY = current_scrollY;
 
@@ -17641,6 +17660,11 @@ var _class = function () {
   }, {
     key: 'unlockBG',
     value: function unlockBG() {
+
+      // 1のときだけ通す
+      var currentCount = parseInt(this.wrapper.getAttribute('data-lock-bg'));
+      this.wrapper.setAttribute('data-lock-bg', currentCount - 1);
+      if (currentCount !== 1) return;
 
       this.$wrapper.attr({ style: '' });
       (0, _jquery2.default)('html, body').prop({ scrollTop: this.original_scrollY });

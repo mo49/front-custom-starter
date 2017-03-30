@@ -12,8 +12,10 @@ export default class {
     this.$openButton = opts.$openButton || $(document.createElement("div"));
     this.isAutoOpen = opts.isAutoOpen || false;
     this.fadeDuration = isNaN(opts.fadeDuration) ? 500 : opts.fadeDuration;
+    // this.canLock = opts.canLock || false;
 
-    this.$wrapper = $('.wrapper');
+    this.wrapper = document.getElementsByClassName('wrapper')[0];
+    this.$wrapper = $(this.wrapper);
 
     this.initListener();
 
@@ -55,6 +57,12 @@ export default class {
 
   lockBG() {
 
+    // modal on modal の対策
+    // 0のときだけ通す
+    const currentCount = parseInt(this.wrapper.getAttribute('data-lock-bg')) || 0;
+    this.wrapper.setAttribute('data-lock-bg',currentCount+1);
+    if ( currentCount !== 0 ) return;
+
     const current_scrollY = $( window ).scrollTop();
     this.original_scrollY = current_scrollY;
 
@@ -67,6 +75,11 @@ export default class {
   }
 
   unlockBG() {
+
+    // 1のときだけ通す
+    const currentCount = parseInt(this.wrapper.getAttribute('data-lock-bg'));
+    this.wrapper.setAttribute('data-lock-bg',currentCount-1);
+    if ( currentCount !== 1 ) return;
 
     this.$wrapper.attr( { style: '' } );
     $( 'html, body' ).prop( { scrollTop: this.original_scrollY } );

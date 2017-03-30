@@ -17,7 +17,8 @@ class Gnav {
     this.$link_modalOnGnav = this.$gnav.find('.gnav__linksItem a[data-link-type="modal-on-gnav"]');
     this.isSP = opts.isSP || false;
 
-    this.$wrapper = $('.wrapper');
+    this.wrapper = document.getElementsByClassName('wrapper')[0];
+    this.$wrapper = $(this.wrapper);
 
     this.initListener();
 
@@ -25,7 +26,7 @@ class Gnav {
 
   initListener() {
 
-    if (!this.isSP) return;
+    // if (!this.isSP) return;
 
     this._onClick( this.$toggleButton )
     this._onClick( this.$link_smoothScroll, 'smoothScroll' )
@@ -81,7 +82,7 @@ class Gnav {
       } else {
         if (isOpened) {
           isOpened = false;
-          this.$gnav.fadeOut(0);
+          this.$gnav.fadeOut(300);
         }
       }
     })
@@ -128,6 +129,11 @@ class Gnav {
 
   lockBG() {
 
+    // 0のときだけ通す
+    const currentCount = parseInt(this.wrapper.getAttribute('data-lock-bg')) || 0;
+    this.wrapper.setAttribute('data-lock-bg',currentCount+1);
+    if ( currentCount !== 0 ) return;
+
     const current_scrollY = $( window ).scrollTop();
     this.original_scrollY = current_scrollY;
 
@@ -140,6 +146,11 @@ class Gnav {
   }
 
   unlockBG() {
+
+    // 1のときだけ通す
+    const currentCount = parseInt(this.wrapper.getAttribute('data-lock-bg'));
+    this.wrapper.setAttribute('data-lock-bg',currentCount-1);
+    if ( currentCount !== 1 ) return;
 
     this.$wrapper.attr( { style: '' } );
     $( 'html, body' ).prop( { scrollTop: this.original_scrollY } );
