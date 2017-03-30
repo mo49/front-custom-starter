@@ -17385,7 +17385,8 @@ var Gnav = function () {
     _classCallCheck(this, Gnav);
 
     this.$toggleButton = opts.$toggleButton || (0, _jquery2.default)(document.createElement("div"));
-    this.$gnav = opts.$gnav || (0, _jquery2.default)(document.createElement("div"));
+    this.gnav = opts.gnav || (0, _jquery2.default)(document.createElement("div"));
+    this.$gnav = (0, _jquery2.default)(this.gnav);
     this.$folding = this.$gnav.find('.gnav__folding');
     this.$link_smoothScroll = this.$gnav.find('.gnav__linksItem a[data-link-type="smooth-scroll"]');
     this.$link_otherPage = this.$gnav.find('.gnav__linksItem a[data-link-type="other-page"]');
@@ -17403,14 +17404,16 @@ var Gnav = function () {
 
       if (!this.isSP) return;
 
-      this.onClick(this.$toggleButton);
-      this.onClick(this.$link_smoothScroll, 'smoothScroll');
-      this.onClick(this.$link_otherPage, 'otherPage', false);
-      this.onClick(this.$link_modalOnGnav, 'modalOnGnav', false);
+      this._onClick(this.$toggleButton);
+      this._onClick(this.$link_smoothScroll, 'smoothScroll');
+      this._onClick(this.$link_otherPage, 'otherPage', false);
+      this._onClick(this.$link_modalOnGnav, 'modalOnGnav', false);
+
+      this._onScroll();
     }
   }, {
-    key: 'onClick',
-    value: function onClick($elm) {
+    key: '_onClick',
+    value: function _onClick($elm) {
       var _this = this;
 
       var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'default';
@@ -17444,14 +17447,45 @@ var Gnav = function () {
       });
     }
   }, {
-    key: 'toggleGnav',
-    value: function toggleGnav() {
+    key: '_onScroll',
+    value: function _onScroll() {
       var _this2 = this;
 
+      this.$gnav.hide();
+      var isOpened = false;
+      (0, _jquery2.default)(window).on('scroll', function () {
+        // gnavを開いた瞬間のlockはscrollとみなさない
+        if (parseInt(_this2.gnav.getAttribute('data-gnav-open')) === 1) return;
+        if ((0, _jquery2.default)(window).scrollTop() > 100) {
+          if (!isOpened) {
+            isOpened = true;
+            _this2.$gnav.fadeIn(500);
+          }
+        } else {
+          if (isOpened) {
+            isOpened = false;
+            _this2.$gnav.fadeOut(0);
+          }
+        }
+      });
+    }
+  }, {
+    key: 'toggleGnav',
+    value: function toggleGnav() {
+      var _this3 = this;
+
       var state = this.$folding.css('display');
-      state === 'none' ? this.open() : setTimeout(function () {
-        return _this2.close();
-      }, 50);
+      if (state === 'none') {
+        this.gnav.setAttribute('data-gnav-open', 1);
+        setTimeout(function () {
+          return _this3.open();
+        }, 50);
+      } else {
+        this.gnav.setAttribute('data-gnav-open', 0);
+        setTimeout(function () {
+          return _this3.close();
+        }, 50);
+      }
 
       this.$toggleButton.stop().fadeToggle();
     }
@@ -17475,7 +17509,7 @@ var Gnav = function () {
     value: function close() {
 
       this.unlockBG();
-      this.$gnav.removeClass('is-gnav-open');
+      this.$folding.removeClass('is-gnav-open');
       this.$gnav.attr({ style: '' });
     }
   }, {
@@ -17511,7 +17545,7 @@ var Gnav = function () {
   var isSP = new _UA2.default().get().Mobile;
 
   var gnav = new Gnav({
-    $gnav: (0, _jquery2.default)('#gnav'),
+    gnav: document.getElementById('gnav'),
     $toggleButton: (0, _jquery2.default)('.js-gnavToggleButton'),
     isSP: isSP
   });

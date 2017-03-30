@@ -9,7 +9,8 @@ class Gnav {
   constructor(opts={}) {
 
     this.$toggleButton = opts.$toggleButton || $(document.createElement("div"));
-    this.$gnav = opts.$gnav || $(document.createElement("div"));
+    this.gnav = opts.gnav || $(document.createElement("div"));
+    this.$gnav = $(this.gnav);
     this.$folding = this.$gnav.find('.gnav__folding');
     this.$link_smoothScroll = this.$gnav.find('.gnav__linksItem a[data-link-type="smooth-scroll"]');
     this.$link_otherPage = this.$gnav.find('.gnav__linksItem a[data-link-type="other-page"]');
@@ -26,14 +27,16 @@ class Gnav {
 
     if (!this.isSP) return;
 
-    this.onClick( this.$toggleButton )
-    this.onClick( this.$link_smoothScroll, 'smoothScroll' )
-    this.onClick( this.$link_otherPage, 'otherPage', false )
-    this.onClick( this.$link_modalOnGnav, 'modalOnGnav', false )
+    this._onClick( this.$toggleButton )
+    this._onClick( this.$link_smoothScroll, 'smoothScroll' )
+    this._onClick( this.$link_otherPage, 'otherPage', false )
+    this._onClick( this.$link_modalOnGnav, 'modalOnGnav', false )
+
+    this._onScroll();
 
   }
 
-  onClick($elm, type='default', canToggle=true) {
+  _onClick($elm, type='default', canToggle=true) {
 
     const DURATION = 500;
     let canClick = true;
@@ -63,10 +66,38 @@ class Gnav {
 
   }
 
+  _onScroll() {
+
+    this.$gnav.hide();
+    let isOpened = false;
+    $(window).on('scroll', () => {
+      // gnavを開いた瞬間のlockはscrollとみなさない
+      if( parseInt(this.gnav.getAttribute('data-gnav-open')) === 1 ) return;
+      if ( $(window).scrollTop() > 100 ) {
+        if (!isOpened) {
+          isOpened = true;
+          this.$gnav.fadeIn(500);
+        }
+      } else {
+        if (isOpened) {
+          isOpened = false;
+          this.$gnav.fadeOut(0);
+        }
+      }
+    })
+
+  }
+
   toggleGnav() {
 
     const state = this.$folding.css('display');
-    (state === 'none') ? this.open() : setTimeout( () => this.close(), 50 ) ;
+    if (state === 'none') {
+      this.gnav.setAttribute('data-gnav-open',1)
+      setTimeout( () => this.open(), 50 )
+    } else {
+      this.gnav.setAttribute('data-gnav-open',0)
+      setTimeout( () => this.close(), 50 )
+    }
 
     this.$toggleButton.stop().fadeToggle();
 
@@ -90,7 +121,7 @@ class Gnav {
   close() {
 
     this.unlockBG();
-    this.$gnav.removeClass('is-gnav-open');
+    this.$folding.removeClass('is-gnav-open');
     this.$gnav.attr( { style: '' } );
 
   }
@@ -124,7 +155,7 @@ class Gnav {
   const isSP = new UA().get().Mobile;
 
   const gnav = new Gnav({
-    $gnav: $('#gnav'),
+    gnav: document.getElementById('gnav'),
     $toggleButton: $('.js-gnavToggleButton'),
     isSP: isSP
   });
