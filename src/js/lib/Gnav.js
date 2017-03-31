@@ -50,6 +50,9 @@ class Gnav {
         case 'otherPage':
           e.stopPropagation(); break;
         default:
+          // バブリングを止める -> デリゲート無効
+          // バブリングを止めない -> モーダル自体が閉じる
+          // ということでgnav上でデリゲートするような必要が生じたら別途対応
           e.stopPropagation();
           e.preventDefault();
       }
