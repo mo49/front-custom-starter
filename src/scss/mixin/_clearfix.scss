@@ -1,4 +1,4 @@
-@mixin clearfix {
+@mixin clearfix() {
   /* For modern browsers */
   .cf:before,
   .cf:after {
