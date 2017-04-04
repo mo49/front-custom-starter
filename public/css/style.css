@@ -98,6 +98,27 @@ $tablet_max: 768;
 }
 
 */
+/*
+@mixin image($url, $w: 300, $h: 300, $scale: 1){
+  @include hide-txt();
+  $width: ceil($w * $scale) + px;
+  $height: ceil($h * $scale) + px;
+  background-image: url('../img/' + $url);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: $width $height;
+  width: $width;
+  height: $height;
+}
+
+// PCとSPで同じ画像のケース
+@mixin same-image($url, $w: 300, $h: 300, $pc-scale: 1, $sp-scale: 0.5){
+  @include image($url,$w,$h,$pc-scale);
+  @include mq(sp) {
+    @include image($url,$w,$h,$sp-scale);
+  }
+}
+*/
 /* ======================================
  * 汎用スタイル
  * ====================================== */
@@ -293,31 +314,31 @@ html[data-env="sp"] * {
   text-indent: -9999px;
   white-space: nowrap;
   overflow: hidden;
-  background-image: url("../img/sample1.jpg");
   background-repeat: no-repeat;
   background-position: center center;
-  background-size: 980px 735px;
-  width: 980px;
-  height: 735px; }
+  background-image: url('/img/sample1.jpg?15b376c7b20');
+  background-size: 640px 480px;
+  width: 640px;
+  height: 480px; }
   html[data-env="sp"] #initialVisitModal .modal__content--img, html[data-env="sp"] #soundCheckModal .modal__content--img, html[data-env="sp"]
   #youtubeModal .modal__content--img {
     text-indent: -9999px;
     white-space: nowrap;
     overflow: hidden;
-    background-image: url("../img/sample1.jpg");
     background-repeat: no-repeat;
     background-position: center center;
-    background-size: 490px 368px;
-    width: 490px;
-    height: 368px; }
+    background-image: url('/img/sample1.jpg?15b376c7b20');
+    background-size: 320px 240px;
+    width: 320px;
+    height: 240px; }
 
 #soundCheckModal .modal__content--img {
   text-indent: -9999px;
   white-space: nowrap;
   overflow: hidden;
-  background-image: url("../img/sample2.png");
   background-repeat: no-repeat;
   background-position: center center;
+  background-image: url('/img/sample2.png?15a458e0238');
   background-size: 480px 400px;
   width: 480px;
   height: 400px; }
@@ -325,9 +346,9 @@ html[data-env="sp"] * {
     text-indent: -9999px;
     white-space: nowrap;
     overflow: hidden;
-    background-image: url("../img/sample2.png");
     background-repeat: no-repeat;
     background-position: center center;
+    background-image: url('/img/sample2.png?15a458e0238');
     background-size: 240px 200px;
     width: 240px;
     height: 200px; }

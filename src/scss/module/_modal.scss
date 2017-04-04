@@ -61,19 +61,16 @@
 // test
 #initialVisitModal{
 .modal__content--img{
-  @include image('sample1.jpg', 3264, 2448, 0.3);
-  @include mq(sp) {
-    @include image('sample1.jpg', 3264, 2448, 0.15);
-  };
+  @include same-image('sample1.jpg');
 }
 
 }
 
 #soundCheckModal{
 .modal__content--img{
-  @include image('sample2.png', 480, 400);
+  @include image('sample2.png');
   @include mq(sp) {
-    @include image('sample2.png', 480, 400, 0.5);
+    @include image('sample2.png',2);
   };
 }
 

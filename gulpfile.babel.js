@@ -13,7 +13,8 @@ import browserSync from 'browser-sync';
 import readConfig from 'read-config';
 import watch from 'gulp-watch';
 import RevLogger from 'rev-logger';
-
+import postcss from 'gulp-postcss';
+import assets from 'postcss-assets';
 
 // const
 const SRC = './src';
@@ -35,6 +36,13 @@ gulp.task('sass', () => {
         .pipe(sassGlob())
         .pipe(sass())
         .pipe(pleeease(config))
+        .pipe(postcss([assets({
+          loadPaths: [`img/`], // 画像のパス
+          basePath: `${DEST}`, // プロジェクトで公開するパス
+          cachebuster: true,
+          // relative: './public/css'
+          // baseUrl: '',
+        })]))
         .pipe(gulp.dest(`${DEST}/css`));
 });
 

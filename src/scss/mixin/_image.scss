@@ -1,3 +1,4 @@
+/*
 @mixin image($url, $w: 300, $h: 300, $scale: 1){
   @include hide-txt();
   $width: ceil($w * $scale) + px;
@@ -15,5 +16,26 @@
   @include image($url,$w,$h,$pc-scale);
   @include mq(sp) {
     @include image($url,$w,$h,$sp-scale);
+  }
+}
+*/
+
+// postCss Assets
+@mixin image($url, $density: 1, $scale:1){
+  @include hide-txt();
+  // $basePath: '../img/';
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-image: resolve($url);
+  // background-image: url($basePath + $url);
+  background-size: size($url,$density * $scale);
+  width: width($url,$density * $scale);
+  height: height($url,$density * $scale);
+}
+// SPをベースにしてPCも同じ画像のケース
+@mixin same-image($url, $scale:1){
+  @include image($url,1 * $scale);
+  @include mq(sp) {
+    @include image($url,2 * $scale);
   }
 }
