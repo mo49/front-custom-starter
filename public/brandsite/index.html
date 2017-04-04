@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <!-- meta-->
+    <title>site name</title>
+    <meta name="description" content="site description">
+    <meta name="keywords" content="keyword1, keyword2, keyword3">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
+    <link rel="icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <!-- smartphone meta-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no">
+    <!-- ogp-->
+    <meta property="fb:app_id" content="99999999999">
+    <meta property="og:url" content="http://example.com/">
+    <meta property="og:image" content="http://example.com/ogp.jpg">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="site name">
+    <meta property="og:site_name" content="site name">
+    <meta property="og:description" content="site description">
+    <meta property="og:locale" content="ja_JP">
+    <!-- twitter card-->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="site name">
+    <meta property="twitter:description" content="site description">
+    <meta property="twitter:image" content="http://example.com/ogp.jpg">
+    <!-- canonical url-->
+    <link rel="canonical" href="http://example.com/">
+    <!-- stylesheet-->
+    <link rel="stylesheet" href="/brandsite/css/style.css?v=1">
+  </head>
+  <body>
+    <div class="page-root" data-page="top">
+      <div class="wrapper">
+        <header class="section-block">
+          <div class="content-block"></div>
+        </header>
+        <div id="gnav">
+          <div class="gnav__overlay pc-none js-gnavToggleButton"></div>
+          <div class="gnav__folding js-gnavToggleButton">
+            <ul class="gnav__links">
+              <li class="gnav__linksItem"><a href="#top" data-link-type="smooth-scroll">TOP</a></li>
+              <li class="gnav__linksItem"><a href="#about" data-link-type="smooth-scroll">ABOUT</a></li>
+              <li class="gnav__linksItem"><a href="#news" data-link-type="smooth-scroll">NEWS</a></li>
+              <li class="gnav__linksItem"><a href="#contact" data-link-type="smooth-scroll">CONTACT</a></li>
+              <li class="gnav__linksItem"><a href="./nextpage" data-link-type="other-page">NEXT PAGE</a></li>
+              <li class="gnav__linksItem"><a href="#" data-link-type="modal-on-gnav">MODAL ON GNAV</a></li>
+            </ul>
+            <div class="gnav__ico sp-none">
+              <div class="gnav__icoLink"><a class="a-block" href="#" target="_blank"></a></div>
+            </div>
+          </div>
+          <div class="gnav__toggleButton pc-none">
+            <div class="gnav__openButton js-gnavToggleButton"><span></span><span></span><span></span></div>
+            <div class="gnav__closeButton js-gnavToggleButton"><span></span><span></span></div>
+          </div>
+        </div>
+        <div class="section-block" id="top">
+          <div class="content-block">
+            <div class="box"></div>
+            <div class="box sp-none"></div>
+          </div>
+        </div>
+        <div class="section-block" id="about">
+          <div class="content-block">
+            <div class="box"></div>
+            <div class="box sp-none"></div>
+          </div>
+        </div>
+        <footer class="section-block">
+          <div class="content-block">
+            <div class="copyright"></div>
+          </div>
+        </footer>
+        <div class="socialButton">
+          <div class="socialButton__facebook js-facebookButton"></div>
+          <div class="socialButton__twitter"><a class="link-block" href="http://twitter.com/intent/tweet?text=twitter%20description%0A&amp;hashtags=hashtag%2C%20hashtag2%2C%20hashtag3&amp;url=http%3A%2F%2Fexample.com%2F" target="_blank"></a></div>
+        </div>
+        <div id="fb-root"></div>
+        <script>
+          window.fbAsyncInit = function() {
+            FB.init({
+              appId      : '99999999999',
+              xfbml      : true,
+              version    : 'v2.8'
+            });
+          };
+          function shareFB(){
+            FB.ui(
+              {
+                method: 'share',
+                href: 'http://example.com/',
+              }
+            );
+          }
+          (function(d, s, id){
+             var js, fjs = d.getElementsByTagName(s)[0];
+             if (d.getElementById(id)) {return;}
+             js = d.createElement(s); js.id = id;
+             js.src = "//connect.facebook.net/ja_JP/sdk.js";
+             fjs.parentNode.insertBefore(js, fjs);
+           }(document, 'script', 'facebook-jssdk'));
+          
+           var facebookButtons = document.getElementsByClassName('js-facebookButton');
+           for (var i = 0; i < facebookButtons.length; i++) {
+             facebookButtons[i].addEventListener('click', function(){shareFB();}, false)
+           }
+          
+          
+          
+        </script>
+        <div class="section-block" id="youtubeModal">
+          <div class="modal__overlay js-youtubeModalToggleButton"></div>
+          <div class="modal__content">
+            <div class="modal__content--img"></div>
+            <div class="modal__btn-close js-youtubeModalToggleButton"></div>
+          </div>
+        </div>
+        <button class="js-youtubeModalToggleButton js-youtubeModalOpenButton">Youtube Modal Button</button>
+        <div class="section-block" id="soundCheckModal">
+          <div class="modal__overlay js-soundCheckModalToggleButton"></div>
+          <div class="modal__content">
+            <div class="modal__content--img"></div>
+            <div class="modal__btn-close js-soundCheckModalToggleButton"></div>
+          </div>
+        </div>
+        <button class="js-soundCheckModalToggleButton js-soundCheckModalOpenButton is-hidden"></button>
+        <div class="section-block" id="initialVisitModal">
+          <div class="modal__overlay js-initialVisitModalToggleButton"></div>
+          <div class="modal__content">
+            <div class="modal__content--img"></div>
+            <div class="modal__btn-close js-initialVisitModalToggleButton"></div>
+          </div>
+        </div>
+        <button class="js-initialVisitModalToggleButton js-initialVisitModalOpenButton is-hidden"></button>
+        <div class="youtube__box01">
+          <div id="ytplayer1"></div>
+          <div class="youtubeStartButton js-youtube01StartButton"></div>
+          <div class="youtubeStopButton js-youtube01StopButton"></div>
+        </div>
+        <div class="youtube__box02">
+          <div id="ytplayer2"></div>
+          <div class="youtubeStartButton js-youtube02StartButton"></div>
+          <div class="youtubeStopButton js-youtube02StopButton"></div>
+        </div>
+        <button class="js-gototopButton">GO TO TOP</button>
+        <div class="js-facebookButton"></div>
+      </div>
+    </div>
+    <div id="loading"></div>
+    <!-- javascript-->
+    <script src="/brandsite/js/script.js?v=1"></script>
+  </body>
+</html>

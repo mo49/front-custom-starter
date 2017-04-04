@@ -20,7 +20,7 @@ import assets from 'postcss-assets';
 const SRC = './src';
 const CONFIG = './src/config';
 const HTDOCS = './public';
-const BASE_PATH = '';
+const BASE_PATH = '/brandsite';
 const DEST = `${HTDOCS}${BASE_PATH}`;
 
 const revLogger = new RevLogger({
