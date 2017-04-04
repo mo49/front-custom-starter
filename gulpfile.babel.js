@@ -20,7 +20,8 @@ import assets from 'postcss-assets';
 const SRC = './src';
 const CONFIG = './src/config';
 const HTDOCS = './public';
-const BASE_PATH = '/brandsite';
+const BASE_PATH = '';
+// const BASE_PATH = '/brandsite';
 const DEST = `${HTDOCS}${BASE_PATH}`;
 
 const revLogger = new RevLogger({
@@ -37,10 +38,10 @@ gulp.task('sass', () => {
         .pipe(sass())
         .pipe(pleeease(config))
         .pipe(postcss([assets({
-          loadPaths: [`img/`], // 画像のパス
           basePath: `${DEST}`, // プロジェクトで公開するパス
+          loadPaths: [`img/`], // basePathから見た画像フォルダの位置
+          relative: `css/` // img/とcss/の相対的な位置
           cachebuster: true,
-          // relative: './public/css'
           // baseUrl: '',
         })]))
         .pipe(gulp.dest(`${DEST}/css`));
