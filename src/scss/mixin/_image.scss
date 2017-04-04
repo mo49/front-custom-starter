@@ -23,6 +23,7 @@
 // postCss Assets
 @mixin image($url, $density: 1, $scale:1){
   @include hide-txt();
+  $scale: 1 / $scale;
   // $basePath: '../img/';
   background-repeat: no-repeat;
   background-position: center center;
@@ -34,6 +35,7 @@
 }
 // SPをベースにしてPCも同じ画像のケース
 @mixin same-image($url, $scale:1){
+  $scale: 1 / $scale;
   @include image($url,1 * $scale);
   @include mq(sp) {
     @include image($url,2 * $scale);

@@ -62,6 +62,7 @@
 #initialVisitModal{
 .modal__content--img{
   @include same-image('sample1.jpg');
+  // @include same-image('sample1.jpg',0.4);
 }
 
 }

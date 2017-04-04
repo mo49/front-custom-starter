@@ -40,7 +40,7 @@ gulp.task('sass', () => {
         .pipe(postcss([assets({
           basePath: `${DEST}`, // プロジェクトで公開するパス
           loadPaths: [`img/`], // basePathから見た画像フォルダの位置
-          relative: `css/` // img/とcss/の相対的な位置
+          relative: `css/`, // img/とcss/の相対的な位置
           cachebuster: true,
           // baseUrl: '',
         })]))
