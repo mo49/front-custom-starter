@@ -5,6 +5,7 @@
 @import 'mixin/centering';
 @import 'mixin/clearfix';
 @import 'mixin/hover';
+@import 'mixin/background';
 
 @mixin pc-layout {
     @media (min-width: $pc_min_width) {
