@@ -17496,25 +17496,34 @@ var Gnav = function () {
   }, {
     key: 'open',
     value: function open() {
+      var _this4 = this;
 
       var current_scrollY = (0, _jquery2.default)(window).scrollTop();
 
       // lockするとページ内スムーススクロールがおかしくなる
-      //（setTimeoutでスムーススクロールの方を遅らせたら直った）
+      //（setTimeoutでスムーススクロールの方を遅らせて直した）
       this.lockBG();
-      this.$folding.addClass('is-gnav-open');
-      this.$folding.css({
-        height: window.innerHeight, // height が決まっていないと overflow-y:scroll できない
-        marginTop: current_scrollY
-      });
+
+      // iOS実機だとlock直後にスクロールが発生（上部のバーの幅が変わる）
+      // スクロール後でないと、window.innerHeightが正しく取れない
+      setTimeout(function () {
+        _this4.$folding.addClass('is-gnav-open');
+        _this4.$folding.css({
+          height: window.innerHeight, // height が決まっていないと overflow-y:scroll できない
+          marginTop: current_scrollY
+        });
+      }, 50);
     }
   }, {
     key: 'close',
     value: function close() {
+      var _this5 = this;
 
       this.unlockBG();
-      this.$folding.removeClass('is-gnav-open');
-      this.$gnav.attr({ style: '' });
+      setTimeout(function () {
+        _this5.$folding.removeClass('is-gnav-open');
+        _this5.$gnav.attr({ style: '' });
+      }, 50);
     }
   }, {
     key: 'lockBG',

@@ -112,21 +112,28 @@ class Gnav {
     const current_scrollY = $( window ).scrollTop();
 
     // lockするとページ内スムーススクロールがおかしくなる
-    //（setTimeoutでスムーススクロールの方を遅らせたら直った）
+    //（setTimeoutでスムーススクロールの方を遅らせて直した）
     this.lockBG();
-    this.$folding.addClass('is-gnav-open');
-    this.$folding.css({
-      height: window.innerHeight, // height が決まっていないと overflow-y:scroll できない
-      marginTop: current_scrollY
-    });
+
+    // iOS実機だとlock直後にスクロールが発生（上部のバーの幅が変わる）
+    // スクロール後でないと、window.innerHeightが正しく取れない
+    setTimeout(() => {
+      this.$folding.addClass('is-gnav-open');
+      this.$folding.css({
+        height: window.innerHeight, // height が決まっていないと overflow-y:scroll できない
+        marginTop: current_scrollY
+      });
+    },50)
 
   }
 
   close() {
 
     this.unlockBG();
-    this.$folding.removeClass('is-gnav-open');
-    this.$gnav.attr( { style: '' } );
+    setTimeout(() => {
+      this.$folding.removeClass('is-gnav-open');
+      this.$gnav.attr( { style: '' } );
+    },50)
 
   }
 
