@@ -9,8 +9,8 @@ const isSP = new UA().get().Mobile;
 const supportTouch = 'ontouchend' in document;
 
 export const userEvent = {
-  click      : (isSP && supportTouch) ? 'touchstart' : 'click',
-  touchstart : supportTouch ? 'touchstart' : 'mousedown',
-  touchmove  : supportTouch ? 'touchmove' : 'mousemove',
-  touchend   : supportTouch ? 'touchend' : 'mouseup',
+  click      : 'click',
+  touchstart : (isSP && supportTouch) ? 'touchstart' : 'mousedown',
+  touchmove  : (isSP && supportTouch) ? 'touchmove' : 'mousemove',
+  touchend   : (isSP && supportTouch) ? 'touchend' : 'mouseup',
 }

@@ -18507,10 +18507,10 @@ var isSP = new _UA2.default().get().Mobile; // ---------------------------------
 var supportTouch = 'ontouchend' in document;
 
 var userEvent = exports.userEvent = {
-  click: isSP && supportTouch ? 'touchstart' : 'click',
-  touchstart: supportTouch ? 'touchstart' : 'mousedown',
-  touchmove: supportTouch ? 'touchmove' : 'mousemove',
-  touchend: supportTouch ? 'touchend' : 'mouseup'
+  click: 'click',
+  touchstart: isSP && supportTouch ? 'touchstart' : 'mousedown',
+  touchmove: isSP && supportTouch ? 'touchmove' : 'mousemove',
+  touchend: isSP && supportTouch ? 'touchend' : 'mouseup'
 };
 
 },{"./UA":310}]},{},[307]);
