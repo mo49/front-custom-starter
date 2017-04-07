@@ -17463,12 +17463,12 @@ var Gnav = function () {
         if ((0, _jquery2.default)(window).scrollTop() > 100) {
           if (!isOpened) {
             isOpened = true;
-            _this2.$gnav.fadeIn(500);
+            _this2.$gnav.show();
           }
         } else {
           if (isOpened) {
             isOpened = false;
-            _this2.$gnav.fadeOut(300);
+            _this2.$gnav.hide();
           }
         }
       });

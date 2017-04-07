@@ -80,12 +80,12 @@ class Gnav {
       if ( $(window).scrollTop() > 100 ) {
         if (!isOpened) {
           isOpened = true;
-          this.$gnav.fadeIn(500);
+          this.$gnav.show();
         }
       } else {
         if (isOpened) {
           isOpened = false;
-          this.$gnav.fadeOut(300);
+          this.$gnav.hide();
         }
       }
     })
