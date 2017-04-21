@@ -45,6 +45,7 @@ html, body{
 
 * {
   box-sizing: border-box; // 初期設定
+  -webkit-overflow-scrolling: touch; // overflow-scrollのとき慣性スクロール有効
 }
 
 .is-fixed{
