@@ -1,5 +1,8 @@
 // https://developers.google.com/youtube/iframe_api_reference?hl=ja
 
+// spでタップなしの自動再生はできない
+// http://www.yoheim.net/blog.php?q=20130816
+
 import $ from 'jquery';
 import { userEvent } from '../util/userEvent';
 
