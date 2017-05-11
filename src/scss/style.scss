@@ -27,17 +27,17 @@ html, body{
 
 // media query
 .pc-none {
-  @include mq-pc {
+  @include env-pc {
     display: none;
   }
 }
 .sp-none {
-  @include mq-sp {
+  @include env-sp {
     display: none;
   }
 }
 .tab-none {
-  @include mq-tab {
+  @include env-tab {
     display: none;
   }
 }

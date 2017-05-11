@@ -14,7 +14,7 @@
 // PCとSPで同じ画像のケース
 @mixin same-image($url, $w: 300, $h: 300, $pc-scale: 1, $sp-scale: 0.5){
   @include image($url,$w,$h,$pc-scale);
-  @include mq(sp) {
+  @include env(sp) {
     @include image($url,$w,$h,$sp-scale);
   }
 }
@@ -37,7 +37,7 @@
 @mixin same-image($url, $scale:1){
   $scale: 1 / $scale;
   @include image($url,1 * $scale);
-  @include mq(sp) {
+  @include env(sp) {
     @include image($url,2 * $scale);
   }
 }

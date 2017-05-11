@@ -1,5 +1,5 @@
 @mixin hover($opacity:0.8){
-  @include mq(pc){
+  @include env(pc){
     cursor: pointer;
     &:hover{
       opacity: $opacity;

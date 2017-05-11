@@ -17693,6 +17693,9 @@ exports.default = _class;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); // https://developers.google.com/youtube/iframe_api_reference?hl=ja
 
+// spでタップなしの自動再生はできない
+// http://www.yoheim.net/blog.php?q=20130816
+
 var _jquery = require('jquery');
 
 var _jquery2 = _interopRequireDefault(_jquery);
@@ -18224,7 +18227,6 @@ var _class = function () {
 
       if (_ua.iOS) this.HTML.setAttribute('data-os', 'ios');
       if (_ua.Android) this.HTML.setAttribute('data-os', 'android');
-      if (_ua.IE) this.HTML.setAttribute('data-os', 'ie');
 
       if (_ua.IE) this.HTML.setAttribute('data-browser', 'ie');
       if (_ua.Edge) this.HTML.setAttribute('data-browser', 'edge');

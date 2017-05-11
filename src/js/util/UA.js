@@ -70,7 +70,6 @@ export default class {
 
     if (_ua.iOS) this.HTML.setAttribute('data-os', 'ios');
     if (_ua.Android) this.HTML.setAttribute('data-os', 'android');
-    if (_ua.IE) this.HTML.setAttribute('data-os', 'ie');
 
     if (_ua.IE) this.HTML.setAttribute('data-browser', 'ie');
     if (_ua.Edge) this.HTML.setAttribute('data-browser', 'edge');

@@ -10,7 +10,7 @@
     width: $youtube-width + px;
     height: $youtube-width * $ratio + px;
   }
-  @include mq(sp) {
+  @include env(sp) {
     width: $youtube-width-sp + px;
     height: $youtube-width-sp * $ratio + px;
     iframe{

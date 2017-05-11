@@ -13,7 +13,7 @@
     z-index: index($z, gnav);
     overflow-y: scroll;
 
-    @include mq(sp) {
+    @include env(sp) {
       $top: 50px;
       display: none;
       width: 100%;
@@ -28,12 +28,12 @@
   }
   .gnav__linksItem{
     display: inline-block;
-    @include mq(sp) {
+    @include env(sp) {
       display: block;
     }
     a{
       color: #000;
-      @include mq(sp) {
+      @include env(sp) {
         color: $font-color;
       }
       &:hover{

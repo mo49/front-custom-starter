@@ -32,7 +32,7 @@ html[data-env="sp"]{
   line-height: $base-line-light--pc;
   font-family: $sans-serif;
   overflow: hidden; // IEで指定しないと余白ができる
-  @include mq(sp) {
+  @include env(sp) {
     min-width: $content-block-width--sp;
     font-size: $base-font-size--sp;
     line-height: $base-line-light--sp;
@@ -44,7 +44,7 @@ html[data-env="sp"]{
 .content-block{
   width: $content-block-width--pc;
   margin: 0 auto;
-  @include mq(sp) {
+  @include env(sp) {
     width: $content-block-width--sp;
   }
 }

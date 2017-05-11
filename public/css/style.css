@@ -53,45 +53,45 @@ $breakpoint: 600;
 $tablet_min: 600;
 $tablet_max: 768;
 
-@mixin mq($env) {
+@mixin env($env) {
 
   @if $env == "pc" {
-    @include mq-pc {
+    @include env-pc {
       @content;
     };
   } @elseif $env == "sp" {
-    @include mq-sp {
+    @include env-sp {
       @content;
     };
   } @if $env == "tab" {
-    @include mq-tab {
+    @include env-tab {
       @content;
     };
   } @else {
-    @include mq-all {
+    @include env-all {
       @content;
     };
   }
 
 }
 
-@mixin mq-all {
+@mixin env-all {
   @content;
 };
 
-@mixin mq-pc {
+@mixin env-pc {
   @media only screen and (min-width: $breakpoint + 1 + 'px') {
     @content;
   }
 }
 
-@mixin mq-sp {
+@mixin env-sp {
   @media only screen and (max-width: $breakpoint + 'px') {
     @content;
   }
 }
 
-@mixin mq-tab {
+@mixin env-tab {
   @media only screen and (min-width: $tablet_min + 'px') and (max-width: $tablet_max + 'px') {
     @content;
   }
@@ -114,7 +114,7 @@ $tablet_max: 768;
 // PCとSPで同じ画像のケース
 @mixin same-image($url, $w: 300, $h: 300, $pc-scale: 1, $sp-scale: 0.5){
   @include image($url,$w,$h,$pc-scale);
-  @include mq(sp) {
+  @include env(sp) {
     @include image($url,$w,$h,$sp-scale);
   }
 }
@@ -454,7 +454,8 @@ html[data-env="sp"] * {
  * ====================================== */
 html, body {
   width: 100%;
-  height: 100%; }
+  height: 100%;
+  -webkit-text-size-adjust: 100%; }
 
 html[data-env="pc"] .pc-none {
   display: none; }
@@ -466,7 +467,8 @@ html[data-env="tablet"] .tab-none {
   display: none; }
 
 * {
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  -webkit-overflow-scrolling: touch; }
 
 .is-fixed {
   position: fixed;

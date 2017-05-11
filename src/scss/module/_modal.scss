@@ -70,7 +70,7 @@
 #soundCheckModal{
 .modal__content--img{
   @include image('sample2.png');
-  @include mq(sp) {
+  @include env(sp) {
     @include image('sample2.png',2);
   };
 }
