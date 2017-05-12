@@ -4,8 +4,8 @@ import $ from 'jquery';
 import './util/Viewport';
 import './util/Gototop';
 import UA from './util/UA';
-import PreloadImage from './util/PreloadImage';
 import WindowScroller from './util/WindowScroller';
+import loadImage from './util/loadImage';
 import { banPinchInOut } from './util/banPinchInOut';
 import { banDoubleTap } from './util/banDoubleTap';
 import { checkOrientation } from './util/checkOrientation';
@@ -14,7 +14,7 @@ import './lib/Youtube';
 import Cookie from './lib/Cookie';
 import Modal from './lib/Modal';
 import { initialVisit } from './lib/initialVisit';
-import { IMAGES_SRC } from './data/imagesSrc';
+import IMAGE_SRCES from './data/imageSrces';
 
 // -------------------------------------------
 // 初期設定
@@ -36,18 +36,15 @@ if (isSP) {
 // -------------------------------------------
 // Promise
 // --------------------------------------------
+
 const p_loadDOM = new Promise((resolve,reject) => {
   window.addEventListener("load", resolve, false);
 })
 
-const p_preloadImage = new Promise((resolve,reject) => {
-  const preloadImage = new PreloadImage(IMAGES_SRC);
-  preloadImage.on(preloadImage.EVENT.ALL_LOADED, () => {
-    resolve();
-  });
-})
+const preloadImageLoaders = IMAGE_SRCES.map(src => loadImage(src));
+const p_loadImages = Promise.all(preloadImageLoaders.map(loader => loader()));
 
-Promise.all([p_loadDOM, p_preloadImage]).then((val) => {
+Promise.all([p_loadDOM, p_loadImages]).then((val) => {
   $('#loading').fadeOut(function(){$(this).remove()});
   windowScroller.start();
   setTimeout(() => {
