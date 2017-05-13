@@ -14,7 +14,7 @@ import './lib/Youtube';
 import Cookie from './lib/Cookie';
 import Modal from './lib/Modal';
 import { initialVisit } from './lib/initialVisit';
-import IMAGE_SRCES from './data/imageSrces';
+import IMAGE_SRCS from './data/imageSrcs';
 
 // -------------------------------------------
 // 初期設定
@@ -36,22 +36,17 @@ if (isSP) {
 // -------------------------------------------
 // Promise
 // --------------------------------------------
+const loadImages = Promise.all(IMAGE_SRCS.map(loadImage));
 
-const p_loadDOM = new Promise((resolve,reject) => {
-  window.addEventListener("load", resolve, false);
-})
-
-const preloadImageLoaders = IMAGE_SRCES.map(src => loadImage(src));
-const p_loadImages = Promise.all(preloadImageLoaders.map(loader => loader()));
-
-Promise.all([p_loadDOM, p_loadImages]).then((val) => {
-  $('#loading').fadeOut(function(){$(this).remove()});
-  windowScroller.start();
-  setTimeout(() => {
-    init();
-  }, 500)
-}, (reason) => {
-  console.error(`error : ${reason}`);
+document.addEventListener('DOMContentLoaded', () => {
+  Promise.all([loadImages /* , loadFonts, loadSVGs, ...and so on */])
+    .then((assets) => {
+      console.log(assets[0]) // Loaded images!
+      $('#loading').fadeOut(function(){$(this).remove()});
+      windowScroller.start();
+      setTimeout(init, 500);
+    })
+    .catch(console.error)
 })
 
 // -------------------------------------------

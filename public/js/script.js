@@ -17637,9 +17637,9 @@ var _Modal2 = _interopRequireDefault(_Modal);
 
 var _initialVisit = require('./lib/initialVisit');
 
-var _imageSrces = require('./data/imageSrces');
+var _imageSrcs = require('./data/imageSrcs');
 
-var _imageSrces2 = _interopRequireDefault(_imageSrces);
+var _imageSrcs2 = _interopRequireDefault(_imageSrcs);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -17665,28 +17665,17 @@ if (isSP) {
 // -------------------------------------------
 // Promise
 // --------------------------------------------
+var loadImages = Promise.all(_imageSrcs2.default.map(_loadImage2.default));
 
-var p_loadDOM = new Promise(function (resolve, reject) {
-  window.addEventListener("load", resolve, false);
-});
-
-var preloadImageLoaders = _imageSrces2.default.map(function (src) {
-  return (0, _loadImage2.default)(src);
-});
-var p_loadImages = Promise.all(preloadImageLoaders.map(function (loader) {
-  return loader();
-}));
-
-Promise.all([p_loadDOM, p_loadImages]).then(function (val) {
-  (0, _jquery2.default)('#loading').fadeOut(function () {
-    (0, _jquery2.default)(this).remove();
-  });
-  windowScroller.start();
-  setTimeout(function () {
-    init();
-  }, 500);
-}, function (reason) {
-  console.error('error : ' + reason);
+document.addEventListener('DOMContentLoaded', function () {
+  Promise.all([loadImages /* , loadFonts, loadSVGs, ...and so on */]).then(function (assets) {
+    console.log(assets[0]); // Loaded images!
+    (0, _jquery2.default)('#loading').fadeOut(function () {
+      (0, _jquery2.default)(this).remove();
+    });
+    windowScroller.start();
+    setTimeout(init, 500);
+  }).catch(console.error);
 });
 
 // -------------------------------------------
@@ -17715,7 +17704,7 @@ function init() {
   });
 }
 
-},{"./data/imageSrces":300,"./lib/Cookie":301,"./lib/Gnav":302,"./lib/Modal":303,"./lib/Youtube":304,"./lib/initialVisit":305,"./util/Gototop":307,"./util/UA":308,"./util/Viewport":309,"./util/WindowScroller":310,"./util/banDoubleTap":311,"./util/banPinchInOut":312,"./util/checkOrientation":313,"./util/loadImage":314,"babel-polyfill":1,"jquery":297}],307:[function(require,module,exports){
+},{"./data/imageSrcs":300,"./lib/Cookie":301,"./lib/Gnav":302,"./lib/Modal":303,"./lib/Youtube":304,"./lib/initialVisit":305,"./util/Gototop":307,"./util/UA":308,"./util/Viewport":309,"./util/WindowScroller":310,"./util/banDoubleTap":311,"./util/banPinchInOut":312,"./util/checkOrientation":313,"./util/loadImage":314,"babel-polyfill":1,"jquery":297}],307:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -18130,18 +18119,17 @@ function checkOrientation() {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = loadImage;
-function loadImage(src) {
-  return function () {
-    return new Promise(function (resolve) {
-      var img = new Image();
-      img.onload = function () {
-        resolve(img);
-      };
-      img.src = src;
-    });
-  };
-}
+
+exports.default = function (src) {
+  var img = new Image();
+  img.src = src;
+
+  return new Promise(function (resolve) {
+    img.onload = function () {
+      return resolve(img);
+    };
+  });
+};
 
 },{}],315:[function(require,module,exports){
 'use strict';
