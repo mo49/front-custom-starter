@@ -41,3 +41,45 @@
     @include image($url,2 * $scale);
   }
 }
+
+/*
+$koma: コマ数
+$animation-name: ユニークな名前（keyframesの上書き防止）
+
+// 使用例
+.horizontal{
+  @include sprite-image(
+    horizontal_pc,'../img/sprite_horizontal.png',
+    708,455,33,3s,horizontal,alternate
+  );
+}
+*/
+@mixin sprite-image(
+  $animation-name, $url, $w, $h, $koma, $duraion,
+  $layout:vertical, $direction:normal
+) {
+  @if $layout == horizontal{
+    height: $h + px;
+    width: 0;
+    padding-left: $w + px;
+    background-size: auto $h + px;
+    animation: $animation-name $duraion steps($koma) infinite $direction;
+    @keyframes #{$animation-name}{
+      0%    { background-position: 0 0; }
+      100%  { background-position: (- $koma * $w + px) 0; }
+    }
+  } @else {
+    height: 0;
+    width: $w + px;
+    padding-top: $h + px;
+    background-size: $w + px auto;
+    animation: $animation-name $duraion steps($koma) infinite $direction;
+    @keyframes #{$animation-name}{
+      0%    { background-position: 0 0; }
+      100%  { background-position: 0 (- $koma * $h + px); }
+    }
+  }
+  overflow: hidden;
+  background-position: 0 0;
+  background-image: url($url);
+}
