@@ -50,20 +50,22 @@ $animation-name: ユニークな名前（keyframesの上書き防止）
 .horizontal{
   @include sprite-image(
     horizontal_pc,'../img/sprite_horizontal.png',
-    708,455,33,3s,horizontal,alternate
+    708,455,33,3s,1,horizontal,alternate
   );
 }
 */
 @mixin sprite-image(
-  $animation-name, $url, $w, $h, $koma, $duraion,
-  $layout:vertical, $direction:normal
+  $animation-name, $url, $w, $h, $koma, $duration:2000ms,
+  $iteration:infinite, $direction:normal, $layout:vertical
 ) {
   @if $layout == horizontal{
     height: $h + px;
     width: 0;
     padding-left: $w + px;
     background-size: auto $h + px;
-    animation: $animation-name $duraion steps($koma) infinite $direction;
+    &.active{
+      animation: $animation-name $duration steps($koma) $iteration $direction;
+    }
     @keyframes #{$animation-name}{
       0%    { background-position: 0 0; }
       100%  { background-position: (- $koma * $w + px) 0; }
@@ -73,12 +75,15 @@ $animation-name: ユニークな名前（keyframesの上書き防止）
     width: $w + px;
     padding-top: $h + px;
     background-size: $w + px auto;
-    animation: $animation-name $duraion steps($koma) infinite $direction;
+    &.active{
+      animation: $animation-name $duration steps($koma) $iteration $direction;
+    }
     @keyframes #{$animation-name}{
       0%    { background-position: 0 0; }
       100%  { background-position: 0 (- $koma * $h + px); }
     }
   }
+  animation-fill-mode: forwards;
   overflow: hidden;
   background-position: 0 0;
   background-image: url($url);
