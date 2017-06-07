@@ -21,8 +21,10 @@
 */
 
 // postCss Assets
-@mixin image($url, $density: 1, $scale:1){
-  @include hide-txt();
+@mixin image($url, $density: 1, $scale:1, $hidetext: 0){
+  @if $hidetext == 1 {
+    @include hide-txt();
+  }
   $scale: 1 / $scale;
   // $basePath: '../img/';
   background-repeat: no-repeat;
@@ -34,7 +36,7 @@
   height: height($url,$density * $scale);
 }
 // SPをベースにしてPCも同じ画像のケース
-@mixin same-image($url, $scale:1){
+@mixin same-image($url, $scale:1, $hidetext: 0){
   $scale: 1 / $scale;
   @include image($url,1 * $scale);
   @include env(sp) {
