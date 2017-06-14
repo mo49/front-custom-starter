@@ -10,6 +10,14 @@ export default class Cookie {
     this.expires = 365;
     this.path = '/';
 
+    this.key = {
+      visit : {
+        top : 'userSiteVisited',
+        about : 'userAboutVisited',
+      },
+      words : 'userWords',
+    }
+
     this.default = {
       words: ["hoge", "huga"]
     }
@@ -19,27 +27,27 @@ export default class Cookie {
   // set
   setUserSiteVisited(value) {
     // boolean型は禁止
-    Cookies.set('userSiteVisited', value, { expires: this.expires, path: this.path });
+    Cookies.set(this.key.visit.top, value, { expires: this.expires, path: this.path });
   }
   setUserWords(value) {
-    Cookies.set('userWords', value, { expires: this.expires, path: this.path });
+    Cookies.set(this.key.words, value, { expires: this.expires, path: this.path });
   }
 
   // get
   getUserSiteVisited() {
-    return parseInt( Cookies.get('userSiteVisited') ) || 0;
+    return parseInt( Cookies.get(this.key.visit.top) ) || 0;
   }
   getUserWords() {
     // array,objectにはgetJSON
-    return Cookies.getJSON('userWords') || this.default.words;
+    return Cookies.getJSON(this.key.words) || this.default.words;
   }
 
   // remove
   removeAll() {
     const ans = confirm("Cookieを削除します。よろしいですか？")
     if ( !ans ) return;
-    Cookies.remove('userSiteVisited');
-    Cookies.remove('userWords');
+    Cookies.remove(this.key.visit.top);
+    Cookies.remove(this.key.words);
   }
 
 

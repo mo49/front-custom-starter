@@ -119,6 +119,18 @@ $tablet_max: 768;
   }
 }
 */
+/*
+$koma: コマ数
+$animation-name: ユニークな名前（keyframesの上書き防止）
+
+// 使用例
+.horizontal{
+  @include sprite-image(
+    horizontal_pc,'../img/sprite_horizontal.png',
+    708,455,33,3s,1,horizontal,alternate
+  );
+}
+*/
 /* ======================================
  * 汎用スタイル
  * ====================================== */
@@ -311,9 +323,6 @@ html[data-env="sp"] * {
 
 #initialVisitModal .modal__content--img, #soundCheckModal .modal__content--img,
 #youtubeModal .modal__content--img {
-  text-indent: -9999px;
-  white-space: nowrap;
-  overflow: hidden;
   background-repeat: no-repeat;
   background-position: center center;
   background-image: url('../img/sample1.jpg?15b376c7b20');
@@ -322,9 +331,6 @@ html[data-env="sp"] * {
   height: 480px; }
   html[data-env="sp"] #initialVisitModal .modal__content--img, html[data-env="sp"] #soundCheckModal .modal__content--img, html[data-env="sp"]
   #youtubeModal .modal__content--img {
-    text-indent: -9999px;
-    white-space: nowrap;
-    overflow: hidden;
     background-repeat: no-repeat;
     background-position: center center;
     background-image: url('../img/sample1.jpg?15b376c7b20');
@@ -333,9 +339,6 @@ html[data-env="sp"] * {
     height: 240px; }
 
 #soundCheckModal .modal__content--img {
-  text-indent: -9999px;
-  white-space: nowrap;
-  overflow: hidden;
   background-repeat: no-repeat;
   background-position: center center;
   background-image: url('../img/sample2.png?15a458e0238');
@@ -343,9 +346,6 @@ html[data-env="sp"] * {
   width: 480px;
   height: 400px; }
   html[data-env="sp"] #soundCheckModal .modal__content--img {
-    text-indent: -9999px;
-    white-space: nowrap;
-    overflow: hidden;
     background-repeat: no-repeat;
     background-position: center center;
     background-image: url('../img/sample2.png?15a458e0238');
