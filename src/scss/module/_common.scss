@@ -29,13 +29,13 @@ html[data-env="sp"]{
   min-width: $content-block-width--pc;
   height: auto;
   font-size: $base-font-size--pc;
-  line-height: $base-line-light--pc;
+  line-height: $base-line-height--pc;
   font-family: $sans-serif;
   overflow: hidden; // IEで指定しないと余白ができる
   @include env(sp) {
     min-width: $content-block-width--sp;
     font-size: $base-font-size--sp;
-    line-height: $base-line-light--sp;
+    line-height: $base-line-height--sp;
   };
 }
 .section-block{
