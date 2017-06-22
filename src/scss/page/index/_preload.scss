@@ -1,0 +1,8 @@
+#preload[data-preload='1']{
+  .preload__image--1{
+    @include same-image('sample1.jpg');
+  }
+  .preload__image--2{
+    @include same-image('sample2.png');
+  }
+}

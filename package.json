@@ -46,5 +46,9 @@
     "presets": [
       "es2015"
     ]
+  },
+  "dependencies": {
+    "css": "^2.2.1",
+    "lodash": "^4.17.4"
   }
 }

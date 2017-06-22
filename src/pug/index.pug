@@ -5,7 +5,7 @@ prepend ConfigBlock
 
 //- append StylesheetBlock
 
-//- append JavascriptBlock
+//- prepend JavascriptBlock
 
 block ContentBlock
   - const encode_description = encodeURIComponent(description);
@@ -51,3 +51,8 @@ block ContentBlock
       .js-facebookButton
 
   #loading
+
+  #preload(data-preload='1')
+    - for (var i = 1; i <= 2; i++) {
+      div(class=`preload__image--${i}`)
+    - }

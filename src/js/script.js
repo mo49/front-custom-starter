@@ -6,6 +6,7 @@ import './util/Gototop';
 import UA from './util/UA';
 import WindowScroller from './util/WindowScroller';
 import loadImage from './util/loadImage';
+import preloadImages from './util/preloadImages';
 import { banPinchInOut } from './util/banPinchInOut';
 import { banDoubleTap } from './util/banDoubleTap';
 import { checkOrientation } from './util/checkOrientation';
@@ -34,10 +35,9 @@ if (isSP) {
 }
 
 // -------------------------------------------
-// Promise
+// Preload
 // --------------------------------------------
 const loadImages = Promise.all(IMAGE_SRCS.map(loadImage));
-
 document.addEventListener('DOMContentLoaded', () => {
   Promise.all([loadImages /* , loadFonts, loadSVGs, ...and so on */])
     .then((assets) => {
@@ -48,6 +48,13 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .catch(console.error)
 })
+
+preloadImages(`data-preload='1'`,onProgress).then((assets) => {
+  console.log(assets);
+})
+function onProgress(count) {
+  console.log("loading ... ", count);
+}
 
 // -------------------------------------------
 // init

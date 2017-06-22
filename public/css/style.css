@@ -449,6 +449,36 @@ html[data-env="sp"] * {
 .page-root[data-page='top'] .youtubeStartButton:hover {
   color: #3f51b5; }
 
+.page-root[data-page='top'] #preload[data-preload='1'] .preload__image--1 {
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-image: url('../img/sample1.jpg?15b376c7b20');
+  background-size: 640px 480px;
+  width: 640px;
+  height: 480px; }
+  html[data-env="sp"] .page-root[data-page='top'] #preload[data-preload='1'] .preload__image--1 {
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-image: url('../img/sample1.jpg?15b376c7b20');
+    background-size: 320px 240px;
+    width: 320px;
+    height: 240px; }
+
+.page-root[data-page='top'] #preload[data-preload='1'] .preload__image--2 {
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-image: url('../img/sample2.png?15a458e0238');
+  background-size: 480px 400px;
+  width: 480px;
+  height: 400px; }
+  html[data-env="sp"] .page-root[data-page='top'] #preload[data-preload='1'] .preload__image--2 {
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-image: url('../img/sample2.png?15a458e0238');
+    background-size: 240px 200px;
+    width: 240px;
+    height: 200px; }
+
 /* ======================================
  * 全ページ共通
  * ====================================== */

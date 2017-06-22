@@ -28,7 +28,7 @@
     <!-- canonical url-->
     <link rel="canonical" href="http://example.com/">
     <!-- stylesheet-->
-    <link rel="stylesheet" href="/css/style.css?v=11">
+    <link rel="stylesheet" data-preload="1" href="/css/style.css?v=12">
   </head>
   <body>
     <div class="page-root" data-page="top">
@@ -149,7 +149,11 @@
       </div>
     </div>
     <div id="loading"></div>
+    <div id="preload" data-preload="1">
+      <div class="preload__image--1"></div>
+      <div class="preload__image--2"></div>
+    </div>
     <!-- javascript-->
-    <script src="/js/script.js?v=21"></script>
+    <script src="/js/script.js?v=22"></script>
   </body>
 </html>
