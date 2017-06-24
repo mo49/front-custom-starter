@@ -1,7 +1,7 @@
 // http://blog.cror.net/iso10-user-scalable.html
 
 // ピンチイン・アウトを無効
-export function banPinchInOut() {
+export default () => {
   document.documentElement.addEventListener('touchstart', (event) => {
     if (event.touches.length > 1) {
       event.preventDefault();

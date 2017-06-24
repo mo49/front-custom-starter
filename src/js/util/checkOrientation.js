@@ -3,7 +3,7 @@
 import $ from 'jquery';
 
 // 横表示不可
-export function checkOrientation() {
+export default () => {
 
   const HTML = document.documentElement;
 

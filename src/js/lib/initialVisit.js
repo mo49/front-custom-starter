@@ -4,7 +4,7 @@ import Modal from './Modal';
 // -----------------------------------
 // 初回訪問時の処理
 // -----------------------------------
-export function initialVisit() {
+export default () => {
 
   new Modal({
     $modal: $('#initialVisitModal'),

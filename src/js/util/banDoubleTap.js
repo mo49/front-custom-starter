@@ -1,7 +1,7 @@
 // http://kimizuka.hatenablog.com/entry/2016/07/29/110931
 
 // ダブルタップを無効
-export function banDoubleTap(dom) {
+export default (dom) => {
 
   let tapFlag = false;
   let timer;

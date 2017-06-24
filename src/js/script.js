@@ -8,14 +8,14 @@ import UA from './util/UA';
 import WindowScroller from './util/WindowScroller';
 import loadImage from './util/loadImage';
 import preloadImages from './util/preloadImages';
-import { banPinchInOut } from './util/banPinchInOut';
-import { banDoubleTap } from './util/banDoubleTap';
-import { checkOrientation } from './util/checkOrientation';
+import banPinchInOut from './util/banPinchInOut';
+import banDoubleTap from './util/banDoubleTap';
+import checkOrientation from './util/checkOrientation';
 import './lib/Gnav';
 import './lib/Youtube';
 import Cookie from './lib/Cookie';
 import Modal from './lib/Modal';
-import { initialVisit } from './lib/initialVisit';
+import initialVisit from './lib/initialVisit';
 import IMAGE_SRCS from './data/imageSrcs';
 
 // -------------------------------------------
