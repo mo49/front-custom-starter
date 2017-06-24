@@ -1,5 +1,4 @@
 // 闇の画像プリローダ
-import "whatwg-fetch"
 import _ from "lodash"
 import css from "css"
 

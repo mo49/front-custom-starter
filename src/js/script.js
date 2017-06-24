@@ -1,4 +1,5 @@
 import 'babel-polyfill';
+import "whatwg-fetch"
 import $ from 'jquery';
 // import './util/GA';
 import './util/Viewport';
