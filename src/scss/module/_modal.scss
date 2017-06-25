@@ -1,4 +1,4 @@
-.modal[data-modal="initial-visit"]{
+.modal{
 
   display: none;
   width: 100%; height: 100%;
@@ -15,6 +15,12 @@
     background-color: rgba(0,0,0,.9);
   }
 
+}
+
+.modal[data-modal="initial-visit"],
+.modal[data-modal="sound-check"],
+.modal[data-modal="youtube"],
+.modal[data-modal="on-modal"]{
   .modal__content{
     @include centering();
 
@@ -51,15 +57,9 @@
 
 }
 
-
-.modal[data-modal="sound-check"],
-.modal[data-modal="youtube"]{
-  @extend .modal[data-modal="initial-visit"];
-
-}
-
 // test
-.modal[data-modal="initial-visit"]{
+.modal[data-modal="initial-visit"],
+.modal[data-modal="youtube"]{
   .modal__content__image{
     @include same-image('sample1.jpg');
     // @include same-image('sample1.jpg',0.4);
@@ -67,7 +67,8 @@
 
 }
 
-.modal[data-modal="sound-check"]{
+.modal[data-modal="sound-check"],
+.modal[data-modal="on-modal"]{
   .modal__content__image{
     @include image('sample2.png');
     @include env(sp) {

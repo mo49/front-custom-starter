@@ -28,7 +28,7 @@
     <!-- canonical url-->
     <link rel="canonical" href="http://example.com/">
     <!-- stylesheet-->
-    <link rel="stylesheet" data-preload="1" href="/css/style.css?v=13">
+    <link rel="stylesheet" data-preload="1" href="/css/style.css?v=14">
   </head>
   <body>
     <div class="page-root" data-page="top">
@@ -37,23 +37,25 @@
           <div class="content-block"></div>
         </header>
         <div id="gnav">
-          <div class="gnav__overlay pc-none js-gnavToggleButton"></div>
-          <div class="gnav__folding js-gnavToggleButton">
-            <ul class="gnav__links">
-              <li class="gnav__linksItem"><a href="#top" data-link-type="smooth-scroll">TOP</a></li>
-              <li class="gnav__linksItem"><a href="#about" data-link-type="smooth-scroll">ABOUT</a></li>
-              <li class="gnav__linksItem"><a href="#news" data-link-type="smooth-scroll">NEWS</a></li>
-              <li class="gnav__linksItem"><a href="#contact" data-link-type="smooth-scroll">CONTACT</a></li>
-              <li class="gnav__linksItem"><a href="./nextpage" data-link-type="other-page">NEXT PAGE</a></li>
-              <li class="gnav__linksItem"><a href="#" data-link-type="modal-on-gnav">MODAL ON GNAV</a></li>
-            </ul>
-            <div class="gnav__ico sp-none">
-              <div class="gnav__icoLink"><a class="a-block" href="#" target="_blank"></a></div>
+          <div class="modal" data-modal="gnav">
+            <div class="modal__overlay pc-none js-gnav-close"></div>
+            <div class="modal__content">
+              <ul class="modal__links">
+                <li class="modal__linksItem js-gnav-close"><a href="#top" data-link-type="smooth-scroll">TOP</a></li>
+                <li class="modal__linksItem js-gnav-close"><a href="#about" data-link-type="smooth-scroll">ABOUT</a></li>
+                <li class="modal__linksItem js-gnav-close"><a href="#news" data-link-type="smooth-scroll">NEWS</a></li>
+                <li class="modal__linksItem js-gnav-close"><a href="#contact" data-link-type="smooth-scroll">CONTACT</a></li>
+                <li class="modal__linksItem"><a href="./nextpage" data-link-type="other-page">NEXT PAGE</a></li>
+                <li class="modal__linksItem js-modal-open" data-modal="on-modal"><a href="#" data-link-type="modal-on-modal">MODAL ON GNAV</a></li>
+              </ul>
+              <div class="modal__ico sp-none">
+                <div class="modal__icoLink"><a class="a-block" href="#" target="_blank"></a></div>
+              </div>
             </div>
           </div>
           <div class="gnav__toggleButton pc-none">
-            <div class="gnav__openButton js-gnavToggleButton"><span></span><span></span><span></span></div>
-            <div class="gnav__closeButton js-gnavToggleButton"><span></span><span></span></div>
+            <div class="gnav__toggleButton--open js-gnav-open"><span></span><span></span><span></span></div>
+            <div class="gnav__toggleButton--close js-gnav-close"><span></span><span></span></div>
           </div>
         </div>
         <div class="section-block" id="top">
@@ -131,6 +133,13 @@
             <div class="modal__button--close js-modal-close"></div>
           </div>
         </div>
+        <div class="modal section-block" data-modal="on-modal">
+          <div class="modal__overlay js-modal-close"></div>
+          <div class="modal__content">
+            <div class="modal__content__image"></div>
+            <div class="modal__button--close js-modal-close"></div>
+          </div>
+        </div>
         <div class="youtube__box01">
           <div id="ytplayer1"></div>
           <div class="youtubeStartButton js-youtube01StartButton"></div>
@@ -153,6 +162,6 @@
       <div class="preload__image--2"></div>
     </div>
     <!-- javascript-->
-    <script src="/js/script.js?v=25"></script>
+    <script src="/js/script.js?v=26"></script>
   </body>
 </html>

@@ -7,7 +7,7 @@ export default class {
     this.$wrapper = $(".wrapper");
   }
 
-  lockBG() {
+  lock() {
     // modal on modal の対策
     // 0のときだけ通す
     const currentCount = parseInt(this.$wrapper.attr('data-lock-bg')) || 0;
@@ -24,7 +24,7 @@ export default class {
     } );
   }
 
-  unlockBG() {
+  unlock() {
     // 1のときだけ通す
     const currentCount = parseInt(this.$wrapper.attr('data-lock-bg'));
     this.$wrapper.attr('data-lock-bg',currentCount-1);
