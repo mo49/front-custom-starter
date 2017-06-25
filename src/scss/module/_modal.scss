@@ -1,4 +1,4 @@
-#initialVisitModal{
+.modal[data-modal="initial-visit"]{
 
   display: none;
   width: 100%; height: 100%;
@@ -18,13 +18,13 @@
   .modal__content{
     @include centering();
 
-    .modal__content--img{
+    .modal__content__image{
       margin: 0 auto;
     }
   }
 
   // button
-  .modal__btn-close{
+  .modal__button--close{
     $line-height: 2;
     width: 50px;
     height: 50px;
@@ -43,7 +43,7 @@
       transform-origin: center center;
     }
     &:after{
-      @extend .modal__btn-close:before;
+      @extend .modal__button--close:before;
       transform: rotate(-45deg);
       margin-top: -$line-height + px;
     }
@@ -52,27 +52,27 @@
 }
 
 
-#soundCheckModal,
-#youtubeModal{
-  @extend #initialVisitModal;
+.modal[data-modal="sound-check"],
+.modal[data-modal="youtube"]{
+  @extend .modal[data-modal="initial-visit"];
 
 }
 
 // test
-#initialVisitModal{
-.modal__content--img{
-  @include same-image('sample1.jpg');
-  // @include same-image('sample1.jpg',0.4);
-}
+.modal[data-modal="initial-visit"]{
+  .modal__content__image{
+    @include same-image('sample1.jpg');
+    // @include same-image('sample1.jpg',0.4);
+  }
 
 }
 
-#soundCheckModal{
-.modal__content--img{
-  @include image('sample2.png');
-  @include env(sp) {
-    @include image('sample2.png',2);
-  };
-}
+.modal[data-modal="sound-check"]{
+  .modal__content__image{
+    @include image('sample2.png');
+    @include env(sp) {
+      @include image('sample2.png',2);
+    };
+  }
 
 }

@@ -28,7 +28,7 @@
     <!-- canonical url-->
     <link rel="canonical" href="http://example.com/">
     <!-- stylesheet-->
-    <link rel="stylesheet" data-preload="1" href="/css/style.css?v=12">
+    <link rel="stylesheet" data-preload="1" href="/css/style.css?v=13">
   </head>
   <body>
     <div class="page-root" data-page="top">
@@ -110,30 +110,27 @@
           
           
         </script>
-        <div class="section-block" id="youtubeModal">
-          <div class="modal__overlay js-youtubeModalToggleButton"></div>
+        <div class="modal section-block" data-modal="youtube">
+          <div class="modal__overlay js-modal-close"></div>
           <div class="modal__content">
-            <div class="modal__content--img"></div>
-            <div class="modal__btn-close js-youtubeModalToggleButton"></div>
+            <div class="modal__content__image">Youtube</div>
+            <div class="modal__button--close js-modal-close"></div>
           </div>
         </div>
-        <button class="js-youtubeModalToggleButton js-youtubeModalOpenButton">Youtube Modal Button</button>
-        <div class="section-block" id="soundCheckModal">
-          <div class="modal__overlay js-soundCheckModalToggleButton"></div>
+        <div class="modal section-block" data-modal="sound-check">
+          <div class="modal__overlay js-modal-close"></div>
           <div class="modal__content">
-            <div class="modal__content--img"></div>
-            <div class="modal__btn-close js-soundCheckModalToggleButton"></div>
+            <div class="modal__content__image">SoundCheck</div>
+            <div class="modal__button--close js-modal-close"></div>
           </div>
         </div>
-        <button class="js-soundCheckModalToggleButton js-soundCheckModalOpenButton is-hidden"></button>
-        <div class="section-block" id="initialVisitModal">
-          <div class="modal__overlay js-initialVisitModalToggleButton"></div>
+        <div class="modal section-block" data-modal="initial-visit">
+          <div class="modal__overlay js-modal-close"></div>
           <div class="modal__content">
-            <div class="modal__content--img"></div>
-            <div class="modal__btn-close js-initialVisitModalToggleButton"></div>
+            <div class="modal__content__image"></div>
+            <div class="modal__button--close js-modal-close"></div>
           </div>
         </div>
-        <button class="js-initialVisitModalToggleButton js-initialVisitModalOpenButton is-hidden"></button>
         <div class="youtube__box01">
           <div id="ytplayer1"></div>
           <div class="youtubeStartButton js-youtube01StartButton"></div>
@@ -144,6 +141,8 @@
           <div class="youtubeStartButton js-youtube02StartButton"></div>
           <div class="youtubeStopButton js-youtube02StopButton"></div>
         </div>
+        <button class="js-modal-open" data-modal="sound-check">SoundCheck Modal Button</button>
+        <button class="js-modal-open" data-modal="youtube">Youtube Modal Button</button>
         <button class="js-gototopButton">GO TO TOP</button>
         <div class="js-facebookButton"></div>
       </div>
@@ -154,6 +153,6 @@
       <div class="preload__image--2"></div>
     </div>
     <!-- javascript-->
-    <script src="/js/script.js?v=23"></script>
+    <script src="/js/script.js?v=25"></script>
   </body>
 </html>

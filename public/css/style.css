@@ -266,8 +266,8 @@ html[data-env="sp"] * {
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
   transition: all .5s; }
 
-#initialVisitModal, #soundCheckModal,
-#youtubeModal {
+.modal[data-modal="initial-visit"], .modal[data-modal="sound-check"],
+.modal[data-modal="youtube"] {
   display: none;
   width: 100%;
   height: 100%;
@@ -276,16 +276,16 @@ html[data-env="sp"] * {
   left: 0;
   background-color: transparent;
   z-index: 5; }
-  #initialVisitModal .modal__overlay, #soundCheckModal .modal__overlay,
-  #youtubeModal .modal__overlay {
+  .modal[data-modal="initial-visit"] .modal__overlay, .modal[data-modal="sound-check"] .modal__overlay,
+  .modal[data-modal="youtube"] .modal__overlay {
     width: 100%;
     height: 120%;
     position: fixed;
     top: -10%;
     left: 0;
     background-color: rgba(0, 0, 0, 0.9); }
-  #initialVisitModal .modal__content, #soundCheckModal .modal__content,
-  #youtubeModal .modal__content {
+  .modal[data-modal="initial-visit"] .modal__content, .modal[data-modal="sound-check"] .modal__content,
+  .modal[data-modal="youtube"] .modal__content {
     position: absolute;
     left: 50%;
     top: 50%;
@@ -293,19 +293,19 @@ html[data-env="sp"] * {
             transform: translate(-50%, -50%);
     margin-top: 0px;
     margin-left: 0px; }
-    #initialVisitModal .modal__content .modal__content--img, #soundCheckModal .modal__content .modal__content--img,
-    #youtubeModal .modal__content .modal__content--img {
+    .modal[data-modal="initial-visit"] .modal__content .modal__content__image, .modal[data-modal="sound-check"] .modal__content .modal__content__image,
+    .modal[data-modal="youtube"] .modal__content .modal__content__image {
       margin: 0 auto; }
-  #initialVisitModal .modal__btn-close, #soundCheckModal .modal__btn-close,
-  #youtubeModal .modal__btn-close {
+  .modal[data-modal="initial-visit"] .modal__button--close, .modal[data-modal="sound-check"] .modal__button--close,
+  .modal[data-modal="youtube"] .modal__button--close {
     width: 50px;
     height: 50px;
     position: absolute;
     top: -50px;
     right: -50px;
     cursor: pointer; }
-    #initialVisitModal .modal__btn-close:before, #soundCheckModal .modal__btn-close:before,
-    #youtubeModal .modal__btn-close:before, #initialVisitModal .modal__btn-close:after, #soundCheckModal .modal__btn-close:after, #youtubeModal .modal__btn-close:after {
+    .modal[data-modal="initial-visit"] .modal__button--close:before, .modal[data-modal="sound-check"] .modal__button--close:before,
+    .modal[data-modal="youtube"] .modal__button--close:before, .modal[data-modal="initial-visit"] .modal__button--close:after, .modal[data-modal="sound-check"] .modal__button--close:after, .modal[data-modal="youtube"] .modal__button--close:after {
       content: '';
       display: block;
       width: 50px;
@@ -315,22 +315,22 @@ html[data-env="sp"] * {
               transform: rotate(45deg);
       -webkit-transform-origin: center center;
               transform-origin: center center; }
-    #initialVisitModal .modal__btn-close:after, #soundCheckModal .modal__btn-close:after,
-    #youtubeModal .modal__btn-close:after {
+    .modal[data-modal="initial-visit"] .modal__button--close:after, .modal[data-modal="sound-check"] .modal__button--close:after,
+    .modal[data-modal="youtube"] .modal__button--close:after {
       -webkit-transform: rotate(-45deg);
               transform: rotate(-45deg);
       margin-top: -2px; }
 
-#initialVisitModal .modal__content--img, #soundCheckModal .modal__content--img,
-#youtubeModal .modal__content--img {
+.modal[data-modal="initial-visit"] .modal__content__image, .modal[data-modal="sound-check"] .modal__content__image,
+.modal[data-modal="youtube"] .modal__content__image {
   background-repeat: no-repeat;
   background-position: center center;
   background-image: url('../img/sample1.jpg?15b376c7b20');
   background-size: 640px 480px;
   width: 640px;
   height: 480px; }
-  html[data-env="sp"] #initialVisitModal .modal__content--img, html[data-env="sp"] #soundCheckModal .modal__content--img, html[data-env="sp"]
-  #youtubeModal .modal__content--img {
+  html[data-env="sp"] .modal[data-modal="initial-visit"] .modal__content__image, html[data-env="sp"] .modal[data-modal="sound-check"] .modal__content__image, html[data-env="sp"]
+  .modal[data-modal="youtube"] .modal__content__image {
     background-repeat: no-repeat;
     background-position: center center;
     background-image: url('../img/sample1.jpg?15b376c7b20');
@@ -338,14 +338,14 @@ html[data-env="sp"] * {
     width: 320px;
     height: 240px; }
 
-#soundCheckModal .modal__content--img {
+.modal[data-modal="sound-check"] .modal__content__image {
   background-repeat: no-repeat;
   background-position: center center;
   background-image: url('../img/sample2.png?15a458e0238');
   background-size: 480px 400px;
   width: 480px;
   height: 400px; }
-  html[data-env="sp"] #soundCheckModal .modal__content--img {
+  html[data-env="sp"] .modal[data-modal="sound-check"] .modal__content__image {
     background-repeat: no-repeat;
     background-position: center center;
     background-image: url('../img/sample2.png?15a458e0238');

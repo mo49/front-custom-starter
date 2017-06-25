@@ -1,13 +1,14 @@
 // http://qiita.com/gonshi_com/items/5a86fc415dcccfb04e2a
 
 import $ from 'jquery';
+import Lock from './Lock';
 import UA from '../util/UA';
 import { userEvent } from '../util/userEvent';
 
-class Gnav {
+class Gnav extends Lock {
 
   constructor(opts={}) {
-
+    super();
     this.$toggleButton = opts.$toggleButton || $(document.createElement("div"));
     this.gnav = opts.gnav || $(document.createElement("div"));
     this.$gnav = $(this.gnav);
@@ -136,37 +137,6 @@ class Gnav {
     },50)
 
   }
-
-  lockBG() {
-
-    // 0のときだけ通す
-    const currentCount = parseInt(this.wrapper.getAttribute('data-lock-bg')) || 0;
-    this.wrapper.setAttribute('data-lock-bg',currentCount+1);
-    if ( currentCount !== 0 ) return;
-
-    const current_scrollY = $( window ).scrollTop();
-    this.original_scrollY = current_scrollY;
-
-    this.$wrapper.css( {
-      position: 'fixed',
-      width: '100%',
-      top: -1 * current_scrollY
-    } );
-
-  }
-
-  unlockBG() {
-
-    // 1のときだけ通す
-    const currentCount = parseInt(this.wrapper.getAttribute('data-lock-bg'));
-    this.wrapper.setAttribute('data-lock-bg',currentCount-1);
-    if ( currentCount !== 1 ) return;
-
-    this.$wrapper.attr( { style: '' } );
-    $( 'html, body' ).prop( { scrollTop: this.original_scrollY } );
-
-  }
-
 
 }
 

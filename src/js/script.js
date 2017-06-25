@@ -65,20 +65,15 @@ function init() {
 if ( !cookie.getUserSiteVisited() ) initialVisit();
 cookie.setUserSiteVisited(1);
 
-// サウンドチェックモーダル
+// sound-check
 new Modal({
-  $modal: $('#soundCheckModal'),
-  $openButton: $('.js-soundCheckModalOpenButton'),
-  $toggleButton: $('.js-soundCheckModalToggleButton'),
+  type: 'sound-check',
   isAutoOpen: true,
   fadeDuration: 0
 });
-
-// youtubeモーダル
+// youtube
 new Modal({
-  $modal: $('#youtubeModal'),
-  $openButton: $('.js-youtubeModalOpenButton'),
-  $toggleButton: $('.js-youtubeModalToggleButton')
+  type: 'youtube'
 });
 
 
