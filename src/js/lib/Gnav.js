@@ -47,20 +47,20 @@ export default class Gnav extends Modal {
 
   // スクロールで表示される
   _onScroll() {
-    let isOpened = false;
+    this.isOpened = false;
     $(window).on('scroll', () => {
       // gnavを開いた瞬間のlockでscrollが発生するが無効
       if( parseInt(this.$gnav.attr('data-gnav-open')) ) {
         return;
       }
       if ( $(window).scrollTop() > 100 ) {
-        if (!isOpened) {
-          isOpened = true;
+        if (!this.isOpened) {
+          this.isOpened = true;
           this.$toggleButton.fadeIn();
         }
       } else {
-        if (isOpened) {
-          isOpened = false;
+        if (this.isOpened) {
+          this.isOpened = false;
           this.$toggleButton.fadeOut();
         }
       }

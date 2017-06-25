@@ -38,14 +38,14 @@ block ContentBlock
       include ./partial/_initialVisitModal
       include ./partial/_modalOnModal
 
-      .youtube__box01
-        #ytplayer1
-        .youtubeStartButton.js-youtube01StartButton
-        .youtubeStopButton.js-youtube01StopButton
-      .youtube__box02
-        #ytplayer2
-        .youtubeStartButton.js-youtube02StartButton
-        .youtubeStopButton.js-youtube02StopButton
+      .youtube
+        #ytplayer-sao.ytplayer(data-youtube-type="sao" data-youtube-id="4slt_lQ8fPc")
+        .youtube__button--start.js-start-youtube(data-youtube-type="sao")
+        .youtube__button--stop.js-stop-youtube(data-youtube-type="sao")
+      .youtube
+        #ytplayer-perfume.ytplayer(data-youtube-type="perfume" data-youtube-id="9pjtVUZNfWY")
+        .youtube__button--start.js-start-youtube(data-youtube-type="perfume")
+        .youtube__button--stop.js-stop-youtube(data-youtube-type="perfume")
 
       button.js-modal-open(data-modal="sound-check") SoundCheck Modal Button
       button.js-modal-open(data-modal="youtube") Youtube Modal Button

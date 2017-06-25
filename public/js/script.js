@@ -33951,6 +33951,19 @@ module.exports = urix
 },{}],137:[function(require,module,exports){
 'use strict';
 
+module.exports = [{
+  type: 'sao',
+  isCustomizedButton: 1
+}, {
+  type: 'perfume',
+  isAutoPlay: 1
+}, {
+  type: 'koi'
+}];
+
+},{}],138:[function(require,module,exports){
+'use strict';
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -33958,7 +33971,7 @@ var ROOT = './img/';
 
 exports.default = [ROOT + 'sample1.jpg', ROOT + 'sample2.png', ROOT + 'sample3.jpg', ROOT + 'sample4.png'];
 
-},{}],138:[function(require,module,exports){
+},{}],139:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -34051,7 +34064,7 @@ var Cookie = function () {
 
 exports.default = Cookie;
 
-},{"babel-runtime/helpers/classCallCheck":10,"babel-runtime/helpers/createClass":11,"jquery":117,"js-cookie":118}],139:[function(require,module,exports){
+},{"babel-runtime/helpers/classCallCheck":10,"babel-runtime/helpers/createClass":11,"jquery":117,"js-cookie":118}],140:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -34158,20 +34171,20 @@ var Gnav = function (_Modal) {
     value: function _onScroll() {
       var _this3 = this;
 
-      var isOpened = false;
+      this.isOpened = false;
       (0, _jquery2.default)(window).on('scroll', function () {
         // gnavを開いた瞬間のlockでscrollが発生するが無効
         if (parseInt(_this3.$gnav.attr('data-gnav-open'))) {
           return;
         }
         if ((0, _jquery2.default)(window).scrollTop() > 100) {
-          if (!isOpened) {
-            isOpened = true;
+          if (!_this3.isOpened) {
+            _this3.isOpened = true;
             _this3.$toggleButton.fadeIn();
           }
         } else {
-          if (isOpened) {
-            isOpened = false;
+          if (_this3.isOpened) {
+            _this3.isOpened = false;
             _this3.$toggleButton.fadeOut();
           }
         }
@@ -34183,7 +34196,7 @@ var Gnav = function (_Modal) {
 
 exports.default = Gnav;
 
-},{"../util/UA":145,"../util/userEvent":153,"./Modal":141,"babel-runtime/core-js/object/get-prototype-of":5,"babel-runtime/helpers/classCallCheck":10,"babel-runtime/helpers/createClass":11,"babel-runtime/helpers/get":12,"babel-runtime/helpers/inherits":13,"babel-runtime/helpers/possibleConstructorReturn":14,"jquery":117}],140:[function(require,module,exports){
+},{"../util/UA":146,"../util/userEvent":154,"./Modal":142,"babel-runtime/core-js/object/get-prototype-of":5,"babel-runtime/helpers/classCallCheck":10,"babel-runtime/helpers/createClass":11,"babel-runtime/helpers/get":12,"babel-runtime/helpers/inherits":13,"babel-runtime/helpers/possibleConstructorReturn":14,"jquery":117}],141:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -34248,7 +34261,7 @@ var _class = function () {
 
 exports.default = _class;
 
-},{"babel-runtime/helpers/classCallCheck":10,"babel-runtime/helpers/createClass":11,"jquery":117}],141:[function(require,module,exports){
+},{"babel-runtime/helpers/classCallCheck":10,"babel-runtime/helpers/createClass":11,"jquery":117}],142:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -34348,7 +34361,7 @@ var Modal = function (_Lock) {
 
 exports.default = Modal;
 
-},{"../util/userEvent":153,"./Lock":140,"babel-runtime/core-js/object/get-prototype-of":5,"babel-runtime/helpers/classCallCheck":10,"babel-runtime/helpers/createClass":11,"babel-runtime/helpers/inherits":13,"babel-runtime/helpers/possibleConstructorReturn":14,"jquery":117}],142:[function(require,module,exports){
+},{"../util/userEvent":154,"./Lock":141,"babel-runtime/core-js/object/get-prototype-of":5,"babel-runtime/helpers/classCallCheck":10,"babel-runtime/helpers/createClass":11,"babel-runtime/helpers/inherits":13,"babel-runtime/helpers/possibleConstructorReturn":14,"jquery":117}],143:[function(require,module,exports){
 'use strict';
 
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
@@ -34365,60 +34378,57 @@ var _jquery2 = _interopRequireDefault(_jquery);
 
 var _userEvent = require('../util/userEvent');
 
+var _Youtube = require('../data/Youtube');
+
+var _Youtube2 = _interopRequireDefault(_Youtube);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// https://developers.google.com/youtube/iframe_api_reference?hl=ja
-
-// spでタップなしの自動再生はできない
-// http://www.yoheim.net/blog.php?q=20130816
-
 var Youtube = function () {
-  function Youtube() {
+  function Youtube(data) {
     (0, _classCallCheck3.default)(this, Youtube);
 
-    this.YOUTUBE_DATA = [{
-      videoID: '4slt_lQ8fPc',
-      ytplayer: 'ytplayer1',
-      $startButton: (0, _jquery2.default)('.js-youtube01StartButton'),
-      $stopButton: (0, _jquery2.default)('.js-youtube01StopButton'),
-      isCustomizedButton: 1,
-      isAutoPlay: 0
-    }, {
-      videoID: '9pjtVUZNfWY',
-      ytplayer: 'ytplayer2',
-      $startButton: (0, _jquery2.default)('.js-youtube02StartButton'),
-      $stopButton: (0, _jquery2.default)('.js-youtube02StopButton'),
-      isCustomizedButton: 0,
-      isAutoPlay: 0
-    }];
     this.players = [];
-    this._init();
+    this.$wrapper = (0, _jquery2.default)('.wrapper');
+
+    this._setData(data);
+    this._init(data);
+    this._initListener(data);
   }
 
   (0, _createClass3.default)(Youtube, [{
+    key: '_setData',
+    value: function _setData(data) {
+      data.forEach(function (val, index) {
+        var $ytplayer = val.$ytplayer || (0, _jquery2.default)('.ytplayer[data-youtube-type="' + val.type + '"]');
+        val.videoId = val.videoId || $ytplayer.attr('data-youtube-id');
+        val.elementId = val.elementId || $ytplayer.prop('id');
+        val.$startButton = val.$startButton || (0, _jquery2.default)('.js-start-youtube[data-youtube-type="' + val.type + '"]');
+        val.$stopButton = val.$stopButton || (0, _jquery2.default)('.js-stop-youtube[data-youtube-type="' + val.type + '"]');
+        val.isAutoPlay = isNaN(val.isAutoPlay) ? 0 : val.isAutoPlay;
+        val.isCustomizedButton = isNaN(val.isCustomizedButton) ? 0 : val.isCustomizedButton;
+      });
+    }
+  }, {
     key: '_init',
-    value: function _init() {
+    value: function _init(data) {
+      var _this = this;
+
+      // 複数個追加したくないので１回
+      (0, _jquery2.default)('body').append('<script src="//www.youtube.com/iframe_api">');
 
       var that = this;
 
-      // 複数個追加したくないので、これは１回
-      (0, _jquery2.default)('body').append('<script src="//www.youtube.com/iframe_api">');
-
       function onPlayerReady(event) {
-
-        that.YOUTUBE_DATA.forEach(function (val, index) {
-
+        data.forEach(function (val, index) {
           if (!val.isCustomizedButton) val.$startButton.hide();
         });
       }
 
       function onPlayerStateChange(event) {
-
-        that.YOUTUBE_DATA.forEach(function (val, index) {
-
-          if (event.target.h.id === val.ytplayer) {
+        data.forEach(function (val, index) {
+          if (event.target.h.id === val.elementId) {
             val.$startButton.hide();
-
             if (event.data == YT.PlayerState.PLAYING) {}
             if (event.data == YT.PlayerState.PAUSED) {}
             if (event.data == YT.PlayerState.ENDED) {
@@ -34429,12 +34439,10 @@ var Youtube = function () {
       }
 
       var onYouTubeIframeAPIReady = function onYouTubeIframeAPIReady() {
-
-        that.YOUTUBE_DATA.forEach(function (val, index) {
-
-          // https://developers.google.com/youtube/player_parameters?playerVersion=HTML5&hl=ja
-          var player = new YT.Player(val.ytplayer, {
-            videoId: val.videoID,
+        // https://developers.google.com/youtube/player_parameters?playerVersion=HTML5&hl=ja
+        data.forEach(function (val, index) {
+          var player = new YT.Player(val.elementId, {
+            videoId: val.videoId,
             playerVars: {
               'controls': 1,
               'enablejsapi': 1,
@@ -34451,85 +34459,85 @@ var Youtube = function () {
               'onStateChange': onPlayerStateChange
             }
           });
-          that.players[index] = player;
+          _this.players['' + val.type] = player;
         });
       };
 
       window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
+    }
+  }, {
+    key: '_initListener',
+    value: function _initListener(data) {
+      var _this2 = this;
 
-      that.YOUTUBE_DATA.forEach(function (val, index) {
-
+      data.forEach(function (val, index) {
         val.$startButton.on(_userEvent.userEvent.click, function () {
-          that.players[index].playVideo();
+          _this2.playVideo(val.type);
         });
         val.$stopButton.on(_userEvent.userEvent.click, function () {
-          that.players[index].stopVideo();
+          _this2.stopVideo(val.type);
         });
       });
     }
   }, {
     key: 'playVideo',
-    value: function playVideo() {
-      var index = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
-
-      this.players[index].playVideo();
+    value: function playVideo(type) {
+      this.players[type].playVideo();
     }
   }, {
     key: 'stopVideo',
-    value: function stopVideo() {
-      var index = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
-
-      this.players[index].stopVideo();
+    value: function stopVideo(type) {
+      this.players[type].stopVideo();
     }
   }, {
     key: 'mute',
-    value: function mute() {
-      var index = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
-
-      this.players[index].mute();
+    value: function mute(type) {
+      this.players[type].mute();
     }
   }, {
     key: 'unMute',
-    value: function unMute() {
-      var index = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
-
-      this.players[index].unMute();
+    value: function unMute(type) {
+      this.players[type].unMute();
     }
   }, {
     key: 'getVolume',
-    value: function getVolume() {
-      var index = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
-
-      return this.players[index].getVolume();
+    value: function getVolume(type) {
+      return this.players[type].getVolume();
     }
   }, {
     key: 'setVolume',
-    value: function setVolume() {
-      var index = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+    value: function setVolume(type) {
       var volume = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 100;
 
-      this.players[index].setVolume(volume);
+      this.players[type].setVolume(volume);
     }
   }]);
   return Youtube;
-}();
+}(); // https://developers.google.com/youtube/iframe_api_reference?hl=ja
+
+// spでタップなしの自動再生はできない
+// http://www.yoheim.net/blog.php?q=20130816
 
 (function () {
 
-  var youtube = new Youtube();
+  var youtube = new Youtube(_Youtube2.default);
+
   // test
-  (0, _jquery2.default)('.box').on(_userEvent.userEvent.click, function () {
-    // youtube.playVideo();
-    // youtube.mute();
-    // youtube.setVolume(0,50);
+  (0, _jquery2.default)('#top').on(_userEvent.userEvent.click, function () {
+    youtube.playVideo('sao');
+    youtube.mute('sao');
+    // youtube.setVolume('sao',50);
   });
-  (0, _jquery2.default)('.wrapper').on(_userEvent.userEvent.click, function () {
-    // youtube.stopVideo(1);
-    // console.log(youtube.getVolume());
+  (0, _jquery2.default)('#about').on(_userEvent.userEvent.click, function () {
+    youtube.stopVideo('perfume');
+    console.log(youtube.getVolume('perfume'));
+  });
+  (0, _jquery2.default)('.modal[data-modal="youtube"] .js-modal-close').on('click', function () {
+    youtube.stopVideo('koi');
   });
 })();
 
-},{"../util/userEvent":153,"babel-runtime/helpers/classCallCheck":10,"babel-runtime/helpers/createClass":11,"jquery":117}],143:[function(require,module,exports){
+},{"../data/Youtube":137,"../util/userEvent":154,"babel-runtime/helpers/classCallCheck":10,"babel-runtime/helpers/createClass":11,"jquery":117}],144:[function(require,module,exports){
 'use strict';
 
 var _promise = require('babel-runtime/core-js/promise');
@@ -34663,7 +34671,7 @@ function init() {
   new _Modal2.default({ type: 'on-modal' });
 }
 
-},{"./data/imageSrcs":137,"./lib/Cookie":138,"./lib/Gnav":139,"./lib/Modal":141,"./lib/Youtube":142,"./util/Gototop":144,"./util/UA":145,"./util/Viewport":146,"./util/WindowScroller":147,"./util/banDoubleTap":148,"./util/banPinchInOut":149,"./util/checkOrientation":150,"./util/loadImage":151,"./util/preloadImages":152,"babel-runtime/core-js/promise":7,"jquery":117,"whatwg-fetch":136}],144:[function(require,module,exports){
+},{"./data/imageSrcs":138,"./lib/Cookie":139,"./lib/Gnav":140,"./lib/Modal":142,"./lib/Youtube":143,"./util/Gototop":145,"./util/UA":146,"./util/Viewport":147,"./util/WindowScroller":148,"./util/banDoubleTap":149,"./util/banPinchInOut":150,"./util/checkOrientation":151,"./util/loadImage":152,"./util/preloadImages":153,"babel-runtime/core-js/promise":7,"jquery":117,"whatwg-fetch":136}],145:[function(require,module,exports){
 'use strict';
 
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
@@ -34739,7 +34747,7 @@ var Gototop = function () {
   });
 })();
 
-},{"./userEvent":153,"babel-runtime/helpers/classCallCheck":10,"babel-runtime/helpers/createClass":11,"jquery":117}],145:[function(require,module,exports){
+},{"./userEvent":154,"babel-runtime/helpers/classCallCheck":10,"babel-runtime/helpers/createClass":11,"jquery":117}],146:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -34834,7 +34842,7 @@ var _class = function () {
 
 exports.default = _class;
 
-},{"babel-runtime/helpers/classCallCheck":10,"babel-runtime/helpers/createClass":11}],146:[function(require,module,exports){
+},{"babel-runtime/helpers/classCallCheck":10,"babel-runtime/helpers/createClass":11}],147:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34883,7 +34891,7 @@ exports.default = function () {
   window.dispatchEvent(evt);
 }();
 
-},{"./UA":145}],147:[function(require,module,exports){
+},{"./UA":146}],148:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -34992,7 +35000,7 @@ var WindowScroller = function () {
 
 exports.default = WindowScroller;
 
-},{"./userEvent":153,"babel-runtime/helpers/classCallCheck":10,"babel-runtime/helpers/createClass":11,"jquery":117}],148:[function(require,module,exports){
+},{"./userEvent":154,"babel-runtime/helpers/classCallCheck":10,"babel-runtime/helpers/createClass":11,"jquery":117}],149:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -35020,7 +35028,7 @@ exports.default = function (dom) {
   }, true);
 };
 
-},{}],149:[function(require,module,exports){
+},{}],150:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -35047,7 +35055,7 @@ exports.default = function () {
   }, false);
 };
 
-},{}],150:[function(require,module,exports){
+},{}],151:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -35082,7 +35090,7 @@ exports.default = function () {
   }).trigger('orientationchange');
 }; // http://qiita.com/butchi_y/items/7f0a3c8f1b9a75ecbb1a
 
-},{"jquery":117}],151:[function(require,module,exports){
+},{"jquery":117}],152:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -35106,7 +35114,7 @@ exports.default = function (src) {
   });
 };
 
-},{"babel-runtime/core-js/promise":7}],152:[function(require,module,exports){
+},{"babel-runtime/core-js/promise":7}],153:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -35245,7 +35253,7 @@ function preloadImages(query, onProgress) {
   return query_promises[query];
 }
 
-},{"babel-runtime/core-js/promise":7,"css":109,"lodash":119}],153:[function(require,module,exports){
+},{"babel-runtime/core-js/promise":7,"css":109,"lodash":119}],154:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -35272,4 +35280,4 @@ var userEvent = exports.userEvent = {
   touchend: isSP && supportTouch ? 'touchend' : 'mouseup'
 };
 
-},{"./UA":145}]},{},[143]);
+},{"./UA":146}]},{},[144]);

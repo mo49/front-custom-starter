@@ -403,21 +403,21 @@ html[data-env="sp"] * {
       .page-root[data-page='top'] #about .box:after {
         content: '800px : gnavだけメディアクエリで表示を切り替える'; } }
 
-.page-root[data-page='top'] .youtube__box01, .page-root[data-page='top'] .youtube__box02 {
+.page-root[data-page='top'] .youtube {
   position: relative;
   width: 600px;
   height: 337.5px; }
-  .page-root[data-page='top'] .youtube__box01 iframe, .page-root[data-page='top'] .youtube__box02 iframe {
+  .page-root[data-page='top'] .youtube iframe {
     width: 600px;
     height: 337.5px; }
-  html[data-env="sp"] .page-root[data-page='top'] .youtube__box01, html[data-env="sp"] .page-root[data-page='top'] .youtube__box02 {
+  html[data-env="sp"] .page-root[data-page='top'] .youtube {
     width: 320px;
     height: 180px; }
-    html[data-env="sp"] .page-root[data-page='top'] .youtube__box01 iframe, html[data-env="sp"] .page-root[data-page='top'] .youtube__box02 iframe {
+    html[data-env="sp"] .page-root[data-page='top'] .youtube iframe {
       width: 320px;
       height: 180px; }
 
-.page-root[data-page='top'] .youtubeStartButton {
+.page-root[data-page='top'] .youtube__button--start {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -432,7 +432,7 @@ html[data-env="sp"] * {
   border: 1px solid #3f51b5;
   cursor: pointer; }
 
-.page-root[data-page='top'] .youtubeStartButton:after {
+.page-root[data-page='top'] .youtube__button--start:after {
   content: '';
   display: block;
   position: absolute;
@@ -450,7 +450,7 @@ html[data-env="sp"] * {
   border-left: 30px solid currentColor;
   margin-left: 15px; }
 
-.page-root[data-page='top'] .youtubeStartButton:hover {
+.page-root[data-page='top'] .youtube__button--start:hover {
   color: #3f51b5; }
 
 .page-root[data-page='top'] #preload[data-preload='1'] .preload__image--1 {

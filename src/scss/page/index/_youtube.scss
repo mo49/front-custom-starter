@@ -1,5 +1,5 @@
 // youtube
-.youtube__box01{
+.youtube{
   $ratio: 9/16;
   $youtube-width: 600;
   $youtube-width-sp: 320;
@@ -21,13 +21,8 @@
 
 }
 
-.youtube__box02{
-  @extend .youtube__box01;
 
-}
-
-
-.youtubeStartButton{
+.youtube__button--start{
   @include centering();
   $size: 70;
   width: $size + px;
@@ -37,7 +32,7 @@
   border: 1px solid $main-color;
   cursor: pointer;
 }
-.youtubeStartButton::after{
+.youtube__button--start::after{
   content: '';
   display: block;
   @include centering();
@@ -50,6 +45,6 @@
   border-left: $sizev + px solid currentColor;
   margin-left: $sizev/2 + px;
 }
-.youtubeStartButton:hover{
+.youtube__button--start:hover{
   color: $main-color;
 }

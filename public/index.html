@@ -28,7 +28,7 @@
     <!-- canonical url-->
     <link rel="canonical" href="http://example.com/">
     <!-- stylesheet-->
-    <link rel="stylesheet" data-preload="1" href="/css/style.css?v=14">
+    <link rel="stylesheet" data-preload="1" href="/css/style.css?v=15">
   </head>
   <body>
     <div class="page-root" data-page="top">
@@ -115,7 +115,9 @@
         <div class="modal section-block" data-modal="youtube">
           <div class="modal__overlay js-modal-close"></div>
           <div class="modal__content">
-            <div class="modal__content__image">Youtube</div>
+            <div class="ytplayer" id="ytplayer-koi" data-youtube-type="koi" data-youtube-id="jhOVibLEDhA"></div>
+            <div class="youtube__button--start js-start-youtube" data-youtube-type="koi"></div>
+            <div class="youtube__button--stop js-stop-youtube" data-youtube-type="koi"></div>
             <div class="modal__button--close js-modal-close"></div>
           </div>
         </div>
@@ -140,15 +142,15 @@
             <div class="modal__button--close js-modal-close"></div>
           </div>
         </div>
-        <div class="youtube__box01">
-          <div id="ytplayer1"></div>
-          <div class="youtubeStartButton js-youtube01StartButton"></div>
-          <div class="youtubeStopButton js-youtube01StopButton"></div>
+        <div class="youtube">
+          <div class="ytplayer" id="ytplayer-sao" data-youtube-type="sao" data-youtube-id="4slt_lQ8fPc"></div>
+          <div class="youtube__button--start js-start-youtube" data-youtube-type="sao"></div>
+          <div class="youtube__button--stop js-stop-youtube" data-youtube-type="sao"></div>
         </div>
-        <div class="youtube__box02">
-          <div id="ytplayer2"></div>
-          <div class="youtubeStartButton js-youtube02StartButton"></div>
-          <div class="youtubeStopButton js-youtube02StopButton"></div>
+        <div class="youtube">
+          <div class="ytplayer" id="ytplayer-perfume" data-youtube-type="perfume" data-youtube-id="9pjtVUZNfWY"></div>
+          <div class="youtube__button--start js-start-youtube" data-youtube-type="perfume"></div>
+          <div class="youtube__button--stop js-stop-youtube" data-youtube-type="perfume"></div>
         </div>
         <button class="js-modal-open" data-modal="sound-check">SoundCheck Modal Button</button>
         <button class="js-modal-open" data-modal="youtube">Youtube Modal Button</button>
@@ -162,6 +164,6 @@
       <div class="preload__image--2"></div>
     </div>
     <!-- javascript-->
-    <script src="/js/script.js?v=26"></script>
+    <script src="/js/script.js?v=27"></script>
   </body>
 </html>

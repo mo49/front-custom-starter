@@ -5,78 +5,62 @@
 
 import $ from 'jquery';
 import { userEvent } from '../util/userEvent';
+import YOUTUBE_DATA from '../data/Youtube';
 
 class Youtube {
-  constructor() {
-    this.YOUTUBE_DATA = [
-      {
-        videoID: '4slt_lQ8fPc',
-        ytplayer: 'ytplayer1',
-        $startButton: $('.js-youtube01StartButton'),
-        $stopButton: $('.js-youtube01StopButton'),
-        isCustomizedButton: 1,
-        isAutoPlay: 0
-      },
-      {
-        videoID: '9pjtVUZNfWY',
-        ytplayer: 'ytplayer2',
-        $startButton: $('.js-youtube02StartButton'),
-        $stopButton: $('.js-youtube02StopButton'),
-        isCustomizedButton: 0,
-        isAutoPlay: 0
-      },
-    ];
+  constructor(data) {
     this.players = [];
-    this._init();
+    this.$wrapper = $('.wrapper');
+
+    this._setData(data);
+    this._init(data);
+    this._initListener(data);
   }
 
-  _init() {
+  _setData(data) {
+    data.forEach((val,index) => {
+      const $ytplayer  = val.$ytplayer || $(`.ytplayer[data-youtube-type="${val.type}"]`);
+      val.videoId      = val.videoId || $ytplayer.attr('data-youtube-id');
+      val.elementId    = val.elementId || $ytplayer.prop('id');
+      val.$startButton = val.$startButton || $(`.js-start-youtube[data-youtube-type="${val.type}"]`)
+      val.$stopButton  = val.$stopButton || $(`.js-stop-youtube[data-youtube-type="${val.type}"]`)
+      val.isAutoPlay = isNaN(val.isAutoPlay) ? 0 : val.isAutoPlay;
+      val.isCustomizedButton = isNaN(val.isCustomizedButton) ? 0 : val.isCustomizedButton;
+    })
+  }
+
+  _init(data) {
+    // 複数個追加したくないので１回
+    $('body').append('<script src="//www.youtube.com/iframe_api">');
 
     const that = this;
 
-    // 複数個追加したくないので、これは１回
-    $('body').append('<script src="//www.youtube.com/iframe_api">');
-
     function onPlayerReady(event) {
-
-      that.YOUTUBE_DATA.forEach((val,index) => {
-
+      data.forEach((val,index) => {
         if (!val.isCustomizedButton) val.$startButton.hide();
-
       })
-
     }
 
     function onPlayerStateChange(event) {
-
-      that.YOUTUBE_DATA.forEach((val,index) => {
-
-        if (event.target.h.id === val.ytplayer) {
+      data.forEach((val,index) => {
+        if (event.target.h.id === val.elementId) {
           val.$startButton.hide();
-
           if (event.data == YT.PlayerState.PLAYING) {
-
           }
           if (event.data == YT.PlayerState.PAUSED) {
-
           }
           if (event.data == YT.PlayerState.ENDED) {
             if (val.isCustomizedButton) val.$startButton.show();
           }
-
         }
-
       })
-
     }
 
     const onYouTubeIframeAPIReady = () => {
-
-      that.YOUTUBE_DATA.forEach((val,index) => {
-
-        // https://developers.google.com/youtube/player_parameters?playerVersion=HTML5&hl=ja
-        const player = new YT.Player(val.ytplayer, {
-          videoId: val.videoID,
+      // https://developers.google.com/youtube/player_parameters?playerVersion=HTML5&hl=ja
+      data.forEach((val,index) => {
+        const player = new YT.Player(val.elementId, {
+          videoId: val.videoId,
           playerVars: {
             'controls': 1,
             'enablejsapi': 1,
@@ -93,60 +77,61 @@ class Youtube {
             'onStateChange': onPlayerStateChange
           }
         });
-        that.players[index] = player;
-
+        this.players[`${val.type}`] = player;
       })
-
     };
 
-    window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
+    window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady
+  }
 
-    that.YOUTUBE_DATA.forEach((val,index) => {
-
+  _initListener(data) {
+    data.forEach((val,index) => {
       val.$startButton.on(userEvent.click, () => {
-        that.players[index].playVideo();
+        this.playVideo(val.type);
       });
       val.$stopButton.on(userEvent.click, () => {
-        that.players[index].stopVideo();
+        this.stopVideo(val.type);
       });
-
     })
-
   }
 
-  playVideo(index=0) {
-    this.players[index].playVideo();
+  playVideo(type) {
+    this.players[type].playVideo();
   }
-  stopVideo(index=0) {
-    this.players[index].stopVideo();
+  stopVideo(type) {
+    this.players[type].stopVideo();
   }
-  mute(index=0) {
-    this.players[index].mute();
+  mute(type) {
+    this.players[type].mute();
   }
-  unMute(index=0) {
-    this.players[index].unMute();
+  unMute(type) {
+    this.players[type].unMute();
   }
-  getVolume(index=0) {
-    return this.players[index].getVolume();
+  getVolume(type) {
+    return this.players[type].getVolume();
   }
-  setVolume(index=0,volume=100) {
-    this.players[index].setVolume(volume);
+  setVolume(type,volume=100) {
+    this.players[type].setVolume(volume);
   }
 
 }
 
 (() => {
 
-  const youtube = new Youtube();
+  const youtube = new Youtube(YOUTUBE_DATA);
+
   // test
-  $('.box').on(userEvent.click, () => {
-    // youtube.playVideo();
-    // youtube.mute();
-    // youtube.setVolume(0,50);
+  $('#top').on(userEvent.click, () => {
+    youtube.playVideo('sao');
+    youtube.mute('sao');
+    // youtube.setVolume('sao',50);
   })
-  $('.wrapper').on(userEvent.click, () => {
-    // youtube.stopVideo(1);
-    // console.log(youtube.getVolume());
+  $('#about').on(userEvent.click, () => {
+    youtube.stopVideo('perfume');
+    console.log(youtube.getVolume('perfume'));
+  })
+  $('.modal[data-modal="youtube"] .js-modal-close').on('click',() => {
+    youtube.stopVideo('koi');
   })
 
 })()
