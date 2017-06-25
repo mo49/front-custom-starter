@@ -172,81 +172,73 @@ html[data-env="sp"] * {
   background-color: #888;
   padding: 0 10px; }
 
-.is-gnav-open {
-  position: absolute;
-  top: 0;
-  left: 0;
-  overflow-y: scroll; }
-
-#gnav {
-  width: 100%; }
-  #gnav .gnav__folding {
-    z-index: 4;
-    overflow-y: scroll; }
-    html[data-env="sp"] #gnav .gnav__folding {
-      display: none;
-      width: 100%;
-      position: absolute;
-      text-align: center;
-      padding-top: 50px; }
-  #gnav .gnav__links {
+#gnav .modal[data-modal="gnav"] {
+  overflow-y: scroll;
+  z-index: 4; }
+  html[data-env="sp"] #gnav .modal[data-modal="gnav"] .modal__content {
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    padding-top: 50px; }
+  #gnav .modal[data-modal="gnav"] .modal__links {
     font-size: 24px;
     line-height: 88px; }
-  #gnav .gnav__linksItem {
+  #gnav .modal[data-modal="gnav"] .modal__linksItem {
     display: inline-block; }
-    html[data-env="sp"] #gnav .gnav__linksItem {
+    html[data-env="sp"] #gnav .modal[data-modal="gnav"] .modal__linksItem {
       display: block; }
-    #gnav .gnav__linksItem a {
+    #gnav .modal[data-modal="gnav"] .modal__linksItem a {
       color: #000; }
-      html[data-env="sp"] #gnav .gnav__linksItem a {
+      html[data-env="sp"] #gnav .modal[data-modal="gnav"] .modal__linksItem a {
         color: #fff; }
-      #gnav .gnav__linksItem a:hover {
+      #gnav .modal[data-modal="gnav"] .modal__linksItem a:hover {
         color: #3f51b5; }
-  #gnav .gnav__overlay {
-    display: none;
-    background-color: rgba(0, 0, 0, 0.9);
-    position: fixed;
-    top: -10%;
+
+#gnav .gnav__toggleButton {
+  display: none;
+  z-index: 4;
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  width: 50px;
+  height: 50px; }
+
+#gnav .gnav__toggleButton--open, #gnav .gnav__toggleButton--close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50px;
+  height: 50px; }
+  #gnav .gnav__toggleButton--open span, #gnav .gnav__toggleButton--close span {
+    position: absolute;
     left: 0;
     width: 100%;
-    height: 120%;
-    z-index: 4; }
-  #gnav .gnav__toggleButton {
-    z-index: 4;
-    position: fixed;
-    top: 15px;
-    right: 15px;
-    width: 50px;
-    height: 50px; }
-    #gnav .gnav__toggleButton .gnav__openButton, #gnav .gnav__toggleButton .gnav__closeButton {
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 50px;
-      height: 50px; }
-      #gnav .gnav__toggleButton .gnav__openButton span, #gnav .gnav__toggleButton .gnav__closeButton span {
-        position: absolute;
-        left: 0;
-        width: 100%;
-        height: 2px;
-        background-color: #fff; }
-        #gnav .gnav__toggleButton .gnav__openButton span:nth-of-type(1), #gnav .gnav__toggleButton .gnav__closeButton span:nth-of-type(1) {
-          top: 0; }
-        #gnav .gnav__toggleButton .gnav__openButton span:nth-of-type(2), #gnav .gnav__toggleButton .gnav__closeButton span:nth-of-type(2) {
-          top: 15px; }
-        #gnav .gnav__toggleButton .gnav__openButton span:nth-of-type(3), #gnav .gnav__toggleButton .gnav__closeButton span:nth-of-type(3) {
-          top: 30px; }
-    #gnav .gnav__toggleButton .gnav__closeButton {
-      display: none;
-      margin-top: 15px; }
-      #gnav .gnav__toggleButton .gnav__closeButton span:nth-of-type(1) {
-        top: 0;
-        -webkit-transform: rotate(45deg);
-                transform: rotate(45deg); }
-      #gnav .gnav__toggleButton .gnav__closeButton span:nth-of-type(2) {
-        top: -2px;
-        -webkit-transform: rotate(-45deg);
-                transform: rotate(-45deg); }
+    height: 2px;
+    background-color: #fff; }
+    #gnav .gnav__toggleButton--open span:nth-of-type(1), #gnav .gnav__toggleButton--close span:nth-of-type(1) {
+      top: 0; }
+    #gnav .gnav__toggleButton--open span:nth-of-type(2), #gnav .gnav__toggleButton--close span:nth-of-type(2) {
+      top: 15px; }
+    #gnav .gnav__toggleButton--open span:nth-of-type(3), #gnav .gnav__toggleButton--close span:nth-of-type(3) {
+      top: 30px; }
+
+#gnav .gnav__toggleButton--close {
+  display: none;
+  margin-top: 15px; }
+  #gnav .gnav__toggleButton--close span:nth-of-type(1) {
+    top: 0;
+    -webkit-transform: rotate(45deg);
+            transform: rotate(45deg); }
+  #gnav .gnav__toggleButton--close span:nth-of-type(2) {
+    top: -2px;
+    -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg); }
+
+#gnav[data-gnav-open="1"] .gnav__toggleButton--open, #gnav[data-gnav-open="1"] .gnav__toggleButton--close {
+  display: none; }
+
+#gnav[data-gnav-open="1"] .gnav__toggleButton--close {
+  display: block; }
 
 #loading {
   position: fixed;
@@ -266,8 +258,7 @@ html[data-env="sp"] * {
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
   transition: all .5s; }
 
-#initialVisitModal, #soundCheckModal,
-#youtubeModal {
+.modal {
   display: none;
   width: 100%;
   height: 100%;
@@ -276,61 +267,72 @@ html[data-env="sp"] * {
   left: 0;
   background-color: transparent;
   z-index: 5; }
-  #initialVisitModal .modal__overlay, #soundCheckModal .modal__overlay,
-  #youtubeModal .modal__overlay {
+  .modal .modal__overlay {
     width: 100%;
     height: 120%;
     position: fixed;
     top: -10%;
     left: 0;
     background-color: rgba(0, 0, 0, 0.9); }
-  #initialVisitModal .modal__content, #soundCheckModal .modal__content,
-  #youtubeModal .modal__content {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    -webkit-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);
-    margin-top: 0px;
-    margin-left: 0px; }
-    #initialVisitModal .modal__content .modal__content--img, #soundCheckModal .modal__content .modal__content--img,
-    #youtubeModal .modal__content .modal__content--img {
-      margin: 0 auto; }
-  #initialVisitModal .modal__btn-close, #soundCheckModal .modal__btn-close,
-  #youtubeModal .modal__btn-close {
-    width: 50px;
-    height: 50px;
-    position: absolute;
-    top: -50px;
-    right: -50px;
-    cursor: pointer; }
-    #initialVisitModal .modal__btn-close:before, #soundCheckModal .modal__btn-close:before,
-    #youtubeModal .modal__btn-close:before, #initialVisitModal .modal__btn-close:after, #soundCheckModal .modal__btn-close:after, #youtubeModal .modal__btn-close:after {
-      content: '';
-      display: block;
-      width: 50px;
-      height: 2px;
-      background-color: #fff;
-      -webkit-transform: rotate(45deg);
-              transform: rotate(45deg);
-      -webkit-transform-origin: center center;
-              transform-origin: center center; }
-    #initialVisitModal .modal__btn-close:after, #soundCheckModal .modal__btn-close:after,
-    #youtubeModal .modal__btn-close:after {
-      -webkit-transform: rotate(-45deg);
-              transform: rotate(-45deg);
-      margin-top: -2px; }
 
-#initialVisitModal .modal__content--img, #soundCheckModal .modal__content--img,
-#youtubeModal .modal__content--img {
+.modal[data-modal="initial-visit"] .modal__content,
+.modal[data-modal="sound-check"] .modal__content,
+.modal[data-modal="youtube"] .modal__content,
+.modal[data-modal="on-modal"] .modal__content {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  margin-top: 0px;
+  margin-left: 0px; }
+  .modal[data-modal="initial-visit"] .modal__content .modal__content__image,
+  .modal[data-modal="sound-check"] .modal__content .modal__content__image,
+  .modal[data-modal="youtube"] .modal__content .modal__content__image,
+  .modal[data-modal="on-modal"] .modal__content .modal__content__image {
+    margin: 0 auto; }
+
+.modal[data-modal="initial-visit"] .modal__button--close,
+.modal[data-modal="sound-check"] .modal__button--close,
+.modal[data-modal="youtube"] .modal__button--close,
+.modal[data-modal="on-modal"] .modal__button--close {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  cursor: pointer; }
+  .modal[data-modal="initial-visit"] .modal__button--close:before, .modal[data-modal="initial-visit"] .modal__button--close:after,
+  .modal[data-modal="sound-check"] .modal__button--close:before, .modal[data-modal="sound-check"] .modal__button--close:after,
+  .modal[data-modal="youtube"] .modal__button--close:before, .modal[data-modal="youtube"] .modal__button--close:after,
+  .modal[data-modal="on-modal"] .modal__button--close:before, .modal[data-modal="on-modal"] .modal__button--close:after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 2px;
+    background-color: #fff;
+    -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+    -webkit-transform-origin: center center;
+            transform-origin: center center; }
+  .modal[data-modal="initial-visit"] .modal__button--close:after,
+  .modal[data-modal="sound-check"] .modal__button--close:after,
+  .modal[data-modal="youtube"] .modal__button--close:after,
+  .modal[data-modal="on-modal"] .modal__button--close:after {
+    -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+    margin-top: -2px; }
+
+.modal[data-modal="initial-visit"] .modal__content__image,
+.modal[data-modal="youtube"] .modal__content__image {
   background-repeat: no-repeat;
   background-position: center center;
   background-image: url('../img/sample1.jpg?15b376c7b20');
   background-size: 640px 480px;
   width: 640px;
   height: 480px; }
-  html[data-env="sp"] #initialVisitModal .modal__content--img, html[data-env="sp"] #soundCheckModal .modal__content--img, html[data-env="sp"]
-  #youtubeModal .modal__content--img {
+  html[data-env="sp"] .modal[data-modal="initial-visit"] .modal__content__image, html[data-env="sp"]
+  .modal[data-modal="youtube"] .modal__content__image {
     background-repeat: no-repeat;
     background-position: center center;
     background-image: url('../img/sample1.jpg?15b376c7b20');
@@ -338,14 +340,16 @@ html[data-env="sp"] * {
     width: 320px;
     height: 240px; }
 
-#soundCheckModal .modal__content--img {
+.modal[data-modal="sound-check"] .modal__content__image,
+.modal[data-modal="on-modal"] .modal__content__image {
   background-repeat: no-repeat;
   background-position: center center;
   background-image: url('../img/sample2.png?15a458e0238');
   background-size: 480px 400px;
   width: 480px;
   height: 400px; }
-  html[data-env="sp"] #soundCheckModal .modal__content--img {
+  html[data-env="sp"] .modal[data-modal="sound-check"] .modal__content__image, html[data-env="sp"]
+  .modal[data-modal="on-modal"] .modal__content__image {
     background-repeat: no-repeat;
     background-position: center center;
     background-image: url('../img/sample2.png?15a458e0238');

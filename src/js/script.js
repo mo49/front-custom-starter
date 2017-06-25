@@ -10,11 +10,10 @@ import preloadImages from './util/preloadImages';
 import banPinchInOut from './util/banPinchInOut';
 import banDoubleTap from './util/banDoubleTap';
 import checkOrientation from './util/checkOrientation';
-import './lib/Gnav';
 import './lib/Youtube';
 import Cookie from './lib/Cookie';
+import Gnav from './lib/Gnav';
 import Modal from './lib/Modal';
-import initialVisit from './lib/initialVisit';
 import IMAGE_SRCS from './data/imageSrcs';
 
 // -------------------------------------------
@@ -29,9 +28,9 @@ ua.initSetting();
 windowScroller.stop();
 
 if (isSP) {
-  banPinchInOut();
-  banDoubleTap(document.documentElement);
-  checkOrientation();
+  // banPinchInOut();
+  // banDoubleTap(document.documentElement);
+  // checkOrientation();
 }
 
 // -------------------------------------------
@@ -61,25 +60,26 @@ function onProgress(count) {
 // -------------------------------------------
 function init() {
 
-// 初回モーダル
-if ( !cookie.getUserSiteVisited() ) initialVisit();
-cookie.setUserSiteVisited(1);
-
-// サウンドチェックモーダル
-new Modal({
-  $modal: $('#soundCheckModal'),
-  $openButton: $('.js-soundCheckModalOpenButton'),
-  $toggleButton: $('.js-soundCheckModalToggleButton'),
-  isAutoOpen: true,
-  fadeDuration: 0
-});
-
-// youtubeモーダル
-new Modal({
-  $modal: $('#youtubeModal'),
-  $openButton: $('.js-youtubeModalOpenButton'),
-  $toggleButton: $('.js-youtubeModalToggleButton')
-});
-
+  // gnav
+  new Gnav();
+  // initial-visit
+  if ( !cookie.getUserSiteVisited() ) {
+    new Modal({
+      type: 'initial-visit',
+      isAutoOpen: true,
+      fadeDuration: 0
+    });
+  }
+  cookie.setUserSiteVisited(1);
+  // sound-check
+  new Modal({
+    type: 'sound-check',
+    isAutoOpen: true,
+    fadeDuration: 0
+  });
+  // youtube
+  new Modal({type: 'youtube'});
+  // modal on modal
+  new Modal({type: 'on-modal'});
 
 }
