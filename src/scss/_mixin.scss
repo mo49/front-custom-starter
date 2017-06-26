@@ -6,6 +6,8 @@
 @import 'mixin/clearfix';
 @import 'mixin/hover';
 @import 'mixin/background';
+@import 'mixin/ellipsis';
+
 
 @mixin pc-layout {
     @media (min-width: $pc_min_width) {
