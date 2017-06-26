@@ -3,6 +3,8 @@ export default (src) => {
   img.src = src;
 
   return new Promise(resolve => {
-    img.onload = () => resolve(img)
+    img.addEventListener("load", function(){
+      resolve(img)
+    })
   })
 }
