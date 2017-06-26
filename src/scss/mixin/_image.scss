@@ -64,7 +64,7 @@ $animation-name: ユニークな名前（keyframesの上書き防止）
     height: $h + px;
     width: 0;
     padding-left: $w + px;
-    background-size: auto $h + px;
+    background-size: ($w * $koma + px) ($h + px);
     &.active{
       animation: $animation-name $duration steps($koma) $iteration $direction;
     }
@@ -76,7 +76,7 @@ $animation-name: ユニークな名前（keyframesの上書き防止）
     height: 0;
     width: $w + px;
     padding-top: $h + px;
-    background-size: $w + px auto;
+    background-size: ($w + px) ($h * $koma + px);
     &.active{
       animation: $animation-name $duration steps($koma) $iteration $direction;
     }
