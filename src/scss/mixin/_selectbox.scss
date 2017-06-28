@@ -1,0 +1,17 @@
+@mixin selectbox {
+  // initialize
+  appearance: none;
+  border-radius: 0;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  background: none transparent;
+  vertical-align: middle;
+  font-size: inherit;
+  color: inherit;
+  box-sizing: content-box;
+  outline: none;
+  &::-ms-expand {
+    display: none;
+  }
+}
