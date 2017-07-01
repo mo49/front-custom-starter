@@ -15,6 +15,7 @@ import './lib/Youtube';
 import Cookie from './lib/Cookie';
 import Gnav from './lib/Gnav';
 import Modal from './lib/Modal';
+import myCanvas from './lib/my-canvas';
 import IMAGE_SRCS from './data/imageSrcs';
 
 // -------------------------------------------
@@ -75,12 +76,14 @@ function init() {
   // sound-check
   new Modal({
     type: 'sound-check',
-    isAutoOpen: true,
+    // isAutoOpen: true,
     fadeDuration: 0
   });
   // youtube
   new Modal({type: 'youtube'});
   // modal on modal
   new Modal({type: 'on-modal'});
+
+  myCanvas();
 
 }
