@@ -39178,10 +39178,12 @@ var _class = function () {
     key: 'lock',
     value: function lock() {
       // modal on modal の対策
-      // 0のときだけ通す
-      var currentCount = parseInt(this.$wrapper.attr('data-lock-bg')) || 0;
+      // 1枚目のモーダルが開かれるときだけロックする
+      var currentCount = Math.max(parseInt(this.$wrapper.attr('data-lock-bg')), 0) || 0;
       this.$wrapper.attr('data-lock-bg', currentCount + 1);
-      if (currentCount !== 0) return;
+      if (currentCount !== 0) {
+        return;
+      };
 
       var current_scrollY = (0, _jquery2.default)(window).scrollTop();
       this.original_scrollY = current_scrollY;
@@ -39195,11 +39197,14 @@ var _class = function () {
   }, {
     key: 'unlock',
     value: function unlock() {
-      // 1のときだけ通す
-      var currentCount = parseInt(this.$wrapper.attr('data-lock-bg'));
+      // 最後の1枚が閉じられたときに元に戻す
+      var currentCount = Math.max(parseInt(this.$wrapper.attr('data-lock-bg')), 0) || 0;
       this.$wrapper.attr('data-lock-bg', currentCount - 1);
-      if (currentCount !== 1) return;
+      if (currentCount !== 1) {
+        return;
+      };
 
+      this.$wrapper.removeAttr('data-lock-bg');
       this.$wrapper.attr({ style: '' });
       (0, _jquery2.default)('html, body').prop({ scrollTop: this.original_scrollY });
     }
