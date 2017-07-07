@@ -127,7 +127,8 @@ $animation-name: ユニークな名前（keyframesの上書き防止）
 .horizontal{
   @include sprite-image(
     horizontal_pc,'../img/sprite_horizontal.png',
-    708,455,33,3s,1,horizontal,alternate
+    708,455,33,30,
+    1,alternate,horizontal
   );
 }
 */
