@@ -62,7 +62,6 @@
 .modal[data-modal="youtube"]{
   .modal__content__image{
     @include same-image('sample1.jpg');
-    // @include same-image('sample1.jpg',0.4);
   }
 
 }
@@ -70,9 +69,9 @@
 .modal[data-modal="sound-check"],
 .modal[data-modal="on-modal"]{
   .modal__content__image{
-    @include image('sample2.png');
+    @include image('sample2.png',false,0.8);
     @include env(sp) {
-      @include image('sample2.png',2);
+      @include image('sample2.png',false,0.4);
     };
   }
 

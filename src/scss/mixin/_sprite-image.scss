@@ -1,0 +1,50 @@
+/*
+$koma: コマ数
+$animation-name: ユニークな名前（keyframesの上書き防止）
+
+// 使用例
+.horizontal{
+  @include sprite-image(
+    horizontal_pc,'../img/sprite_horizontal.png',
+    708,455,33,30,
+    1,alternate,horizontal
+  );
+}
+*/
+// simple ex.
+// @include sprite-image(sample,'./sprite.png',600,400,20);
+@mixin sprite-image(
+  $animation-name, $url, $w, $h, $koma, $fps:30,
+  $iteration:infinite, $direction:normal, $layout:vertical
+) {
+  @if $layout == horizontal{
+    height: $h + px;
+    width: 0;
+    padding-left: $w + px;
+    background-size: ($w * $koma + px) ($h + px);
+    @keyframes #{$animation-name}_horizontal{
+      0%    { background-position: 0 0; }
+      100%  { background-position: (- $koma * $w + px) 0; }
+    }
+  } @else {
+    height: 0;
+    width: $w + px;
+    padding-top: $h + px;
+    background-size: ($w + px) ($h * $koma + px);
+    @keyframes #{$animation-name}_vertical{
+      0%    { background-position: 0 0; }
+      100%  { background-position: 0 (- $koma * $h + px); }
+    }
+  }
+  &.active{
+    animation-name: $animation-name;
+  }
+  animation-duration: $koma * round(1000 / $fps) + ms;
+  animation-timing-function: steps($koma);
+  animation-iteration-count: $iteration;
+  animation-direction: $direction;
+  animation-fill-mode: forwards;
+  overflow: hidden;
+  background-position: 0 0;
+  background-image: url($url);
+}

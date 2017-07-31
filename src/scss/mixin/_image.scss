@@ -20,9 +20,18 @@
 }
 */
 
-// postCss Assets
-@mixin image($url, $density: 1, $scale:1, $hidetext: 0){
-  @if $hidetext == 1 {
+/*
+postCss Assets
+
+デフォルト値（scale=1）
+ex. 640x320のとき...
+  pc: 640x320(density=1)
+  sp: 320x160(density=2)
+
+evenizer -i *.png で偶数にしておく
+*/
+@mixin image($url, $hidetext: true, $scale:1){
+  @if $hidetext {
     @include hide-txt();
   }
   $scale: 1 / $scale;
@@ -31,69 +40,32 @@
   background-position: center center;
   background-image: resolve($url);
   // background-image: url($basePath + $url);
-  background-size: size($url,$density * $scale);
-  width: width($url,$density * $scale);
-  height: height($url,$density * $scale);
+  background-size: size($url,1 * $scale);
+  width: width($url,1 * $scale);
+  height: height($url,1 * $scale);
 }
 // SPをベースにしてPCも同じ画像のケース
-@mixin same-image($url, $scale:1, $hidetext: 0){
-  $scale: 1 / $scale;
-  @include image($url,1 * $scale);
+@mixin same-image($url, $hidetext: true, $p_scale:1, $s_scale:1){
+  $pc_scale: $p_scale;
+  $sp_scale: $s_scale;
+  // ex. pcサイズを一括で70%のサイズにしたいとき...
+  // $global-pc-scale: 0.7; を_variable.scssに設定
+  @if variable-exists(global-pc-scale) {
+    $pc_scale: $global-pc-scale;
+  }
+  @if variable-exists(global-sp-scale) {
+    $sp_scale: $global-sp-scale;
+  }
+  // globalの上書きもできるようにしておくが、
+  // これを使うくらいなら same-image でなく image を使うべき
+  @if $p_scale != 1 {
+    $pc_scale: $p_scale;
+  }
+  @if $s_scale != 1 {
+    $sp_scale: $s_scale;
+  }
+  @include image($url,$hidetext,1 * $pc_scale);
   @include env(sp) {
-    @include image($url,2 * $scale);
+    @include image($url,$hidetext,2 * $sp_scale);
   }
-}
-
-/*
-$koma: コマ数
-$animation-name: ユニークな名前（keyframesの上書き防止）
-
-// 使用例
-.horizontal{
-  @include sprite-image(
-    horizontal_pc,'../img/sprite_horizontal.png',
-    708,455,33,30,
-    1,alternate,horizontal
-  );
-}
-*/
-// simple ex.
-// @include sprite-image(sample,'./sprite.png',600,400,20);
-@mixin sprite-image(
-  $animation-name, $url, $w, $h, $koma, $fps:30,
-  $iteration:infinite, $direction:normal, $layout:vertical
-) {
-  @if $layout == horizontal{
-    height: $h + px;
-    width: 0;
-    padding-left: $w + px;
-    background-size: ($w * $koma + px) ($h + px);
-    &.active{
-      animation-name: $animation-name;
-    }
-    @keyframes #{$animation-name}_horizontal{
-      0%    { background-position: 0 0; }
-      100%  { background-position: (- $koma * $w + px) 0; }
-    }
-  } @else {
-    height: 0;
-    width: $w + px;
-    padding-top: $h + px;
-    background-size: ($w + px) ($h * $koma + px);
-    &.active{
-      animation-name: $animation-name;
-    }
-    @keyframes #{$animation-name}_vertical{
-      0%    { background-position: 0 0; }
-      100%  { background-position: 0 (- $koma * $h + px); }
-    }
-  }
-  animation-duration: $koma * round(1000 / $fps) + ms;
-  animation-timing-function: steps($koma);
-  animation-iteration-count: $iteration;
-  animation-direction: $direction;
-  animation-fill-mode: forwards;
-  overflow: hidden;
-  background-position: 0 0;
-  background-image: url($url);
 }
