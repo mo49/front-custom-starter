@@ -1,0 +1,16 @@
+{
+    "extends": ["eslint:recommended"],
+    "plugins": [],
+    "parserOptions": {
+      "sourceType": "module"
+    },
+    "env": {
+      "browser": true,
+      "es6": true
+    },
+    "globals": {},
+    "rules": {
+      "no-unused-vars": [1, {"vars" : "all", "args" : "after-used"} ],
+      "no-empty": 0
+    }
+}

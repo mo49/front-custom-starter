@@ -22,6 +22,9 @@ $animation-name: ユニークな名前（keyframesの上書き防止）
     width: 0;
     padding-left: $w + px;
     background-size: ($w * $koma + px) ($h + px);
+    &.active{
+      animation-name: #{$animation-name}_horizontal;
+    }
     @keyframes #{$animation-name}_horizontal{
       0%    { background-position: 0 0; }
       100%  { background-position: (- $koma * $w + px) 0; }
@@ -31,13 +34,13 @@ $animation-name: ユニークな名前（keyframesの上書き防止）
     width: $w + px;
     padding-top: $h + px;
     background-size: ($w + px) ($h * $koma + px);
+    &.active{
+      animation-name: #{$animation-name}_vertical;
+    }
     @keyframes #{$animation-name}_vertical{
       0%    { background-position: 0 0; }
       100%  { background-position: 0 (- $koma * $h + px); }
     }
-  }
-  &.active{
-    animation-name: $animation-name;
   }
   animation-duration: $koma * round(1000 / $fps) + ms;
   animation-timing-function: steps($koma);
