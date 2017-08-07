@@ -2,6 +2,7 @@
 
 // spでタップなしの自動再生はできない
 // http://www.yoheim.net/blog.php?q=20130816
+// pcでもクリックなしの自動再生をやると2回目が読み込めなくなる
 
 import $ from 'jquery';
 import { userEvent } from '../util/userEvent';
