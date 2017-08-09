@@ -5,7 +5,7 @@
 // pcでもクリックなしの自動再生をやると2回目が読み込めなくなる
 
 import $ from 'jquery';
-import { userEvent } from '../util/userEvent';
+import userEvent from '../util/userEvent';
 import YOUTUBE_DATA from '../data/Youtube';
 
 class Youtube {

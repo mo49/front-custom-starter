@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import { userEvent } from './userEvent';
+import userEvent from './userEvent';
 
 export default (() => {
 

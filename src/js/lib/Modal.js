@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import Lock from './Lock';
-import { userEvent } from '../util/userEvent';
+import userEvent from '../util/userEvent';
 
 export default class Modal extends Lock {
 
