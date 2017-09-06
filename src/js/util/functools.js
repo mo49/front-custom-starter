@@ -17,3 +17,8 @@ export function scrollHorizontal(target_id) {
     elm.style.left = -window.scrollX + "px";
   }
 }
+
+// 3桁区切り
+export function separate(num){
+  return String(num).replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,');
+}
