@@ -51,6 +51,7 @@
   },
   "dependencies": {
     "css": "^2.2.1",
+    "howler": "^2.0.4",
     "lodash": "^4.17.4",
     "whatwg-fetch": "^2.0.3"
   }

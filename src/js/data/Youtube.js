@@ -5,7 +5,7 @@ module.exports = [
   },
   {
     type:'perfume',
-    isAutoPlay: 1,
+    // isAutoPlay: 1,
   },
   {
     type:'koi',

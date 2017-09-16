@@ -16,6 +16,7 @@ import Cookie from './lib/Cookie';
 import Gnav from './lib/Gnav';
 import Modal from './lib/Modal';
 import myCanvas from './lib/my-canvas';
+import soundManager from './lib/SoundManager';
 import IMAGE_SRCS from './data/imageSrcs';
 
 // -------------------------------------------
@@ -85,5 +86,44 @@ function init() {
   new Modal({type: 'on-modal'});
 
   myCanvas();
+
+  // sound
+  const $muteBtn = $('.sound__mute');
+  soundManager.setSound('se1', {
+    src: ['/sounds/se1.mp3']
+  })
+  soundManager.setSound('se2', {
+    src: ['/sounds/se2.mp3']
+  })
+  soundManager.setSound('bgm', {
+    src: ['/sounds/bgm.mp3'],
+    loop: true,
+  })
+
+  $('.sound__se1').on('click', () => {
+    soundManager.play('se1');
+  })
+  $('.sound__se2').on('click', () => {
+    soundManager.stop('se2');
+    soundManager.play('se2');
+  })
+  soundManager.play('bgm');
+
+  start();
+  $muteBtn.on('click', toggle);
+
+  function start() {
+    (soundManager.isMute)
+      ? soundManager.mute()
+      : soundManager.unmute()
+    $muteBtn.attr('data-mute',soundManager.isMute);
+  }
+  function toggle() {
+    (soundManager.isMute)
+    ? soundManager.unmute()
+    : soundManager.mute()
+    $muteBtn.attr('data-mute',soundManager.isMute);
+  }
+
 
 }
