@@ -14,6 +14,19 @@ class SoundManager extends EventEmitter {
         super();
         this.isMute = (cookie.getMute() === 'true') || false;
         this.sounds = {};
+        this.initListener();
+    }
+
+    initListener() {
+        // 別タブに移動した際など、強制ミュートにする
+        document.addEventListener('visibilitychange', (e) => {
+            if (document.visibilityState !== 'visible') {
+                Howler.mute(true);
+            } else {
+                if (!this.isMute)
+                    Howler.mute(false);
+            }
+        });
     }
 
     get EVENT() {
@@ -105,10 +118,5 @@ class SoundManager extends EventEmitter {
         });
     }
 };
-
-// 別タブに移動した際など、強制ミュートにする
-document.addEventListener('visibilitychange', (e) => {
-    Howler.mute(document.visibilityState !== 'visible');
-});
 
 export default new SoundManager();

@@ -42471,10 +42471,25 @@ var SoundManager = function (_EventEmitter) {
 
         _this.isMute = cookie.getMute() === 'true' || false;
         _this.sounds = {};
+        _this.initListener();
         return _this;
     }
 
     _createClass(SoundManager, [{
+        key: 'initListener',
+        value: function initListener() {
+            var _this2 = this;
+
+            // 別タブに移動した際など、強制ミュートにする
+            document.addEventListener('visibilitychange', function (e) {
+                if (document.visibilityState !== 'visible') {
+                    _howler.Howler.mute(true);
+                } else {
+                    if (!_this2.isMute) _howler.Howler.mute(false);
+                }
+            });
+        }
+    }, {
         key: 'unmute',
         value: function unmute() {
             this.isMute = false;
@@ -42581,11 +42596,6 @@ var SoundManager = function (_EventEmitter) {
 }(_events2.default);
 
 ;
-
-// 別タブに移動した際など、強制ミュートにする
-document.addEventListener('visibilitychange', function (e) {
-    _howler.Howler.mute(document.visibilityState !== 'visible');
-});
 
 exports.default = new SoundManager();
 
@@ -42995,7 +43005,10 @@ function init() {
   // sound
   var $muteBtn = (0, _jquery2.default)('.sound__mute');
   _SoundManager2.default.setSound('se1', {
-    src: ['/sounds/se1.mp3']
+    src: ['/sounds/se1.mp3'],
+    onend: function onend() {
+      console.log("se1 end!");
+    }
   });
   _SoundManager2.default.setSound('se2', {
     src: ['/sounds/se2.mp3']

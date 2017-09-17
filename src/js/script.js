@@ -90,7 +90,10 @@ function init() {
   // sound
   const $muteBtn = $('.sound__mute');
   soundManager.setSound('se1', {
-    src: ['/sounds/se1.mp3']
+    src: ['/sounds/se1.mp3'],
+    onend: () => {
+      console.log("se1 end!");
+    }
   })
   soundManager.setSound('se2', {
     src: ['/sounds/se2.mp3']
