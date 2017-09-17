@@ -3,11 +3,10 @@
 import EventEmitter from 'events';
 import { Howler, Howl } from 'howler';
 
-import Cookie from './Cookie';
+import cookie from './Cookie';
 
 const BGM_VOLUME = 0.2;
 const BGM_KEY = 'bgm';
-const cookie = new Cookie();
 
 class SoundManager extends EventEmitter {
     constructor (opts = {}) {

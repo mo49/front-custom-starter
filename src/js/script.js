@@ -12,7 +12,7 @@ import banPinchInOut from './util/banPinchInOut';
 import banDoubleTap from './util/banDoubleTap';
 import checkOrientation from './util/checkOrientation';
 import './lib/Youtube';
-import Cookie from './lib/Cookie';
+import cookie from './lib/Cookie';
 import Gnav from './lib/Gnav';
 import Modal from './lib/Modal';
 import myCanvas from './lib/my-canvas';
@@ -22,7 +22,6 @@ import IMAGE_SRCS from './data/imageSrcs';
 // -------------------------------------------
 // 初期設定
 // -------------------------------------------
-const cookie = new Cookie();
 const ua = new UA();
 const isSP = ua.get().Mobile;
 const windowScroller = new WindowScroller();

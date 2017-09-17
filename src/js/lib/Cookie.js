@@ -3,7 +3,7 @@
 import $ from 'jquery';
 import cookie from 'js-cookie';
 
-export default class Cookie {
+class Cookie {
 
   constructor() {
 
@@ -57,5 +57,6 @@ export default class Cookie {
     cookie.remove(this.key.words);
   }
 
-
 }
+
+module.exports = new Cookie();

@@ -42053,10 +42053,6 @@ exports.default = [ROOT + 'sample1.jpg', ROOT + 'sample2.png', ROOT + 'sample3.j
 },{}],331:[function(require,module,exports){
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); // https://www.npmjs.com/package/js-cookie
 
 var _jquery = require('jquery');
@@ -42146,7 +42142,7 @@ var Cookie = function () {
   return Cookie;
 }();
 
-exports.default = Cookie;
+module.exports = new Cookie();
 
 },{"jquery":308,"js-cookie":309}],332:[function(require,module,exports){
 'use strict';
@@ -42457,7 +42453,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var BGM_VOLUME = 0.2;
 var BGM_KEY = 'bgm';
-var cookie = new _Cookie2.default();
 
 var SoundManager = function (_EventEmitter) {
     _inherits(SoundManager, _EventEmitter);
@@ -42469,7 +42464,7 @@ var SoundManager = function (_EventEmitter) {
 
         var _this = _possibleConstructorReturn(this, (SoundManager.__proto__ || Object.getPrototypeOf(SoundManager)).call(this));
 
-        _this.isMute = cookie.getMute() === 'true' || false;
+        _this.isMute = _Cookie2.default.getMute() === 'true' || false;
         _this.sounds = {};
         _this.initListener();
         return _this;
@@ -42493,7 +42488,7 @@ var SoundManager = function (_EventEmitter) {
         key: 'unmute',
         value: function unmute() {
             this.isMute = false;
-            cookie.setMute(this.isMute);
+            _Cookie2.default.setMute(this.isMute);
             _howler.Howler.mute(false);
             this.emit(this.EVENT.TOGGLE_MUTE, this.isMute);
         }
@@ -42501,7 +42496,7 @@ var SoundManager = function (_EventEmitter) {
         key: 'mute',
         value: function mute() {
             this.isMute = true;
-            cookie.setMute(this.isMute);
+            _Cookie2.default.setMute(this.isMute);
             _howler.Howler.mute(true);
             this.emit(this.EVENT.TOGGLE_MUTE, this.isMute);
         }
@@ -42937,7 +42932,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // -------------------------------------------
 
 // import './util/GA';
-var cookie = new _Cookie2.default();
 var ua = new _UA2.default();
 var isSP = ua.get().Mobile;
 var windowScroller = new _WindowScroller2.default();
@@ -42981,14 +42975,14 @@ function init() {
   // gnav
   new _Gnav2.default();
   // initial-visit
-  if (!cookie.getUserSiteVisited()) {
+  if (!_Cookie2.default.getUserSiteVisited()) {
     new _Modal2.default({
       type: 'initial-visit',
       isAutoOpen: true,
       fadeDuration: 0
     });
   }
-  cookie.setUserSiteVisited(1);
+  _Cookie2.default.setUserSiteVisited(1);
   // sound-check
   new _Modal2.default({
     type: 'sound-check',
