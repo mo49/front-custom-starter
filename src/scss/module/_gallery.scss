@@ -1,0 +1,26 @@
+.gallery{
+    width: 300px;
+    margin: 0 auto;
+    border: 1px solid #333;
+}
+
+.gallery__item{
+    width: 100px !important;
+    height: 100px !important;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transform: translateX(20px); // 微調整
+    &[data-carousel-id="1"]{
+        background-image: image-url("sample1.jpg");
+    }
+    &[data-carousel-id="2"]{
+        background-image: image-url("sample2.png");
+    }
+    &[data-carousel-id="3"]{
+        background-image: image-url("sample3.jpg");
+    }
+    &[data-carousel-id="4"]{
+        background-image: image-url("sample4.png");
+    }
+}

@@ -4,6 +4,9 @@
 // config
 @import 'variable', 'function', 'mixin', 'keyframes';
 
+// lib
+@import 'lib/*';
+
 // modules
 @import 'module/*';
 

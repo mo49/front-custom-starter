@@ -42,6 +42,7 @@
     "read-config": "2.0.*",
     "reset.css": "^2.0.2",
     "rev-logger": "1.1.1",
+    "slick-carousel": "^1.8.1",
     "vinyl-source-stream": "1.1.*"
   },
   "babel": {

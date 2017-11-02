@@ -56,6 +56,10 @@ block ContentBlock
 
       .js-facebookButton
 
+      .gallery.js-gallery-carousel
+        - for(var i=1; i<=4; i++)
+          .gallery__item(data-carousel-id=i)
+
       #canvasArea
         .button
           button.js-restart START

@@ -1,6 +1,7 @@
 import "babel-polyfill";
 import "whatwg-fetch"
 import $ from 'jquery';
+import 'slick-carousel';
 // import './util/GA';
 import './util/Viewport';
 import './util/Gototop';
@@ -126,6 +127,20 @@ function init() {
     : soundManager.mute()
     $muteBtn.attr('data-mute',soundManager.isMute);
   }
+
+  // carousel
+  $(".js-gallery-carousel").slick({
+    infinite: true,
+    centerMode: true,
+    centerPadding: "80px", // どれくらい見切れているか
+    slidesToScroll: 1,
+    // autoplay: true,
+    speed: 300,
+    focusOnSelect: true,
+  })
+  .on("afterChange", (event, slick, currentSlide) => {
+      console.log(currentSlide);
+  });
 
 
 }
