@@ -5,7 +5,7 @@ import 'slick-carousel';
 // import './util/GA';
 import './util/Viewport';
 import './util/Gototop';
-import UA from './util/UA';
+import ua from './util/UA';
 import WindowScroller from './util/WindowScroller';
 import loadImage from './util/loadImage';
 import preloadImages from './util/preloadImages';
@@ -23,14 +23,11 @@ import IMAGE_SRCS from './data/imageSrcs';
 // -------------------------------------------
 // 初期設定
 // -------------------------------------------
-const ua = new UA();
-const isSP = ua.get().Mobile;
 const windowScroller = new WindowScroller();
 
-ua.initSetting();
 windowScroller.stop();
 
-if (isSP) {
+if (ua.info.Mobile) {
   // banPinchInOut();
   // banDoubleTap(document.documentElement);
   // checkOrientation();

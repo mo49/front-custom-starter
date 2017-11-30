@@ -45947,14 +45947,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // -------------------------------------------
 
 // import './util/GA';
-var ua = new _UA2.default();
-var isSP = ua.get().Mobile;
 var windowScroller = new _WindowScroller2.default();
 
-ua.initSetting();
 windowScroller.stop();
 
-if (isSP) {}
+if (_UA2.default.info.Mobile) {}
 // banPinchInOut();
 // banDoubleTap(document.documentElement);
 // checkOrientation();
@@ -46240,92 +46237,87 @@ exports.default = TimeSkipper;
 },{}],343:[function(require,module,exports){
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-//w3g.jp/blog/js_browser_sniffing2015
+var UA = function () {
+    function UA() {
+        var opts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-var _class = function () {
-  function _class() {
-    var opts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+        _classCallCheck(this, UA);
 
-    _classCallCheck(this, _class);
-
-    this.HTML = document.documentElement;
-    this.BODY = document.body;
-  }
-
-  _createClass(_class, [{
-    key: 'get',
-    value: function get() {
-
-      var ua = window.navigator.userAgent.toLowerCase();
-      var ver = window.navigator.appVersion.toLowerCase();
-
-      var isMSIE = ua.indexOf('msie') != -1 && ua.indexOf('opera') == -1;
-      var isIE11 = ua.indexOf('trident/7') != -1;
-
-      return {
-        Tablet: ua.indexOf("windows") != -1 && ua.indexOf("touch") != -1 && ua.indexOf("tablet pc") == -1 || ua.indexOf("ipad") != -1 || ua.indexOf("android") != -1 && ua.indexOf("mobile") == -1 || ua.indexOf("firefox") != -1 && ua.indexOf("tablet") != -1 || ua.indexOf("kindle") != -1 || ua.indexOf("silk") != -1 || ua.indexOf("playbook") != -1,
-        Mobile: ua.indexOf("windows") != -1 && ua.indexOf("phone") != -1 || ua.indexOf("iphone") != -1 || ua.indexOf("ipod") != -1 || ua.indexOf("android") != -1 && ua.indexOf("mobile") != -1 || ua.indexOf("firefox") != -1 && ua.indexOf("mobile") != -1 || ua.indexOf("blackberry") != -1,
-        iOS: ua.indexOf("iphone") != -1 || ua.indexOf("ipod") != -1 || ua.indexOf("ipad") != -1,
-        iPad: ua.indexOf("ipad") != -1,
-        iPhone: ua.indexOf("iphone") != -1,
-        Android: ua.indexOf("android") != -1,
-        MSIE: isMSIE, // IE11以外
-        IE6: isMSIE && ver.indexOf('msie 6.') != -1,
-        IE7: isMSIE && ver.indexOf('msie 7.') != -1,
-        IE8: isMSIE && ver.indexOf('msie 8.') != -1,
-        IE9: isMSIE && ver.indexOf('msie 9.') != -1,
-        IE10: isMSIE && ver.indexOf('msie 10.') != -1,
-        IE11: isIE11,
-        IE: isMSIE || isIE11,
-        Edge: ua.indexOf('edge') != -1,
-        Chrome: ua.indexOf('chrome') != -1 && ua.indexOf('edge') == -1,
-        Firefox: ua.indexOf('firefox') != -1,
-        Safari: ua.indexOf('safari') != -1 && ua.indexOf('chrome') == -1,
-        Opera: ua.indexOf('opera') != -1
-      };
+        this.HTML = document.documentElement;
+        this.BODY = document.body;
+        this.info = null; // set
+        this.init();
     }
-  }, {
-    key: 'initSetting',
-    value: function initSetting() {
 
-      var _ua = this.get();
+    _createClass(UA, [{
+        key: 'init',
+        value: function init() {
+            if (this._info.Mobile) {
+                this.HTML.setAttribute('data-env', 'sp');
+            } else if (this._info.Tablet) {
+                this.HTML.setAttribute('data-env', 'tablet');
+            } else {
+                this.HTML.setAttribute('data-env', 'pc');
+            }
 
-      if (_ua.Mobile) {
-        this.HTML.setAttribute('data-env', 'sp');
-      } else if (_ua.Tablet) {
-        this.HTML.setAttribute('data-env', 'tablet');
-      } else {
-        this.HTML.setAttribute('data-env', 'pc');
-      }
+            if (this._info.iPad) this.HTML.setAttribute('data-device', 'ipad');
+            if (this._info.iPhone) this.HTML.setAttribute('data-device', 'iphone');
+            if (this._info.Android) this.HTML.setAttribute('data-device', 'android');
 
-      if (_ua.iPad) this.HTML.setAttribute('data-device', 'ipad');
-      if (_ua.iPhone) this.HTML.setAttribute('data-device', 'iphone');
-      if (_ua.Android) this.HTML.setAttribute('data-device', 'android');
+            if (this._info.iOS) this.HTML.setAttribute('data-os', 'ios');
+            if (this._info.Android) this.HTML.setAttribute('data-os', 'android');
 
-      if (_ua.iOS) this.HTML.setAttribute('data-os', 'ios');
-      if (_ua.Android) this.HTML.setAttribute('data-os', 'android');
+            if (this._info.IE) this.HTML.setAttribute('data-browser', 'ie');
+            if (this._info.Edge) this.HTML.setAttribute('data-browser', 'edge');
+            if (this._info.Chrome) this.HTML.setAttribute('data-browser', 'chrome');
+            if (this._info.Firefox) this.HTML.setAttribute('data-browser', 'firefox');
+            if (this._info.Safari) this.HTML.setAttribute('data-browser', 'safari');
+            if (this._info.Opera) this.HTML.setAttribute('data-browser', 'opera');
+        }
+    }, {
+        key: 'info',
+        get: function get() {
+            return this._info;
+        },
+        set: function set(opts) {
+            var ua = window.navigator.userAgent.toLowerCase();
+            var ver = window.navigator.appVersion.toLowerCase();
 
-      if (_ua.IE) this.HTML.setAttribute('data-browser', 'ie');
-      if (_ua.Edge) this.HTML.setAttribute('data-browser', 'edge');
-      if (_ua.Chrome) this.HTML.setAttribute('data-browser', 'chrome');
-      if (_ua.Firefox) this.HTML.setAttribute('data-browser', 'firefox');
-      if (_ua.Safari) this.HTML.setAttribute('data-browser', 'safari');
-      if (_ua.Opera) this.HTML.setAttribute('data-browser', 'opera');
-    }
-  }]);
+            var isMSIE = ua.indexOf('msie') != -1 && ua.indexOf('opera') == -1;
+            var isIE11 = ua.indexOf('trident/7') != -1;
 
-  return _class;
+            this._info = {
+                Tablet: ua.indexOf("windows") != -1 && ua.indexOf("touch") != -1 && ua.indexOf("tablet pc") == -1 || ua.indexOf("ipad") != -1 || ua.indexOf("android") != -1 && ua.indexOf("mobile") == -1 || ua.indexOf("firefox") != -1 && ua.indexOf("tablet") != -1 || ua.indexOf("kindle") != -1 || ua.indexOf("silk") != -1 || ua.indexOf("playbook") != -1,
+                Mobile: ua.indexOf("windows") != -1 && ua.indexOf("phone") != -1 || ua.indexOf("iphone") != -1 || ua.indexOf("ipod") != -1 || ua.indexOf("android") != -1 && ua.indexOf("mobile") != -1 || ua.indexOf("firefox") != -1 && ua.indexOf("mobile") != -1 || ua.indexOf("blackberry") != -1,
+                iOS: ua.indexOf("iphone") != -1 || ua.indexOf("ipod") != -1 || ua.indexOf("ipad") != -1,
+                iPad: ua.indexOf("ipad") != -1,
+                iPhone: ua.indexOf("iphone") != -1,
+                Android: ua.indexOf("android") != -1,
+                MSIE: isMSIE, // IE11以外
+                IE6: isMSIE && ver.indexOf('msie 6.') != -1,
+                IE7: isMSIE && ver.indexOf('msie 7.') != -1,
+                IE8: isMSIE && ver.indexOf('msie 8.') != -1,
+                IE9: isMSIE && ver.indexOf('msie 9.') != -1,
+                IE10: isMSIE && ver.indexOf('msie 10.') != -1,
+                IE11: isIE11,
+                IE: isMSIE || isIE11,
+                Edge: ua.indexOf('edge') != -1,
+                Chrome: ua.indexOf('chrome') != -1 && ua.indexOf('edge') == -1,
+                Firefox: ua.indexOf('firefox') != -1,
+                Safari: ua.indexOf('safari') != -1 && ua.indexOf('chrome') == -1,
+                Opera: ua.indexOf('opera') != -1
+            };
+        }
+    }]);
+
+    return UA;
 }();
 
-exports.default = _class;
+module.exports = new UA();
 
 },{}],344:[function(require,module,exports){
 "use strict";
@@ -46340,22 +46332,19 @@ var _UA2 = _interopRequireDefault(_UA);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _ua = new _UA2.default().get(); // http://www.bricoleur.co.jp/blog/archives/2985
-
 exports.default = function () {
 
   var SP_BASE_WIDTH = 375; // デザイナー作成サイズ
   var PC_MAX_WIDTH = 1280; // タブレット内に収めたいPCデザインのサイズ
 
-  var ua = navigator.userAgent.toLowerCase();
-  var iOSviewportW = _ua.iOS ? document.documentElement.clientWidth : 0;
+  var iOSviewportW = _UA2.default.info.iOS ? document.documentElement.clientWidth : 0;
 
   function updateMetaViewport() {
 
-    var ww = _ua.iOS ? iOSviewportW : window.outerWidth;
+    var ww = _UA2.default.info.iOS ? iOSviewportW : window.outerWidth;
     var viewportContent = void 0;
 
-    if (_ua.Tablet) {
+    if (_UA2.default.info.Tablet) {
       // タブレットの場合はpcを縮小した感じにする
       viewportContent = "width=" + PC_MAX_WIDTH + ", user-scalable=no, shrink-to-fit=no";
     } else {
@@ -46374,7 +46363,7 @@ exports.default = function () {
   var evt = document.createEvent("UIEvent");
   evt.initEvent("resize", true, true);
   window.dispatchEvent(evt);
-}();
+}(); // http://www.bricoleur.co.jp/blog/archives/2985
 
 },{"./UA":343}],345:[function(require,module,exports){
 'use strict';

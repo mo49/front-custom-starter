@@ -1,22 +1,20 @@
 // http://www.bricoleur.co.jp/blog/archives/2985
 
-import UA from './UA';
-const _ua = new UA().get();
+import ua from './UA';
 
 export default (() => {
 
   const SP_BASE_WIDTH = 375; // デザイナー作成サイズ
   const PC_MAX_WIDTH = 1280; // タブレット内に収めたいPCデザインのサイズ
 
-  const ua = navigator.userAgent.toLowerCase();
-  const iOSviewportW = (_ua.iOS) ? document.documentElement.clientWidth : 0;
+  const iOSviewportW = (ua.info.iOS) ? document.documentElement.clientWidth : 0;
 
   function updateMetaViewport(){
 
-    const ww = (_ua.iOS) ? iOSviewportW : window.outerWidth;
+    const ww = (ua.info.iOS) ? iOSviewportW : window.outerWidth;
     let viewportContent;
 
-    if (_ua.Tablet) {
+    if (ua.info.Tablet) {
       // タブレットの場合はpcを縮小した感じにする
       viewportContent = `width=${PC_MAX_WIDTH}, user-scalable=no, shrink-to-fit=no`;
     } else {

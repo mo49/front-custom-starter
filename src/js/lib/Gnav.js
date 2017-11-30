@@ -2,7 +2,7 @@
 
 import $ from 'jquery';
 import Modal from './Modal';
-import UA from '../util/UA';
+import ua from '../util/UA';
 import userEvent from '../util/userEvent';
 
 export default class Gnav extends Modal {
