@@ -369,6 +369,43 @@ $animation-name: ユニークな名前（keyframesの上書き防止）
   display: none; }
 
 /* ======================================
+ * 全ページ共通
+ * ====================================== */
+html, body {
+  width: 100%;
+  height: 100%;
+  -webkit-text-size-adjust: 100%; }
+
+html[data-env="pc"] .pc-none {
+  display: none; }
+
+html[data-env="sp"] .sp-none {
+  display: none; }
+
+html[data-env="tablet"] .tab-none {
+  display: none; }
+
+* {
+  box-sizing: border-box;
+  -webkit-overflow-scrolling: touch; }
+
+.is-fixed {
+  position: fixed;
+  top: 0;
+  left: 0; }
+
+.is-hidden {
+  display: none; }
+
+.line-it-button {
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; }
+
+.adobe {
+  font-size: 0;
+  line-height: 0; }
+
+/* ======================================
  * 汎用スタイル
  * ====================================== */
 html[data-env="sp"] * {
@@ -775,40 +812,3 @@ html[data-env="sp"] * {
     background-size: 960px 800px;
     width: 960px;
     height: 800px; }
-
-/* ======================================
- * 全ページ共通
- * ====================================== */
-html, body {
-  width: 100%;
-  height: 100%;
-  -webkit-text-size-adjust: 100%; }
-
-html[data-env="pc"] .pc-none {
-  display: none; }
-
-html[data-env="sp"] .sp-none {
-  display: none; }
-
-html[data-env="tablet"] .tab-none {
-  display: none; }
-
-* {
-  box-sizing: border-box;
-  -webkit-overflow-scrolling: touch; }
-
-.is-fixed {
-  position: fixed;
-  top: 0;
-  left: 0; }
-
-.is-hidden {
-  display: none; }
-
-.line-it-button {
-  opacity: 0;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; }
-
-.adobe {
-  font-size: 0;
-  line-height: 0; }

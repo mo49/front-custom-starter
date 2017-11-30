@@ -1,16 +1,3 @@
-@import 'mixin/layout';
-@import 'mixin/env';
-@import 'mixin/image';
-@import 'mixin/sprite-image';
-@import 'mixin/flex-img';
-@import 'mixin/centering';
-@import 'mixin/clearfix';
-@import 'mixin/hover';
-@import 'mixin/background';
-@import 'mixin/ellipsis';
-@import 'mixin/selectbox';
-
-
 @mixin pc-layout {
     @media (min-width: $pc_min_width) {
         @content;
