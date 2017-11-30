@@ -128,9 +128,13 @@ function init() {
   // carousel
   $(".js-gallery-carousel").slick({
     infinite: true,
-    centerMode: true,
-    centerPadding: "80px", // どれくらい見切れているか
-    slidesToScroll: 1,
+    dots: false,
+    arrow: false,
+    initialSlide: 3, // default: 0
+    // centerMode: true, // trueにするとslidesToScrollが1になる
+    // centerPadding: "80px", // どれくらい見切れているか
+    slidesToShow: 3,
+    slidesToScroll: 3,
     // autoplay: true,
     speed: 300,
     focusOnSelect: true,
