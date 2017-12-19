@@ -676,6 +676,30 @@ html[data-env="sp"] * {
     opacity: .3;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)"; }
 
+.sprite div {
+  display: inline-block; }
+
+.sprite div[data-chara="megumin"] {
+  background-image: url(../img/sprite/sprite.png);
+  background-size: 952.65px 572.4px;
+  background-position: -375.75px 0px;
+  width: 340.2px;
+  height: 459.9px; }
+
+.sprite div[data-chara="sagiri"] {
+  background-image: url(../img/sprite/sprite.png);
+  background-size: 846.8px 508.8px;
+  background-position: 0px 0px;
+  width: 334px;
+  height: 508.8px; }
+
+.sprite div[data-chara="umaru"] {
+  background-image: url(../img/sprite/sprite.png);
+  background-size: 1270.2px 763.2px;
+  background-position: -954.6px 0px;
+  width: 315.6px;
+  height: 360px; }
+
 .page-root[data-page='top'] #top .box {
   width: 100%;
   height: 500px;

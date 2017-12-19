@@ -1,0 +1,19 @@
+.sprite{
+    $charas: megumin sagiri umaru;
+    @each $chara in $charas {
+        div[data-chara='#{$chara}']{
+        }
+    }
+    div{
+        display: inline-block;
+    }
+    div[data-chara="megumin"]{
+        @include sprite($sprite-megumin, 0.45);
+    }
+    div[data-chara="sagiri"]{
+        @include sprite($sprite-sagiri, 0.4);
+    }
+    div[data-chara="umaru"]{
+        @include sprite($sprite-umaru, 0.6);
+    }
+}

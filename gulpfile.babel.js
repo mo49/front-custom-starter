@@ -15,6 +15,7 @@ import watch from 'gulp-watch';
 import RevLogger from 'rev-logger';
 import postcss from 'gulp-postcss';
 import assets from 'postcss-assets';
+import spritesmith from 'gulp.spritesmith';
 
 // const
 const SRC = './src';
@@ -48,6 +49,22 @@ gulp.task('sass', () => {
 });
 
 gulp.task('css', gulp.series('sass'));
+
+// sprite
+gulp.task('sprite', () => {
+    const spriteData = gulp.src(`${SRC}/img/sprite/**/*.png`)
+        .pipe(spritesmith({
+            imgName: 'sprite.png',
+            cssName: '_sprite.scss',
+            imgPath: '../img/sprite/sprite.png',
+            cssFormat: 'scss',
+            cssVarMap: function(sprite){
+                sprite.name = 'sprite-' + sprite.name;
+            }
+        }));
+    spriteData.img.pipe(gulp.dest(`${DEST}/img/sprite`));
+    spriteData.css.pipe(gulp.dest(`${SRC}/scss/mixin`));
+})
 
 // js
 gulp.task('browserify', () => {
