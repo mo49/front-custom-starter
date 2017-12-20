@@ -1,0 +1,13 @@
+@mixin sprite-number($url, $w, $h, $scale, $index) {
+    $basePath: '../img/';
+    $width: $w * $scale;
+    $height: $h * $scale;
+    &[data-sprite-index="#{$index}"]{
+        height: 0;
+        width: $width + px;
+        padding-top: $height + px;
+        background-size: $width + px auto;
+        background-position: 0 (- $index * $height + px);
+        background-image: url($basePath + $url);
+    }
+}

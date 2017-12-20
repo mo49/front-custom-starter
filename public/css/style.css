@@ -700,6 +700,106 @@ html[data-env="sp"] * {
   width: 315.6px;
   height: 360px; }
 
+.sprite-number span[data-sprite-index="0"] {
+  display: inline-block; }
+  .sprite-number span[data-sprite-index="0"][data-sprite-index="0"] {
+    height: 0;
+    width: 24px;
+    padding-top: 42.5px;
+    background-size: 24px auto;
+    background-position: 0 0px;
+    background-image: url("../img/sprite/number.png"); }
+
+.sprite-number span[data-sprite-index="1"] {
+  display: inline-block; }
+  .sprite-number span[data-sprite-index="1"][data-sprite-index="1"] {
+    height: 0;
+    width: 24px;
+    padding-top: 42.5px;
+    background-size: 24px auto;
+    background-position: 0 -42.5px;
+    background-image: url("../img/sprite/number.png"); }
+
+.sprite-number span[data-sprite-index="2"] {
+  display: inline-block; }
+  .sprite-number span[data-sprite-index="2"][data-sprite-index="2"] {
+    height: 0;
+    width: 24px;
+    padding-top: 42.5px;
+    background-size: 24px auto;
+    background-position: 0 -85px;
+    background-image: url("../img/sprite/number.png"); }
+
+.sprite-number span[data-sprite-index="3"] {
+  display: inline-block; }
+  .sprite-number span[data-sprite-index="3"][data-sprite-index="3"] {
+    height: 0;
+    width: 24px;
+    padding-top: 42.5px;
+    background-size: 24px auto;
+    background-position: 0 -127.5px;
+    background-image: url("../img/sprite/number.png"); }
+
+.sprite-number span[data-sprite-index="4"] {
+  display: inline-block; }
+  .sprite-number span[data-sprite-index="4"][data-sprite-index="4"] {
+    height: 0;
+    width: 24px;
+    padding-top: 42.5px;
+    background-size: 24px auto;
+    background-position: 0 -170px;
+    background-image: url("../img/sprite/number.png"); }
+
+.sprite-number span[data-sprite-index="5"] {
+  display: inline-block; }
+  .sprite-number span[data-sprite-index="5"][data-sprite-index="5"] {
+    height: 0;
+    width: 24px;
+    padding-top: 42.5px;
+    background-size: 24px auto;
+    background-position: 0 -212.5px;
+    background-image: url("../img/sprite/number.png"); }
+
+.sprite-number span[data-sprite-index="6"] {
+  display: inline-block; }
+  .sprite-number span[data-sprite-index="6"][data-sprite-index="6"] {
+    height: 0;
+    width: 24px;
+    padding-top: 42.5px;
+    background-size: 24px auto;
+    background-position: 0 -255px;
+    background-image: url("../img/sprite/number.png"); }
+
+.sprite-number span[data-sprite-index="7"] {
+  display: inline-block; }
+  .sprite-number span[data-sprite-index="7"][data-sprite-index="7"] {
+    height: 0;
+    width: 24px;
+    padding-top: 42.5px;
+    background-size: 24px auto;
+    background-position: 0 -297.5px;
+    background-image: url("../img/sprite/number.png"); }
+
+.sprite-number span[data-sprite-index="8"] {
+  display: inline-block; }
+  .sprite-number span[data-sprite-index="8"][data-sprite-index="8"] {
+    height: 0;
+    width: 24px;
+    padding-top: 42.5px;
+    background-size: 24px auto;
+    background-position: 0 -340px;
+    background-image: url("../img/sprite/number.png"); }
+
+.sprite-number span[data-sprite-index="9"] {
+  display: inline-block; }
+  .sprite-number span[data-sprite-index="9"][data-sprite-index="9"] {
+    height: 0;
+    width: 24px;
+    padding-top: 42.5px;
+    background-size: 24px auto;
+    background-position: 0 -382.5px;
+    background-image: url("../img/sprite/number.png"); }
+
 .page-root[data-page='top'] #top .box {
   width: 100%;
   height: 500px;

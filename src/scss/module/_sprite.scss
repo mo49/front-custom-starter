@@ -17,3 +17,12 @@
         @include sprite($sprite-umaru, 0.6);
     }
 }
+
+.sprite-number{
+    @for $i from 0 through 9 {
+        span[data-sprite-index="#{$i}"]{
+            display: inline-block;
+            @include sprite-number("sprite/number.png",48,85,0.5,$i);
+        }
+    }
+}
