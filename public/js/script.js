@@ -45044,18 +45044,6 @@ module.exports = urix
 },{}],330:[function(require,module,exports){
 'use strict';
 
-module.exports = [{
-  type: 'sao',
-  isCustomizedButton: 1
-}, {
-  type: 'perfume'
-}, {
-  type: 'koi'
-}];
-
-},{}],331:[function(require,module,exports){
-'use strict';
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -45063,7 +45051,7 @@ var ROOT = './img/';
 
 exports.default = [ROOT + 'sample1.jpg', ROOT + 'sample2.png', ROOT + 'sample3.jpg', ROOT + 'sample4.png'];
 
-},{}],332:[function(require,module,exports){
+},{}],331:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); // https://www.npmjs.com/package/js-cookie
@@ -45157,7 +45145,7 @@ var Cookie = function () {
 
 module.exports = new Cookie();
 
-},{"jquery":308,"js-cookie":309}],333:[function(require,module,exports){
+},{"jquery":308,"js-cookie":309}],332:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -45277,7 +45265,7 @@ var Gnav = function (_Modal) {
 
 exports.default = Gnav;
 
-},{"../util/UA":343,"../util/userEvent":351,"./Modal":335,"jquery":308}],334:[function(require,module,exports){
+},{"../util/UA":341,"../util/userEvent":349,"./Modal":334,"jquery":308}],333:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -45345,7 +45333,7 @@ var _class = function () {
 
 exports.default = _class;
 
-},{"jquery":308}],335:[function(require,module,exports){
+},{"jquery":308}],334:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -45437,7 +45425,7 @@ var Modal = function (_Lock) {
 
 exports.default = Modal;
 
-},{"../util/userEvent":351,"./Lock":334,"jquery":308}],336:[function(require,module,exports){
+},{"../util/userEvent":349,"./Lock":333,"jquery":308}],335:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -45607,183 +45595,7 @@ var SoundManager = function (_EventEmitter) {
 
 exports.default = new SoundManager();
 
-},{"./Cookie":332,"events":305,"howler":306}],337:[function(require,module,exports){
-'use strict';
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); // https://developers.google.com/youtube/iframe_api_reference?hl=ja
-
-// spでタップなしの自動再生はできない
-// http://www.yoheim.net/blog.php?q=20130816
-// pcでもクリックなしの自動再生をやると2回目が読み込めなくなる
-
-var _jquery = require('jquery');
-
-var _jquery2 = _interopRequireDefault(_jquery);
-
-var _userEvent = require('../util/userEvent');
-
-var _userEvent2 = _interopRequireDefault(_userEvent);
-
-var _Youtube = require('../data/Youtube');
-
-var _Youtube2 = _interopRequireDefault(_Youtube);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Youtube = function () {
-  function Youtube(data) {
-    _classCallCheck(this, Youtube);
-
-    this.players = [];
-    this.$wrapper = (0, _jquery2.default)('.wrapper');
-
-    this._setData(data);
-    this._init(data);
-    this._initListener(data);
-  }
-
-  _createClass(Youtube, [{
-    key: '_setData',
-    value: function _setData(data) {
-      data.forEach(function (val, index) {
-        var $ytplayer = val.$ytplayer || (0, _jquery2.default)('.ytplayer[data-youtube-type="' + val.type + '"]');
-        val.videoId = val.videoId || $ytplayer.attr('data-youtube-id');
-        val.elementId = val.elementId || $ytplayer.prop('id');
-        val.$startButton = val.$startButton || (0, _jquery2.default)('.js-start-youtube[data-youtube-type="' + val.type + '"]');
-        val.$stopButton = val.$stopButton || (0, _jquery2.default)('.js-stop-youtube[data-youtube-type="' + val.type + '"]');
-        val.isAutoPlay = isNaN(val.isAutoPlay) ? 0 : val.isAutoPlay;
-        val.isCustomizedButton = isNaN(val.isCustomizedButton) ? 0 : val.isCustomizedButton;
-      });
-    }
-  }, {
-    key: '_init',
-    value: function _init(data) {
-      var _this = this;
-
-      // 複数個追加したくないので１回
-      (0, _jquery2.default)('body').append('<script src="//www.youtube.com/iframe_api">');
-
-      var that = this;
-
-      function onPlayerReady(event) {
-        data.forEach(function (val, index) {
-          if (!val.isCustomizedButton) val.$startButton.hide();
-        });
-      }
-
-      function onPlayerStateChange(event) {
-        data.forEach(function (val, index) {
-          if (event.target.h.id === val.elementId) {
-            val.$startButton.hide();
-            if (event.data == YT.PlayerState.PLAYING) {}
-            if (event.data == YT.PlayerState.PAUSED) {}
-            if (event.data == YT.PlayerState.ENDED) {
-              if (val.isCustomizedButton) val.$startButton.show();
-            }
-          }
-        });
-      }
-
-      var onYouTubeIframeAPIReady = function onYouTubeIframeAPIReady() {
-        // https://developers.google.com/youtube/player_parameters?playerVersion=HTML5&hl=ja
-        data.forEach(function (val, index) {
-          var player = new YT.Player(val.elementId, {
-            videoId: val.videoId,
-            playerVars: {
-              'controls': 1,
-              'enablejsapi': 1,
-              'iv_load_policy': 3, // アノテーション
-              'disablekb': 1,
-              'showinfo': 1,
-              'loop': 0,
-              'autoplay': val.isAutoPlay,
-              'rel': 0, // 関連動画
-              'fs': 1 // 全画面
-            },
-            events: {
-              'onReady': onPlayerReady,
-              'onStateChange': onPlayerStateChange
-            }
-          });
-          _this.players['' + val.type] = player;
-        });
-      };
-
-      window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
-    }
-  }, {
-    key: '_initListener',
-    value: function _initListener(data) {
-      var _this2 = this;
-
-      data.forEach(function (val, index) {
-        val.$startButton.on(_userEvent2.default.click, function () {
-          _this2.playVideo(val.type);
-        });
-        val.$stopButton.on(_userEvent2.default.click, function () {
-          _this2.stopVideo(val.type);
-        });
-      });
-    }
-  }, {
-    key: 'playVideo',
-    value: function playVideo(type) {
-      this.players[type].playVideo();
-    }
-  }, {
-    key: 'stopVideo',
-    value: function stopVideo(type) {
-      this.players[type].stopVideo();
-    }
-  }, {
-    key: 'mute',
-    value: function mute(type) {
-      this.players[type].mute();
-    }
-  }, {
-    key: 'unMute',
-    value: function unMute(type) {
-      this.players[type].unMute();
-    }
-  }, {
-    key: 'getVolume',
-    value: function getVolume(type) {
-      return this.players[type].getVolume();
-    }
-  }, {
-    key: 'setVolume',
-    value: function setVolume(type) {
-      var volume = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 100;
-
-      this.players[type].setVolume(volume);
-    }
-  }]);
-
-  return Youtube;
-}();
-
-(function () {
-
-  var youtube = new Youtube(_Youtube2.default);
-
-  // test
-  (0, _jquery2.default)('#top').on(_userEvent2.default.click, function () {
-    youtube.playVideo('sao');
-    youtube.mute('sao');
-    // youtube.setVolume('sao',50);
-  });
-  (0, _jquery2.default)('#about').on(_userEvent2.default.click, function () {
-    youtube.stopVideo('perfume');
-    console.log(youtube.getVolume('perfume'));
-  });
-  (0, _jquery2.default)('.modal[data-modal="youtube"] .js-modal-close').on('click', function () {
-    youtube.stopVideo('koi');
-  });
-})();
-
-},{"../data/Youtube":330,"../util/userEvent":351,"jquery":308}],338:[function(require,module,exports){
+},{"./Cookie":331,"events":305,"howler":306}],336:[function(require,module,exports){
 'use strict';
 
 var _jquery = require('jquery');
@@ -45869,7 +45681,7 @@ module.exports = function () {
   }
 };
 
-},{"../util/TimeAccumulator":341,"../util/TimeSkipper":342,"jquery":308}],339:[function(require,module,exports){
+},{"../util/TimeAccumulator":339,"../util/TimeSkipper":340,"jquery":308}],337:[function(require,module,exports){
 "use strict";
 
 require("babel-polyfill");
@@ -45914,8 +45726,6 @@ var _checkOrientation = require("./util/checkOrientation");
 
 var _checkOrientation2 = _interopRequireDefault(_checkOrientation);
 
-require("./lib/Youtube");
-
 var _Cookie = require("./lib/Cookie");
 
 var _Cookie2 = _interopRequireDefault(_Cookie);
@@ -45946,8 +45756,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // 初期設定
 // -------------------------------------------
 
-// import './util/GA';
+// import './lib/Youtube';
 var windowScroller = new _WindowScroller2.default();
+// import './util/GA';
+
 
 windowScroller.stop();
 
@@ -46063,7 +45875,7 @@ function init() {
   });
 }
 
-},{"./data/imageSrcs":331,"./lib/Cookie":332,"./lib/Gnav":333,"./lib/Modal":335,"./lib/SoundManager":336,"./lib/Youtube":337,"./lib/my-canvas":338,"./util/Gototop":340,"./util/UA":343,"./util/Viewport":344,"./util/WindowScroller":345,"./util/banDoubleTap":346,"./util/banPinchInOut":347,"./util/checkOrientation":348,"./util/loadImage":349,"./util/preloadImages":350,"babel-polyfill":2,"jquery":308,"slick-carousel":315,"whatwg-fetch":329}],340:[function(require,module,exports){
+},{"./data/imageSrcs":330,"./lib/Cookie":331,"./lib/Gnav":332,"./lib/Modal":334,"./lib/SoundManager":335,"./lib/my-canvas":336,"./util/Gototop":338,"./util/UA":341,"./util/Viewport":342,"./util/WindowScroller":343,"./util/banDoubleTap":344,"./util/banPinchInOut":345,"./util/checkOrientation":346,"./util/loadImage":347,"./util/preloadImages":348,"babel-polyfill":2,"jquery":308,"slick-carousel":315,"whatwg-fetch":329}],338:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -46138,7 +45950,7 @@ var Gototop = function () {
   });
 })();
 
-},{"./userEvent":351,"jquery":308}],341:[function(require,module,exports){
+},{"./userEvent":349,"jquery":308}],339:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -46194,7 +46006,7 @@ var TimeAccumulator = function () {
 
 exports.default = TimeAccumulator;
 
-},{}],342:[function(require,module,exports){
+},{}],340:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -46238,7 +46050,7 @@ var TimeSkipper = function () {
 
 exports.default = TimeSkipper;
 
-},{}],343:[function(require,module,exports){
+},{}],341:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -46323,7 +46135,7 @@ var UA = function () {
 
 module.exports = new UA();
 
-},{}],344:[function(require,module,exports){
+},{}],342:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -46369,7 +46181,7 @@ exports.default = function () {
   window.dispatchEvent(evt);
 }(); // http://www.bricoleur.co.jp/blog/archives/2985
 
-},{"./UA":343}],345:[function(require,module,exports){
+},{"./UA":341}],343:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -46477,7 +46289,7 @@ var WindowScroller = function () {
 
 exports.default = WindowScroller;
 
-},{"./userEvent":351,"jquery":308}],346:[function(require,module,exports){
+},{"./userEvent":349,"jquery":308}],344:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -46505,7 +46317,7 @@ exports.default = function (dom) {
   }, true);
 };
 
-},{}],347:[function(require,module,exports){
+},{}],345:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -46532,7 +46344,7 @@ exports.default = function () {
   }, false);
 };
 
-},{}],348:[function(require,module,exports){
+},{}],346:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -46567,7 +46379,7 @@ exports.default = function () {
   }).trigger('orientationchange');
 }; // http://qiita.com/butchi_y/items/7f0a3c8f1b9a75ecbb1a
 
-},{"jquery":308}],349:[function(require,module,exports){
+},{"jquery":308}],347:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -46585,7 +46397,7 @@ exports.default = function (src) {
   });
 };
 
-},{}],350:[function(require,module,exports){
+},{}],348:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -46719,7 +46531,7 @@ function preloadImages(query, onProgress) {
   return query_promises[query];
 }
 
-},{"css":298,"lodash":310}],351:[function(require,module,exports){
+},{"css":298,"lodash":310}],349:[function(require,module,exports){
 'use strict';
 
 // -----------------------------------
@@ -46734,4 +46546,4 @@ module.exports = {
   touchend: window.is_sp && supportTouch ? 'touchend' : 'mouseup'
 };
 
-},{}]},{},[339]);
+},{}]},{},[337]);

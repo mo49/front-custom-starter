@@ -469,6 +469,10 @@ html[data-env="sp"] * {
   .gallery__item[data-carousel-id="4"] {
     background-image: url("../img/sample4.png"); }
 
+.gmap {
+  width: 500px;
+  height: 400px; }
+
 #gnav .modal[data-modal="gnav"] {
   overflow-y: scroll;
   z-index: 4; }

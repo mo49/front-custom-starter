@@ -1,0 +1,16 @@
+.gmap
+
+script(src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDV9eS6-ULKY2C_J5DhIJr7_KCt3mi5Rfo&callback=initMap" async defer)
+script.
+    function initMap() {
+        var myLatLng = {lat: 26.314571, lng: 127.796185};
+        var map = new google.maps.Map(document.getElementsByClassName('gmap')[0], {
+            center: myLatLng,
+            zoom: 15
+        });
+        var marker = new google.maps.Marker({
+            position: myLatLng,
+            map: map,
+            title: 'イオンモール沖縄ライカム'
+        });
+    }

@@ -12,7 +12,7 @@ import preloadImages from './util/preloadImages';
 import banPinchInOut from './util/banPinchInOut';
 import banDoubleTap from './util/banDoubleTap';
 import checkOrientation from './util/checkOrientation';
-import './lib/Youtube';
+// import './lib/Youtube';
 import cookie from './lib/Cookie';
 import Gnav from './lib/Gnav';
 import Modal from './lib/Modal';

@@ -28,7 +28,7 @@
     <!-- canonical url-->
     <link rel="canonical" href="http://example.com/">
     <!-- stylesheet-->
-    <link rel="stylesheet" data-preload="1" href="/css/style.css?v=23">
+    <link rel="stylesheet" data-preload="1" href="/css/style.css?v=24">
   </head>
   <body>
     <div class="page-root" data-page="top">
@@ -213,6 +213,22 @@
         </div>
         <div class="sprite-number"><span data-sprite-index="0"></span><span data-sprite-index="1"></span><span data-sprite-index="2"></span><span data-sprite-index="3"></span><span data-sprite-index="4"></span><span data-sprite-index="5"></span><span data-sprite-index="6"></span><span data-sprite-index="7"></span><span data-sprite-index="8"></span><span data-sprite-index="9"></span>
         </div>
+        <div class="gmap"></div>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDV9eS6-ULKY2C_J5DhIJr7_KCt3mi5Rfo&amp;callback=initMap" async defer></script>
+        <script>
+          function initMap() {
+              var myLatLng = {lat: 26.314571, lng: 127.796185};
+              var map = new google.maps.Map(document.getElementsByClassName('gmap')[0], {
+                  center: myLatLng,
+                  zoom: 15
+              });
+              var marker = new google.maps.Marker({
+                  position: myLatLng,
+                  map: map,
+                  title: 'イオンモール沖縄ライカム'
+              });
+          }
+        </script>
       </div>
     </div>
     <div id="loading"></div>
@@ -221,6 +237,6 @@
       <div class="preload__image--2"></div>
     </div>
     <!-- javascript-->
-    <script src="/js/script.js?v=35"></script>
+    <script src="/js/script.js?v=36"></script>
   </body>
 </html>
